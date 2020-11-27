@@ -38,7 +38,7 @@ if (isset($_GET["error"])){
 						<?php } else if ($error == 2) { ?>
 						<div class="alert alert-danger alert-dismissible fade show"
 							role="alert">
-							<strong>Cliente deshabilitado</strong>
+							<strong>Domiciliario deshabilitado</strong>
 							<button type="button" class="close" data-dismiss="alert"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -56,7 +56,7 @@ if (isset($_GET["error"])){
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary">Autenticar</button>
 							<button type="submit" class="btn btn-primary">Registrarse</button>
-						</div>
+						</div>		
 						<p class="text-center">
 							<a href="<?php echo "index.php?pid=" . base64_encode("presentacion/recuperarClave.php") ?>"> &#191&#211lvido
 								la clave?</a>

@@ -20,6 +20,12 @@ class DomiciliarioDAO{
         $this -> estado = $pEstado;
     }
        
+    function autenticar () {
+        return "select idDomiciliario, estado
+                from Domiciliario
+                where correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
+    }
+    
     function consultarTodos () {
         return "select idDomiciliario, nombre, apellido, ciudad, direccion, correo, estado
                 from Domiciliario";

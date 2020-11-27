@@ -7,7 +7,7 @@ class LogDAO{
     private $hora;
     private $actor;
     
-    function ClienteDAO ($pIdLog, $pAccion, $pDatos, $pFecha, $pHora, $pActor) {
+    function LogDAO ($pIdLog, $pAccion, $pDatos, $pFecha, $pHora, $pActor) {
         $this -> idLog = $pIdLog;
         $this -> accion = $pAccion;
         $this -> datos = $pDatos;
