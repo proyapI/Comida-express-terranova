@@ -1,8 +1,6 @@
 <?php
 
-
 require "logica/Administrador.php";
-require "logica/Carrito.php";
 require "logica/Cliente.php";
 require "logica/Cliente_producto.php";
 require "logica/Domiciliario.php";
@@ -32,7 +30,7 @@ if (isset($_GET["pid"])) {
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.11.1/css/all.css" />
-<link href="https://bootswatch.com/4/superhero/bootstrap.css"
+<link href="https://bootswatch.com/4/minty/bootstrap.css"
 	rel="stylesheet" />	
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
