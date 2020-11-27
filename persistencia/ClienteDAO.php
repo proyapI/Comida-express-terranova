@@ -18,9 +18,14 @@ class ClienteDAO{
         $this -> clave = $pClave;
     }
     
+    function crear () {
+        return "insert into Cliente (idCliente, nombre, apellido, ciudad, direccion, correo, clave)
+                values ('" . $this -> idCliente . "','" . $this -> nombre . "', '" . $this -> apellido . "','" . $this -> ciudad . "', 
+                '" . $this -> direccion . "','" . $this -> correo . "','" . md5 ($this ->  clave) . "')";
+    }
+    
     function autenticar () {
-        return "select idCliente
-                from Cliente
+        return "select idCliente from Cliente
                 where correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
     }
        

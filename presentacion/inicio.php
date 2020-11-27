@@ -54,14 +54,14 @@ if (isset($_GET["error"])){
 								placeholder="Clave" required="required">
 						</div>
 						<div class="form-group text-center">
-							<button type="submit" class="btn btn-primary">Autenticar</button>
-							<button type="submit" class="btn btn-primary">Registrarse</button>
-						</div>		
-						<p class="text-center">
+							<button type="submit" class="btn btn-primary">Autenticar</button>	
+							<button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/registrarCliente.php")?>'" class="btn btn-primary"> Registrarse </button>						 
+						</div>								
+						<p class="text-center">							
 							<a href="<?php echo "index.php?pid=" . base64_encode("presentacion/recuperarClave.php") ?>"> &#191&#211lvido
 								la clave?</a>
-						</p>
-					</form>
+						</p>										
+					</form>									
 				</div>
 			</div>
 		</div>

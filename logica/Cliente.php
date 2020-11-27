@@ -59,9 +59,15 @@ class Cliente{
         $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion, $pCorreo, $pClave);
     }
     
+    function crear(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> crear());
+        $this -> conexion -> cerrar();
+    }
+    
     function autenticar () {
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> ClienteDAO -> autenticar());
+        $this -> conexion -> ejecutar($this -> clienteDAO -> autenticar());
         $this -> conexion -> cerrar();
         if($this -> conexion -> numFilas() == 1){
             $this -> idCliente = $this -> conexion -> extraer()[0];
@@ -71,9 +77,10 @@ class Cliente{
         }
     }
     
+    
     function consultar(){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> ClienteDAO -> consultar());
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultar());
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         $this -> nombre = $resultado[0];
@@ -85,7 +92,7 @@ class Cliente{
     
     function consultarTodos(){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> ClienteDAO -> consultarTodos());
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultarTodos());
         $this -> conexion -> cerrar();
         $clientes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
