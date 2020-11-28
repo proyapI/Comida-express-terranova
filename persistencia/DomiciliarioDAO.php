@@ -5,16 +5,18 @@ class DomiciliarioDAO{
     private $apellido;
     private $ciudad;
     private $direccion;
+    private $telefono;
     private $correo;
     private $clave;
     private $estado;
     
-    function ClienteDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pCorreo, $pClave, $pEstado) {
+    function ClienteDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pCorreo, $pClave, $pEstado) {
         $this -> idDomiciliario = $pIdDomiciliario;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
         $this -> direccion = $pDireccion;
+        $this -> telefono = $pTelefono;
         $this -> correo = $pCorreo;
         $this -> clave = $pClave;
         $this -> estado = $pEstado;
@@ -27,7 +29,7 @@ class DomiciliarioDAO{
     }
     
     function consultarTodos () {
-        return "select idDomiciliario, nombre, apellido, ciudad, direccion, correo, estado
+        return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, correo, estado
                 from Domiciliario";
     }
     

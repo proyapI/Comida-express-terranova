@@ -21,7 +21,7 @@ class ClienteDAO{
     function crear () {
         return "insert into Cliente (idCliente, nombre, apellido, ciudad, direccion, correo, clave)
                 values ('" . $this -> idCliente . "','" . $this -> nombre . "', '" . $this -> apellido . "','" . $this -> ciudad . "', 
-                '" . $this -> direccion . "','" . $this -> correo . "','" . md5 ($this ->  clave) . "')";
+                '" . $this -> direccion . "','" . $this -> correo . "','" . md5 ($this ->  clave) . "')";        
     }
     
     function autenticar () {

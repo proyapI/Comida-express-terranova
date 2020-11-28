@@ -12,56 +12,39 @@ class Producto{
     private $valor;
     private $conexion;
     private $productoDAO;
-    /**
-     * @return mixed
-     */
+
     public function getId_prod()
     {
         return $this->id_prod;
     }
 
-    /**
-     * @return mixed
-     */
     public function getNombre()
     {
         return $this->nombre;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDescripcion()
     {
         return $this->descripcion;
     }
 
-    /**
-     * @return mixed
-     */
     public function getImagen()
     {
         return $this->imagen;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCantidad_und()
     {
         return $this->cantidad_und;
     }
 
-    /**
-     * @return mixed
-     */
     public function getValor()
     {
         return $this->valor;
     }
 
     
-    function ProductoDAO($pid_prod="", $pnombre="", $pdescripcion="", $pimagen="", $pcantidad_und="", $pvalor=""){
+    function Producto($pid_prod="", $pnombre="", $pdescripcion="", $pimagen="", $pcantidad_und="", $pvalor=""){
         $this -> id_prod = $pid_prod;
         $this -> nombre = $pnombre;
         $this -> descripcion = $pdescripcion;

@@ -19,8 +19,8 @@ class ProductoDAO {
     }
     
     function agregar(){
-        return "insert into Producto (nombre, descripcion, imagen, cantidad_und, valor)
-                values ('".$this -> nombre."', '".$this -> descripcion."','".$this -> imagen."', '".$this -> cantidad_und."', '".$this -> valor."')";
+        return "insert into Producto (id_prod, nombre, descripcion, imagen, cantidad_und, valor)
+                values ('".$this -> id_prod ."','".$this -> nombre ."', '".$this -> descripcion ."','".$this -> imagen ."', '".$this -> cantidad_und ."', '".$this -> valor ."')";
     }
     
     function consultarTodos(){

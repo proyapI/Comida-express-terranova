@@ -7,6 +7,7 @@ class Cliente{
     private $apellido;
     private $ciudad;
     private $direccion;
+    private $telefono;
     private $correo;
     private $clave;
     private $conexion;
@@ -36,7 +37,7 @@ class Cliente{
     {
         return $this->direccion;
     }
-    
+        
     public function getCorreo()
     {
         return $this->correo;
@@ -47,7 +48,7 @@ class Cliente{
         return $this->clave;
     }
     
-    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion, $pCorreo="", $pClave="") {
+    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pCorreo="", $pClave="") {
         $this -> idCliente = $pIdCliente;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
@@ -76,7 +77,6 @@ class Cliente{
             return false;
         }
     }
-    
     
     function consultar(){
         $this -> conexion -> abrir();
