@@ -9,7 +9,7 @@ class Cliente{
     private $direccion;
     private $telefono;
     private $correo;
-    private $clave;
+    private $clave;    
     private $conexion;
     private $clienteDAO;
     
@@ -38,6 +38,11 @@ class Cliente{
         return $this->direccion;
     }
         
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+    
     public function getCorreo()
     {
         return $this->correo;
@@ -48,16 +53,17 @@ class Cliente{
         return $this->clave;
     }
     
-    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pCorreo="", $pClave="") {
+    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="", $pCorreo="", $pClave="") {
         $this -> idCliente = $pIdCliente;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
         $this -> direccion = $pDireccion;
+        $this -> telefono = $pTelefono;
         $this -> correo = $pCorreo;
-        $this -> clave = $pClave;        
+        $this -> clave = $pClave;          
         $this -> conexion = new Conexion();
-        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion, $pCorreo, $pClave);
+        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion,  $pTelefono, $pCorreo, $pClave);
     }
     
     function crear(){
@@ -87,7 +93,8 @@ class Cliente{
         $this -> apellido = $resultado[1];
         $this -> ciudad = $resultado[2];
         $this -> direccion = $resultado[3];
-        $this -> correo = $resultado[4];
+        $this -> telefono = $resultado[4];
+        $this -> correo = $resultado[5];        
     }
     
     function consultarTodos(){
@@ -96,7 +103,7 @@ class Cliente{
         $this -> conexion -> cerrar();
         $clientes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5], ""));
+            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5], $resultado[6],""));
         }
         return $clientes;
     }
