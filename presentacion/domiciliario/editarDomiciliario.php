@@ -6,8 +6,8 @@ if($_SESSION["rol"] == "administrador"){
         $domiciliario -> editar();
         $editado = true;
     }else{
-        $producto = new Producto($_GET["idDomiciliario"]);
-        $producto -> consultar();
+        $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
+        $domiciliario -> consultar();
     }
 }
 elseif ($_SESSION["rol"] == "domiciliario"){
@@ -17,8 +17,8 @@ elseif ($_SESSION["rol"] == "domiciliario"){
         $domiciliario -> editar();
         $editado = true;
     }else{
-        $producto = new Producto($_GET["idDomiciliario"]);
-        $producto -> consultar();
+        $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
+        $domiciliario -> consultar();
     }
 }
 ?>

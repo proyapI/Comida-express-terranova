@@ -63,12 +63,12 @@ if($totalRegistros%$cantidad != 0){
                                           <i class='fas fa-sort-down'></i>";
 								}								
 								?>
-								</th>
+								</th>								
 								<th width="20%">Ciudad</th> 	
 								<th width="20%">Direccion</th>
 								<th width="20%">Telefono</th>
 								<th width="20%">Correo</th>
-								<th width="20%">Estado</th>							
+								<th width="20%">Estado</th>															
 								<th>Servicios</th>
 							</tr>
 						</thead>
@@ -77,25 +77,25 @@ if($totalRegistros%$cantidad != 0){
 						$i = (($pagina - 1) * $cantidad) + 1;
 						foreach ($domiciliarios as $domiciliarioActual){
 						    echo "<tr>";
-						    echo "<td>" . $domiciliarioActual -> getIdDomiciliario() . "</td><td>" . $domiciliarioActual -> getNombre() . "</td><td>" . $domiciliarioActual -> getApellido() . "</td>
-						    <td>" . $domiciliarioActual -> getCiudad() . "</td><td>" . $domiciliarioActual -> getDireccion() . "</td><td>" . $domiciliarioActual -> getTelefono() . "</td>
-                            <td>" . $domiciliarioActual -> getCorreo() . "</td><td>" . $domiciliarioActual -> getEstado() . "</td>";
-						    echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";
-						    if($_SESSION["rol"] == "domiciliario"){
-						        echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") . 
-						        "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&correo=" . $domiciliarioActual -> getCorreo() .
-						        "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>";
-						    } elseif ($_SESSION["rol"] == "administrador") {
-						        echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
-						        "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
-						        "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() . 
-						        "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>";
-						    }
-						    echo "</td>";
-						    echo "</tr>";
-						    
-						}						
-						?>						
+						    echo "<td>" . $domiciliarioActual->getIdDomiciliario() . "</td><td>" . $domiciliarioActual -> getNombre() . "</td>";
+                            echo "<td>" . $domiciliarioActual -> getApellido() . "</td><td>" . $domiciliarioActual -> getCiudad() . "</td>";
+                            echo "<td>" . $domiciliarioActual -> getDireccion() . "</td><td>" . $domiciliarioActual -> getTelefono() . "</td>";
+                            echo "<td>" . $domiciliarioActual -> getCorreo() . "</td><td>" . $domiciliarioActual -> getEstado();
+                            echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";
+                            if($_SESSION["rol"] == "domiciliario"){
+                                echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
+                                "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&correo=" . $domiciliarioActual -> getCorreo() .
+                                "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>";
+                            } elseif ($_SESSION["rol"] == "administrador") {
+                                echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
+                                "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
+                                "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() .
+                                "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>";
+                            }
+                            echo "</td>";
+                            echo "</tr>";                           
+						}
+						?>
 						</tbody>
 					</table>
 					<div class="row">
@@ -162,3 +162,4 @@ $("#cantidad").on("change", function() {
 	location.replace(url);
 });
 </script>
+						

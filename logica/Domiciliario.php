@@ -13,12 +13,12 @@ class Domiciliario{
     private $estado;
     private $conexion;
     private $domiciliarioDAO;
-    
+
     public function getIdDomiciliario()
     {
         return $this->idDomiciliario;
     }
-    
+
     public function getNombre()
     {
         return $this->nombre;
@@ -60,7 +60,7 @@ class Domiciliario{
     }
     
     function Domiciliario ($pIdDomiciliario="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="",$pCorreo="", $pClave="", $pEstado="") {
-        $this -> idCliente = $pIdDomiciliario;
+        $this -> idDomiciliario = $pIdDomiciliario;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
@@ -93,7 +93,7 @@ class Domiciliario{
     
     function consultar(){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> DomiciliarioDAO -> consultar());
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultar());
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         $this -> nombre = $resultado[0];
@@ -106,7 +106,7 @@ class Domiciliario{
     
     function consultarTodos(){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> DomiciliarioDAO -> consultarTodos());
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultarTodos());
         $this -> conexion -> cerrar();
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
@@ -128,8 +128,8 @@ class Domiciliario{
         $this -> conexion -> cerrar();
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
-                $resultado[5]),$resultado[6],"",$resultado[7]);
+            array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
+                $resultado[5], $resultado[6],"",$resultado[7]));
         }
         return $domiciliarios;
     }
@@ -144,7 +144,7 @@ class Domiciliario{
     
     function cambiarEstado($estado){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> DomiciliarioDAO -> cambiarEstado($estado));
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> cambiarEstado($estado));
         $this -> conexion -> cerrar();
     }
     
