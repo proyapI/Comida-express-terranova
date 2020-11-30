@@ -1,12 +1,11 @@
 <?php
 $editado = false;
 if(isset($_POST["editar"])){
-    $producto = new Producto($_POST["id"], $_POST["nombre"], $_POST["descripcion"],$_POST["imagen"],$_POST["cantidad_und"],
-        $_POST["valor"]);
+    $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$_POST["imagen"],$_POST["unidades"], $_POST["valor"]);
     $producto -> editar();
     $editado = true;
 }else{
-    $producto = new Producto($_GET["idProducto"]);
+    $producto = new Producto($_GET["id_prod"]);
     $producto -> consultar();
 }
 ?>
@@ -30,7 +29,7 @@ if(isset($_POST["editar"])){
 						</div>
 					<?php } ?>
 					<form
-						action="<?php echo "index.php?pid=" . base64_encode("presentacion/producto/editarProducto.php") . "&idProducto=" . $_GET["idProducto"] ?>"
+						action="<?php echo "index.php?pid=" . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $_GET["id_prod"] ?>"
 						method="post">
 						<div class="form-group">
 							<input type="text" name="nombre" class="form-control"

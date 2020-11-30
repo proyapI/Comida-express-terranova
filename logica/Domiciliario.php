@@ -38,7 +38,7 @@ class Domiciliario{
     {
         return $this->direccion;
     }
-
+    
     public function getTelefono()
     {
         return $this->telefono;
@@ -59,7 +59,7 @@ class Domiciliario{
         return $this->estado;
     }
     
-    function Cliente ($pIdDomiciliario="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion, $pTelefono, $pCorreo="", $pClave="", $pEstado="") {
+    function Domiciliario ($pIdDomiciliario="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="",$pCorreo="", $pClave="", $pEstado="") {
         $this -> idCliente = $pIdDomiciliario;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
@@ -71,6 +71,12 @@ class Domiciliario{
         $this -> estado = $pEstado;
         $this -> conexion = new Conexion();
         $this -> domiciliarioDAO = new DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pCorreo, $pClave, $pEstado);
+    }
+    
+    function crear(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> crear());
+        $this -> conexion -> cerrar();
     }
     
     function autenticar () {
@@ -93,7 +99,7 @@ class Domiciliario{
         $this -> nombre = $resultado[0];
         $this -> apellido = $resultado[1];
         $this -> ciudad = $resultado[2];
-        $this -> direccion = $resultado[3];
+        $this -> direccion = $resultado[3];        
         $this -> telefono = $resultado[4];
         $this -> correo = $resultado[5];
     }
@@ -104,10 +110,36 @@ class Domiciliario{
         $this -> conexion -> cerrar();
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($domiciliarios, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
-                $resultado[5], $resultado[6], "", $resultado[7]));
+            array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
+                $resultado[5], $resultado[6],"",$resultado[7]));
         }
         return $domiciliarios;
+    }
+    
+    function editar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> editar());
+        $this -> conexion -> cerrar();
+    }
+    
+    function consultarPorPagina($cantidad, $pagina, $orden, $dir){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));
+        $this -> conexion -> cerrar();
+        $domiciliarios = array();
+        while(($resultado = $this -> conexion -> extraer()) != null){
+            array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
+                $resultado[5]),$resultado[6],"",$resultado[7]);
+        }
+        return $domiciliarios;
+    }
+    
+    function consultarTotalRegistros(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
     }
     
     function cambiarEstado($estado){

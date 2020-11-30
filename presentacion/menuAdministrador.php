@@ -27,8 +27,8 @@ $administrador -> consultar();
           Domiciliario
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Crear</a>
-          <a class="dropdown-item" href="#">Consultar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/crearDomiciliario.php")?>">Crear</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/consultarDomiciliario.php")?>">Consultar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Buscar</a>
         </div>

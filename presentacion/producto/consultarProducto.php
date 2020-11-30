@@ -66,7 +66,7 @@ if($totalRegistros%$cantidad != 0){
 						    <td>" . $productoActual -> getImagen() . "</td><td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
 						    echo "<td>";
 						    if($_SESSION["rol"] == "administrador"){
-						        echo "<a href='index.php?pid= " . base64_encode("presentacion/autor/editarAutor.php") . "&idAutor=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>";
+						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>";
 						    }
 						    echo "</td>";
 						    echo "</tr>";

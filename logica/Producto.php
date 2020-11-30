@@ -61,6 +61,18 @@ class Producto{
         $this -> conexion -> cerrar();
     }
     
+    function consultar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> consultar());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        $this -> nombre = $resultado[0];
+        $this -> descripcion = $resultado[1];
+        $this -> imagen = $resultado[2];
+        $this -> cantidad_und = $resultado[3];
+        $this -> valor = $resultado[4];        
+    }
+    
     function consultarTodos(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> productoDAO -> consultarTodos());
