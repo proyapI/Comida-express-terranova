@@ -6,26 +6,28 @@ class DomiciliarioDAO{
     private $ciudad;
     private $direccion;
     private $telefono;
+    private $imagen;
     private $correo;
     private $clave;
     private $estado;
     
-    function DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pCorreo, $pClave, $pEstado) {
+    function DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave, $pEstado) {
         $this -> idDomiciliario = $pIdDomiciliario;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
         $this -> direccion = $pDireccion;
         $this -> telefono = $pTelefono;
+        $this -> imagen = $pImagen;
         $this -> correo = $pCorreo;
         $this -> clave = $pClave;
         $this -> estado = $pEstado;
     }
     
     function crear () {
-        return "insert into Domiciliario (idDomiciliario, nombre, apellido, ciudad, direccion, telefono, correo, clave, estado)
+        return "insert into Domiciliario (idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, clave, estado)
                 values ('" . $this -> idDomiciliario . "','" . $this -> nombre . "', '" . $this -> apellido . "','" . $this -> ciudad . "',
-                '" . $this -> direccion . "','" . $this -> telefono . "','" . $this -> correo . "','" . md5 ($this ->  clave) . "',
+                '" . $this -> direccion . "','" . $this -> telefono . "','" . $this -> imagen . "','" . $this -> correo . "','" . md5 ($this ->  clave) . "',
                 '" . $this -> estado . "')";
     }    
        
@@ -36,12 +38,12 @@ class DomiciliarioDAO{
     }
     
     function consultar(){
-        return "select nombre, apellido, ciudad, direccion, telefono, correo, estado
+        return "select nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
                 from Domiciliario where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     
     function consultarTodos () {
-        return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, correo, estado
+        return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
                 from Domiciliario";
     }
     
@@ -55,11 +57,11 @@ class DomiciliarioDAO{
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
         if($orden == "" || $dir == ""){
-            return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, correo, estado
+            return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
                 from domiciliario
                 limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
         }else{
-            return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, correo, estado
+            return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
                 from domiciliario
                 order by " . $orden . " " . $dir . "
                 limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
@@ -76,6 +78,16 @@ class DomiciliarioDAO{
                 where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     
+    function buscar($filtro){
+        return "select idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
+                from domiciliario
+                where nombre like '" . $filtro . "%'";
+    }
+    
+    function editarFoto() {
+        return "update Domiciliario set imagen = '" . $this -> imagen . "'
+                where idDomiciliario = '" . $this -> idDomiciliario . "'";
+    }
     
 }
 

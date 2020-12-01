@@ -5,6 +5,7 @@ class Administrador{
     private $idAdministrador;
     private $nombre;
     private $apellido;
+    private $imagen;
     private $correo;
     private $clave;
     private $conexion;
@@ -25,6 +26,11 @@ class Administrador{
         return $this->apellido;
     }
     
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+    
     public function getCorreo()
     {
         return $this->correo;
@@ -35,14 +41,15 @@ class Administrador{
         return $this->clave;
     }
     
-    function Administrador ($pIdAdministrador="", $pNombre="", $pApellido="", $pCorreo="", $pClave="") {
+    function Administrador ($pIdAdministrador="", $pNombre="", $pApellido="", $pImagen="", $pCorreo="", $pClave="") {
         $this -> idAdministrador = $pIdAdministrador;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
+        $this -> imagen = $pImagen;
         $this -> correo = $pCorreo;
         $this -> clave = $pClave;
         $this -> conexion = new Conexion();
-        $this -> administradorDAO = new AdministradorDAO ($pIdAdministrador, $pNombre, $pApellido, $pCorreo, $pClave);
+        $this -> administradorDAO = new AdministradorDAO ($pIdAdministrador, $pNombre, $pApellido, $pImagen, $pCorreo, $pClave);
     }
     
     function autenticar () {
@@ -64,7 +71,20 @@ class Administrador{
         $resultado = $this -> conexion -> extraer();
         $this -> nombre = $resultado[0];
         $this -> apellido = $resultado[1];
-        $this -> correo = $resultado[2];
+        $this -> imagen = $resultado[2];
+        $this -> correo = $resultado[3];
+    }
+    
+    function editar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> administradorDAO -> editar());
+        $this -> conexion -> cerrar();
+    }
+    
+    function editarFoto(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> administradorDAO -> editarFoto());
+        $this -> conexion -> cerrar();
     }
 }
 

@@ -62,11 +62,13 @@ if($totalRegistros%$cantidad != 0){
 						$i = (($pagina - 1) * $cantidad) + 1;
 						foreach ($productos as $productoActual){
 						    echo "<tr>";
-						    echo "<td>" . $productoActual -> getId_prod() . "</td><td>" . $productoActual -> getNombre() . "</td><td>" . $productoActual -> getDescripcion() . "</td>
-						    <td>" . $productoActual -> getImagen() . "</td><td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
+						    echo "<td>" . $productoActual -> getId_prod() . "</td><td>" . $productoActual -> getNombre() . "</td><td>" . $productoActual -> getDescripcion() . "</td>";
+						    echo "<td><img src='" . $productoActual -> getImagen() . "' width='50px' /></td>";
+						    echo "<td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
 						    echo "<td>";
 						    if($_SESSION["rol"] == "administrador"){
 						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>";
+						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
 						    }
 						    echo "</td>";
 						    echo "</tr>";

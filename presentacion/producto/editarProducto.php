@@ -1,9 +1,17 @@
 <?php
 $editado = false;
 if(isset($_POST["editar"])){
-    $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$_POST["imagen"],$_POST["unidades"], $_POST["valor"]);
-    $producto -> editar();
-    $editado = true;
+    $producto = new Producto($_GET["id_prod"]);
+    $producto -> consultar();
+    if ($producto-> getImagen()== '' || $producto ->getImagen() == '...'){
+        $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],'...',$_POST["unidades"], $_POST["valor"]);
+        $producto -> editar();
+        $editado = true;
+    } else{
+        $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$_GET["imagen"],$_POST["unidades"], $_POST["valor"]);
+        $producto -> editar();
+        $editado = true;
+    }
 }else{
     $producto = new Producto($_GET["id_prod"]);
     $producto -> consultar();
@@ -38,10 +46,6 @@ if(isset($_POST["editar"])){
 						<div class="form-group">
 							<input type="text" name="descripcion" class="form-control"
 								placeholder="Descripcion" value="<?php echo $producto -> getDescripcion() ?>" required="required">
-						</div>
-						<div class="form-group">
-							<input type="text" name="imagen" class="form-control"
-								placeholder="Imagen" value="<?php echo $producto -> getImagen() ?>" required="required">
 						</div>
 						<div class="form-group">
 							<input type="text" name="unidades" class="form-control"

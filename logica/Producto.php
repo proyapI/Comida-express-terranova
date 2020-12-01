@@ -120,6 +120,11 @@ class Producto{
         return $productos;
     }
     
+    function editarFoto(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> editarFoto());
+        $this -> conexion -> cerrar();
+    }
 }
 
 ?>

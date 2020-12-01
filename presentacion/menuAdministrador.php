@@ -30,7 +30,7 @@ $administrador -> consultar();
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/crearDomiciliario.php")?>">Crear</a>
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/consultarDomiciliario.php")?>">Consultar</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Buscar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/buscarDomiciliario.php")?>">Buscar</a>
         </div>
       </li>
 
@@ -39,7 +39,7 @@ $administrador -> consultar();
           Cliente
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/cliente/consultarCliente.php")?>">Consultar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/cliente/consultarCliente.php") ?>">Consultar</a>
         </div>
       </li>
 
@@ -49,8 +49,8 @@ $administrador -> consultar();
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Administrador: <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido(); ?>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Editar Perfil</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarAdministrador.php") ?>">Editar Perfil</a>
           <a class="dropdown-item" href="#">Editar Foto</a>
         </div>
       </li>      

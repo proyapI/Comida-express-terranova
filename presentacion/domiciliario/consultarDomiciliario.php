@@ -67,6 +67,7 @@ if($totalRegistros%$cantidad != 0){
 								<th width="20%">Ciudad</th> 	
 								<th width="20%">Direccion</th>
 								<th width="20%">Telefono</th>
+								<th width="20%">Imagen</th>
 								<th width="20%">Correo</th>
 								<th width="20%">Estado</th>															
 								<th>Servicios</th>
@@ -80,12 +81,15 @@ if($totalRegistros%$cantidad != 0){
 						    echo "<td>" . $domiciliarioActual->getIdDomiciliario() . "</td><td>" . $domiciliarioActual -> getNombre() . "</td>";
                             echo "<td>" . $domiciliarioActual -> getApellido() . "</td><td>" . $domiciliarioActual -> getCiudad() . "</td>";
                             echo "<td>" . $domiciliarioActual -> getDireccion() . "</td><td>" . $domiciliarioActual -> getTelefono() . "</td>";
-                            echo "<td>" . $domiciliarioActual -> getCorreo() . "</td><td>" . $domiciliarioActual -> getEstado();
-                            echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";
+                            echo "<td><img src='" . $domiciliarioActual -> getImagen() . "' width='50px' /></td>";
+                            echo "<td>" . $domiciliarioActual -> getCorreo() . "</td>";
+                            echo "<td> <div id='estado" . $domiciliarioActual -> getIdDomiciliario() . "'>" . (($domiciliarioActual -> getEstado()==1)?"<i class='fas fa-check-circle' data-toggle='tooltip' data-placement='bottom' title='Habilitado'></i>":"<i class='fas fa-times-circle' data-toggle='tooltip' data-placement='bottom' title='Deshabilitado'></i>") . "<div></td>";
+                            echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";                            
                             if($_SESSION["rol"] == "domiciliario"){
                                 echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                 "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&correo=" . $domiciliarioActual -> getCorreo() .
                                 "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>";
+                                echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
                             } elseif ($_SESSION["rol"] == "administrador") {
                                 echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                 "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
@@ -93,7 +97,7 @@ if($totalRegistros%$cantidad != 0){
                                 "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>";
                             }
                             echo "</td>";
-                            echo "</tr>";                           
+                            echo "</tr>";
 						}
 						?>
 						</tbody>
@@ -160,6 +164,19 @@ $("#cantidad").on("change", function() {
 	url = "index.php?pid=<?php echo base64_encode("presentacion/domiciliario/consultarDomiciliario.php") ?>&cantidad=" + $(this).val() + "<?php echo (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") ?>";
 	//alert (url);
 	location.replace(url);
+});
+</script>
+<script>
+$(document).ready(function(){
+<?php 
+$i = 1;
+foreach ($domiciliarios as $domiciliarioActual){
+    echo "\t$(\"#cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "\").click(function(){\n";
+    echo "\t\turl = \"indexAjax.php?pid=" . base64_encode("presentacion/domiciliario/cambiarEstadoDomiciliarioAjax.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "\"\n";
+    echo "\t\t$(\"#estado" . $domiciliarioActual -> getIdDomiciliario() . "\").load(url);\n";
+    echo "\t});\n\n";
+}	
+?>
 });
 </script>
 						

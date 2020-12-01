@@ -2,7 +2,7 @@
 if($_SESSION["rol"] == "administrador"){
     $creado = false;
     if(isset($_POST["crear"])){
-        $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["correo"],$_POST["clave"], $_POST["estado"]);
+        $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"], $_POST["estado"]);
         $domiciliario -> crear();
         $creado = true;
     }
@@ -11,7 +11,7 @@ if($_SESSION["rol"] == "administrador"){
 <div class="container">
     	<div class="row mt-3">
     		<div class="col-3"></div>
-    		<div class="col-6">
+    		<div class="col-6"> 
     			<div class="card">
     				<div class="card-header">
     					<h3>Registrar domiciliario</h3>

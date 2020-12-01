@@ -8,6 +8,7 @@ class Cliente{
     private $ciudad;
     private $direccion;
     private $telefono;
+    private $imagen;
     private $correo;
     private $clave;    
     private $conexion;
@@ -43,6 +44,11 @@ class Cliente{
         return $this->telefono;
     }
     
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+    
     public function getCorreo()
     {
         return $this->correo;
@@ -53,17 +59,18 @@ class Cliente{
         return $this->clave;
     }
     
-    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="", $pCorreo="", $pClave="") {
+    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="", $pImagen="", $pCorreo="", $pClave="") {
         $this -> idCliente = $pIdCliente;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
         $this -> direccion = $pDireccion;
         $this -> telefono = $pTelefono;
+        $this -> imagen = $pImagen;
         $this -> correo = $pCorreo;
         $this -> clave = $pClave;          
         $this -> conexion = new Conexion();
-        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion,  $pTelefono, $pCorreo, $pClave);
+        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave);
     }
     
     function crear(){
@@ -94,7 +101,8 @@ class Cliente{
         $this -> ciudad = $resultado[2];
         $this -> direccion = $resultado[3];
         $this -> telefono = $resultado[4];
-        $this -> correo = $resultado[5];        
+        $this -> imagen = $resultado[5];
+        $this -> correo = $resultado[6];        
     }
     
     function consultarTodos(){
@@ -107,6 +115,51 @@ class Cliente{
         }
         return $clientes;
     }
+    
+    function editar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> editar());
+        $this -> conexion -> cerrar();
+    }
+    
+    function consultarPorPagina($cantidad, $pagina, $orden, $dir){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));
+        $this -> conexion -> cerrar();
+        $clientes = array();
+        while(($resultado = $this -> conexion -> extraer()) != null){
+            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
+                $resultado[5], $resultado[6], $resultado[7],""));
+        }
+        return $clientes;
+    }
+    
+    function consultarTotalRegistros(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
+    function buscar($filtro){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> buscar($filtro));
+        $this -> conexion -> cerrar();
+        $clientes = array();
+        while(($resultado = $this -> conexion -> extraer()) != null){
+            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
+                $resultado[5], $resultado[6], $resultado[7],""));
+        }
+        return $clientes;
+    }
+    
+    function editarFoto(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> editarFoto());
+        $this -> conexion -> cerrar();
+    }
+    
     
 }
 
