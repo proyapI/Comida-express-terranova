@@ -17,8 +17,7 @@ class LogDAO{
     }
     
     function consultarTodos () {
-        return "select idLog, accion, datos, fecha, hora, actor
-                    from log";
+        return "select idLog, accion, datos, fecha, hora, actor from log";
     }
 }
 ?>

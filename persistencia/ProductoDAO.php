@@ -19,8 +19,13 @@ class ProductoDAO {
     }
     
     function agregar(){
-        return "insert into Producto (nombre, descripcion, imagen, cantidad_und, valor)
-                values ('".$this -> nombre."', '".$this -> descripcion."','".$this -> imagen."', '".$this -> cantidad_und."', '".$this -> valor."')";
+        return "insert into Producto (id_prod, nombre, descripcion, imagen, cantidad_und, valor)
+                values ('".$this -> id_prod ."','".$this -> nombre . "', '".$this -> descripcion . "','" . $this -> imagen . "','" . $this -> cantidad_und ."', '".$this -> valor ."')";
+    }
+    
+    function consultar(){
+        return "select nombre, descripcion, imagen, cantidad_und, valor
+                from Producto where id_prod = '" . $this -> id_prod . "'";
     }
     
     function consultarTodos(){
@@ -29,9 +34,10 @@ class ProductoDAO {
     }
     
     function editar(){
-        return "update producto
-                set nombre = '".$this -> nombre."', '".$this -> descripcion."', '".$this -> imagen."','".$this -> cantidad_und."', '".$this -> valor."'
-                where id_prod = '".$this -> id_prod."'";
+        return "update Producto
+                set nombre = '".$this -> nombre . "', descripcion ='" . $this -> descripcion . "',
+                cantidad_und = '".$this -> cantidad_und . "', valor = '" . $this -> valor . "'
+                where id_prod = '" . $this -> id_prod . "'";
     }
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
@@ -58,6 +64,10 @@ class ProductoDAO {
                 where nombre like '" . $filtro . "%'";
     }
     
+    function editarFoto() {
+        return "update Producto set imagen = '" . $this -> imagen . "'
+                where id_prod = '" . $this -> id_prod . "'";
+    }
     
 }
 

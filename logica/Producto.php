@@ -12,56 +12,39 @@ class Producto{
     private $valor;
     private $conexion;
     private $productoDAO;
-    /**
-     * @return mixed
-     */
+
     public function getId_prod()
     {
         return $this->id_prod;
     }
 
-    /**
-     * @return mixed
-     */
     public function getNombre()
     {
         return $this->nombre;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDescripcion()
     {
         return $this->descripcion;
     }
 
-    /**
-     * @return mixed
-     */
     public function getImagen()
     {
         return $this->imagen;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCantidad_und()
     {
         return $this->cantidad_und;
     }
 
-    /**
-     * @return mixed
-     */
     public function getValor()
     {
         return $this->valor;
     }
 
     
-    function ProductoDAO($pid_prod="", $pnombre="", $pdescripcion="", $pimagen="", $pcantidad_und="", $pvalor=""){
+    function Producto($pid_prod="", $pnombre="", $pdescripcion="", $pimagen="", $pcantidad_und="", $pvalor=""){
         $this -> id_prod = $pid_prod;
         $this -> nombre = $pnombre;
         $this -> descripcion = $pdescripcion;
@@ -76,6 +59,18 @@ class Producto{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> productoDAO -> agregar());
         $this -> conexion -> cerrar();
+    }
+    
+    function consultar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> consultar());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        $this -> nombre = $resultado[0];
+        $this -> descripcion = $resultado[1];
+        $this -> imagen = $resultado[2];
+        $this -> cantidad_und = $resultado[3];
+        $this -> valor = $resultado[4];        
     }
     
     function consultarTodos(){
@@ -125,6 +120,11 @@ class Producto{
         return $productos;
     }
     
+    function editarFoto(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> editarFoto());
+        $this -> conexion -> cerrar();
+    }
 }
 
 ?>

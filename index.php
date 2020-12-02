@@ -1,13 +1,15 @@
 <?php
-
+session_start();
 require "logica/Administrador.php";
 require "logica/Cliente.php";
 require "logica/Cliente_producto.php";
 require "logica/Domiciliario.php";
 require "logica/Pedido.php";
 require "logica/Producto.php";
+require "persistencia/Conexion.php";
 
 $pagSinSesion = array(
+    "presentacion/registrarCliente.php",
     "presentacion/recuperarClave.php",
     "presentacion/autenticar.php"
 );
@@ -51,7 +53,13 @@ $(function () {
 
 if (isset($pid)) {
     if (isset($_SESSION["id"])) {
-        include "presentacion/menuAdministrador.php";
+        if($_SESSION["rol"] == "administrador"){
+            include "presentacion/menuAdministrador.php";
+        }elseif ($_SESSION["rol"] == "cliente") {
+            include "presentacion/menuCliente.php";
+        }else {
+            include "presentacion/menuDomiciliario.php";
+        }     
         include $pid;
     } else if (in_array($pid, $pagSinSesion)) {
         include $pid;
