@@ -11,19 +11,31 @@ if($_SESSION["rol"] == "administrador"){
     }
 }
 elseif ($_SESSION["rol"] == "domiciliario"){
-    $editado = false;
-    
+    $editado = false;    
     if(isset($_POST["editar"])){
         $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
         $domiciliario -> consultar();
-        if ($domiciliario ->getImagen() == '' || $domiciliario ->getImagen() == '...'){
-            $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], md5($_POST["clave"]));
-            $domiciliario -> editar();
-            $editado = true;
-        }else{
-            $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], md5($_POST["clave"]));
-            $domiciliario -> editar();
-            $editado = true;
+        if($_POST["clave"] == $domiciliario -> getClave()){
+            if ($domiciliario ->getImagen() == '' || $domiciliario ->getImagen() == '...'){
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], $_POST["clave"]);
+                $domiciliario -> editar();
+                $editado = true;
+            }else{
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_GET["correo"], $_POST["clave"]);
+                $domiciliario -> editar();
+                $editado = true;
+            }
+        }
+        else{
+            if ($domiciliario ->getImagen() == '' || $domiciliario ->getImagen() == '...'){
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], md5($_POST["clave"]));
+                $domiciliario -> editar();
+                $editado = true;
+            }else{
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_GET["correo"], md5($_POST["clave"]));
+                $domiciliario -> editar();
+                $editado = true;
+            }
         }
     }else{
         $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
@@ -74,6 +86,10 @@ elseif ($_SESSION["rol"] == "domiciliario"){
     							<input type="text" name="telefono" class="form-control"
     								placeholder="Telefono" value="<?php echo $domiciliario -> getTelefono() ?>" required="required">
     						</div>
+    						<div class="form-group">
+								<input type="hidden" name="imagen" class="form-control"
+								value="<?php echo $domiciliario -> getImagen() ?>">
+							</div>
     						<div class="form-group">
     							<input type="text" name="clave" value="<?php echo $domiciliario -> getClave() ?>" class="form-control"
     								placeholder="Clave" required="required">    						

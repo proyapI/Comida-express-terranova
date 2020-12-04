@@ -6,7 +6,10 @@ if(isset($_POST["editarFoto"])){
     if($tipo == "image/jpeg" || $tipo == "image/png"){
         $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
         $domiciliario -> consultar();
-        if($domiciliario -> getImagen() == ""){
+        if($domiciliario -> getImagen() == "" || $domiciliario -> getImagen() == '...'){
+            $domiciliario -> getImagen();
+        }
+        else{
             unlink($domiciliario -> getImagen());
         }
         $urlServidor = "imagenes/" . time() . ".png";
