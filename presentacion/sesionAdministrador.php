@@ -10,7 +10,10 @@ $administrador -> consultar();
 					<h3>Bienvenido</h3>
 				</div>
 				<div class="card-body">
-					Administrador: <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido() ?>
+					<h4>Administrador: <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido() ?></h4>
+				</div>
+				<div class="card-body">
+					<?php echo "<img src='" . $administrador -> getImagen() . "' width='30%' />";?>
 				</div>
 			</div>
 		</div>

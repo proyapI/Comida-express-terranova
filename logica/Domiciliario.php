@@ -110,6 +110,7 @@ class Domiciliario{
         $this -> telefono = $resultado[4];
         $this -> imagen = $resultado[5];
         $this -> correo = $resultado[6];
+        $this -> estado = $resultado[7];
     }
     
     function consultarTodos(){

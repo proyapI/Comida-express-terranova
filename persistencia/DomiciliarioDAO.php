@@ -74,7 +74,7 @@ class DomiciliarioDAO{
     }
     
     function cambiarEstado($estado) {
-        return "update Domiciliario set estado = '" . $estado . "' 
+        return "update domiciliario set estado = '" . $estado . "' 
                 where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     

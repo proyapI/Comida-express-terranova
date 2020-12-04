@@ -73,6 +73,7 @@ class Administrador{
         $this -> apellido = $resultado[1];
         $this -> imagen = $resultado[2];
         $this -> correo = $resultado[3];
+        $this -> clave = $resultado[4];
     }
     
     function editar(){

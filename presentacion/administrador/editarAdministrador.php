@@ -3,13 +3,13 @@ $editado = false;
 if(isset($_POST["editar"])){
     $administrador = new Administrador($_GET["idAdministrador"]);
     $administrador -> consultar();
-    if ($administrador ->getImagen() == '' || $administrador ->getImagen() == '...' || $administrador -> getClave() == ''){
-        $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],'...',$_POST["correo"],'');
+    if ($administrador ->getImagen() == '' || $administrador ->getImagen() == '...'){
+        $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],'...',$_POST["correo"], md5($_POST["clave"]));
         $administrador -> editar();
         $editado = true;
     }
     else{
-        $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],$_GET["imagen"],$_POST["correo"],$_GET["clave"]);
+        $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],$_GET["imagen"],$_POST["correo"], md5($_POST["clave"]));
         $administrador -> editar();
         $editado = true;
     }
@@ -30,11 +30,11 @@ if(isset($_POST["editar"])){
 					<?php if ($editado) { ?>						
 						<div class="alert alert-success alert-dismissible fade show"
 							role="alert">
-							<strong>Datos editados</strong>
-							<button type="button" class="close" data-dismiss="alert"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+							<?php 
+    							 echo "Datos editados"; 
+    							 session_destroy();
+    							 echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";
+    						?>
 						</div>
 					<?php } ?>
 					<form
@@ -50,8 +50,12 @@ if(isset($_POST["editar"])){
 						</div>
 						<div class="form-group">
 							<input type="text" name="correo" class="form-control"
-								placeholder="correo" value="<?php echo $administrador -> getCorreo() ?>" required="required">
-						</div>								
+								placeholder="Correo" value="<?php echo $administrador -> getCorreo() ?>" required="required">
+						</div>	
+						<div class="form-group">
+							<input type="password" name="clave" class="form-control"
+								placeholder="Clave" value="<?php echo $administrador -> getClave() ?>" required="required">
+						</div>							
 						<div class="form-group">
 							<button type="submit" name="editar" class="btn btn-primary">Editar</button>
 						</div>

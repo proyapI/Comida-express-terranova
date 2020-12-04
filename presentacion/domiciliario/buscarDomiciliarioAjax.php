@@ -28,8 +28,8 @@ $domiciliarios = $domiciliario -> buscar($filtro);
 			foreach ($domiciliarios as $domiciliarioActual){
 			    $filtro = ucwords(strtolower($filtro));				  
 			    echo "<tr>";
-			    echo "<td>" . $domiciliarioActual -> getIdDomiciliario() . "</td><td>". str_replace($filtro, "<FONT color='#FF0000'>$filtro</FONT>", $domiciliarioActual -> getNombre()) ."</td>";
-			    echo "<td>" . $domiciliarioActual -> getApellido() . "</td><td>" . $domiciliarioActual -> getCiudad() . "</td><td>" . $domiciliarioActual -> getDireccion() . "</td><td>". $domiciliarioActual -> getTelefono() . "</td>";
+			    echo "<td>" . $domiciliarioActual -> getIdDomiciliario() . "</td><td>". str_replace($filtro, "<FONT color='#FF0000'>$filtro</FONT>", $domiciliarioActual -> getNombre() ."</td><td>" . $domiciliarioActual -> getApellido()) . "</td>";
+			    echo "<td>" . $domiciliarioActual -> getCiudad() . "</td><td>" . $domiciliarioActual -> getDireccion() . "</td><td>". $domiciliarioActual -> getTelefono() . "</td>";
 			    echo "<td>" . $domiciliarioActual -> getImagen() . "</td><td>" . $domiciliarioActual -> getCorreo() . "</td><td>" . $domiciliarioActual -> getEstado() . "</td>";
 			    echo "<td><a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") . "&idProducto=" . $domiciliarioActual -> getIdDomiciliario() . "'><i class='fas fa-edit'></i></a></td>";
 			    echo "</tr>";			

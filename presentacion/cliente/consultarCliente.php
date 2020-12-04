@@ -84,7 +84,7 @@ if($totalRegistros%$cantidad != 0){
 						    echo "<td>";
 						    if($_SESSION["rol"] == "cliente"){
 						        echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente/editarCliente.php") . "&idCliente=" . $clienteActual -> getIdCliente() . "'><i class='fas fa-edit'></i></a>";
-						        echo "<a href='index.php?pid=" . base64_encode("presentacion/cliente/editarFotoCliente.php") . "&id_prod=" . $clienteActual -> getIdCliente() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
+						        echo "<a href='index.php?pid=" . base64_encode("presentacion/cliente/editarFotoCliente.php") . "&idCliente=" . $clienteActual -> getIdCliente() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
 						    }
 						    echo "</td>";
 						    echo "</tr>";

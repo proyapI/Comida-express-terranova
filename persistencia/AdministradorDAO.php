@@ -23,8 +23,8 @@ class AdministradorDAO{
     }
     
     function consultar () {
-        return "select nombre, apellido, imagen, correo
-                from Administrador
+        return "select nombre, apellido, imagen, correo, clave
+                from administrador
                 where idAdministrador = '" . $this -> idAdministrador . "'";
     }
     
@@ -34,7 +34,7 @@ class AdministradorDAO{
     }
     
     function editar(){
-        return "update Administrador
+        return "update administrador
                 set nombre = '".$this -> nombre . "', apellido ='" . $this -> apellido . "', imagen ='" .
                 $this -> imagen . "',correo = '".$this -> correo . "', clave = '" . $this -> clave . "'
                 where idAdministrador = '" . $this -> idAdministrador . "'";

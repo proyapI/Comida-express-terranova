@@ -12,6 +12,9 @@ $cliente -> consultar();
 				<div class="card-body">
 					Cliente: <?php echo $cliente -> getNombre() . " " . $cliente -> getApellido() ?>
 				</div>
+				<div class="card-body">
+					<?php echo "<img src='" . $cliente -> getImagen() . "' width='30%' />";?>
+				</div>
 			</div>
 		</div>
 	</div>

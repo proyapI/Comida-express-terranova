@@ -172,7 +172,8 @@ $(document).ready(function(){
 $i = 1;
 foreach ($domiciliarios as $domiciliarioActual){
     echo "\t$(\"#cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "\").click(function(){\n";
-    echo "\t\turl = \"indexAjax.php?pid=" . base64_encode("presentacion/domiciliario/cambiarEstadoDomiciliarioAjax.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "\"\n";
+    echo "\t console.log('Hola Oscar');\n";
+    echo "\t\t const url = \"indexAjax.php?pid=" . base64_encode("presentacion/domiciliario/cambiarEstadoDomiciliarioAjax.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "\"\n";
     echo "\t\t$(\"#estado" . $domiciliarioActual -> getIdDomiciliario() . "\").load(url);\n";
     echo "\t});\n\n";
 }	

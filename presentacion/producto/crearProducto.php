@@ -47,11 +47,11 @@ if($_SESSION["rol"] == "administrador"){
     								placeholder="Imagen" required="required">    								
     						</div>
     						<div class="form-group">
-    							<input type="text" name="cantidad_und" class="form-control"
+    							<input type="number" name="cantidad_und" class="form-control"
     								placeholder="Cantidad_unidades" required="required">
     						</div>
     						<div class="form-group">
-    							<input type="text" name="valor" class="form-control"
+    							<input type="number" name="valor" class="form-control"
     								placeholder="Valor" required="required">
     						</div>
     						<div class="form-group">

@@ -34,7 +34,7 @@ class ClienteDAO{
     }
        
     function consultar(){
-        return "select idCliente, nombre, apellido, ciudad, direccion, telefono, imagen, correo
+        return "select nombre, apellido, ciudad, direccion, telefono, imagen, correo, clave
                 from Cliente where idCliente = '" . $this -> idCliente . "'";
     }
     
@@ -46,18 +46,18 @@ class ClienteDAO{
     function editar(){
         return "update Cliente
                 set nombre = '".$this -> nombre . "', apellido ='" . $this -> apellido . "', ciudad ='" .
-                $this -> ciudad . "',direccion = '".$this -> direccion . "', telefono = '" . $this -> telefono . "'
-                correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
+                $this -> ciudad . "',direccion = '".$this -> direccion . "', telefono = '" . $this -> telefono . "',
+                imagen = '" . $this -> imagen . "', correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
                 where idCliente = '" . $this -> idCliente . "'";
     }
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
         if($orden == "" || $dir == ""){
-            return "select idCliente, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
+            return "select idCliente, nombre, apellido, ciudad, direccion, telefono, imagen, correo
                 from cliente
                 limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
         }else{
-            return "select idCliente, nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
+            return "select idCliente, nombre, apellido, ciudad, direccion, telefono, imagen, correo
                 from cliente
                 order by " . $orden . " " . $dir . "
                 limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;

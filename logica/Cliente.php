@@ -102,7 +102,8 @@ class Cliente{
         $this -> direccion = $resultado[3];
         $this -> telefono = $resultado[4];
         $this -> imagen = $resultado[5];
-        $this -> correo = $resultado[6];        
+        $this -> correo = $resultado[6]; 
+        $this -> clave = $resultado[7];
     }
     
     function consultarTodos(){
