@@ -4,16 +4,31 @@
     if(isset($_POST["editar"])){
         $cliente = new Cliente($_GET["idCliente"]);
         $cliente -> consultar();
-        if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
-            $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
-            $cliente -> editar();
-            $editado = true;
+        if($_POST["clave"] == $cliente -> getClave()){
+            if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
+                $cliente -> editar();
+                $editado = true;
+            }
+            else{
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
+                $cliente -> editar();
+                $editado = true;
+            }
+            
+        }else{
+            if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
+                $cliente -> editar();
+                $editado = true;
+            }
+            else{
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], md5($_POST["clave"]));
+                $cliente -> editar();
+                $editado = true;
+            }
         }
-        else{
-            $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_POST["correo"], md5($_POST["clave"]));
-            $cliente -> editar();
-            $editado = true;
-        }
+        
         
     }else{
         $cliente = new Cliente($_GET["idCliente"]);
@@ -61,6 +76,10 @@
 						<div class="form-group">
 							<input type="text" name="telefono" class="form-control"
 								placeholder="Telefono" value="<?php echo $cliente -> getTelefono() ?>" required="required">
+						</div>
+						<div class="form-group">
+							<input type="hidden" name="imagen" class="form-control"
+								value="<?php echo $cliente -> getImagen() ?>">
 						</div>
 						<div class="form-group">
 							<input type="text" name="correo" class="form-control"

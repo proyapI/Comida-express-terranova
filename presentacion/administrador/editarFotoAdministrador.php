@@ -6,7 +6,9 @@ if(isset($_POST["editarFoto"])){
     if($tipo == "image/jpeg" || $tipo == "image/png"){
         $administrador = new Administrador($_GET["idAdministrador"]);
         $administrador -> consultar();
-        if($administrador -> getImagen() == ""){
+        if($administrador -> getImagen() == "" || $administrador -> getImagen() == '...'){
+            $administrador -> getImagen();
+        }else{
             unlink($administrador -> getImagen());
         }
         $urlServidor = "imagenes/" . time() . ".png";

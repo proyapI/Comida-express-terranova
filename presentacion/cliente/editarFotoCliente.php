@@ -6,7 +6,9 @@ if(isset($_POST["editarFoto"])){
     if($tipo == "image/jpeg" || $tipo == "image/png"){
         $cliente = new Cliente($_GET["idCliente"]);
         $cliente -> consultar();
-        if($cliente -> getImagen() == ""){
+        if($cliente -> getImagen() == "" || $cliente -> getImagen() == '...'){
+            $cliente -> getImagen();
+        }else{
             unlink($cliente -> getImagen());
         }
         $urlServidor = "imagenes/" . time() . ".png";
