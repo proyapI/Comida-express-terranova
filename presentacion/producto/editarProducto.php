@@ -1,4 +1,5 @@
 <?php
+require "logica/Log.php";
 $editado = false;
 if(isset($_POST["editar"])){
     $producto = new Producto($_GET["id_prod"]);
@@ -7,11 +8,17 @@ if(isset($_POST["editar"])){
         $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],'...',$_POST["unidades"], $_POST["valor"]);
         $producto -> editar();
         $editado = true;
+        date_default_timezone_set('America/Bogota');
+        $log = new Log($_SESSION["id"] . "." . $_GET["id_prod"],"editar","editar producto: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+        $log -> crear();
     } else{
         $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$_GET["imagen"],$_POST["unidades"], $_POST["valor"]);
         $producto -> editar();
         $editado = true;
-    }
+        date_default_timezone_set('America/Bogota');
+        $log = new Log($_SESSION["id"],"editar","editar producto: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+        $log -> crear();
+    }    
 }else{
     $producto = new Producto($_GET["id_prod"]);
     $producto -> consultar();

@@ -1,5 +1,5 @@
 <?php
-$domiciliario = new Cliente($_SESSION["id"]);
+$domiciliario = new Domiciliario($_SESSION["id"]);
 $domiciliario -> consultar();
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,8 +32,8 @@ $domiciliario -> consultar();
           Domiciliario: <?php echo $domiciliario -> getNombre() . " " . $domiciliario -> getApellido(); ?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
-          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>">Editar Perfil</a>
-          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarFotoDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>"">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/domiciliario/editarDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>">Editar Perfil</a>
+          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/domiciliario/editarFotoDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>">Editar Foto</a>
         </div>
       </li>      
       <li class="nav-item">

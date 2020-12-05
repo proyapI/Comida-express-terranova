@@ -28,9 +28,9 @@ $productos = $producto -> buscar($filtro);
 			    echo "<td>" . $productoActual -> getId_prod() . "</td><td>". str_replace($filtro, "<FONT color='#FF0000'>$filtro</FONT>", $productoActual -> getNombre()) ."</td>";
 			    echo "<td>" . $productoActual -> getDescripcion() . "</td><td>" . $productoActual -> getImagen() . "</td><td>" . $productoActual -> getCantidad_und() . "</td><td>". $productoActual -> getValor() . "</td>";
 			    echo "<td><a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&idProducto=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a></td>";
-			    echo "</tr>";			
+			    echo "</tr>";			    
 			}			
-			?>
+			?>			
 			</tbody>
 		</table>
 	</div>

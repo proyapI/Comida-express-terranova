@@ -1,4 +1,5 @@
 <?php
+require "logica/Log.php";
 $error = 0;
 if(isset($_POST["editarFoto"])){
     $foto = $_FILES["foto"];
@@ -17,6 +18,9 @@ if(isset($_POST["editarFoto"])){
     }else{
         $error = 1;
     }
+    date_default_timezone_set('America/Bogota');
+    $log = new Log($_SESSION["id"],"editar","editar foto producto: " . $_GET["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+    $log -> crear();
 }
 ?>
 <div class="container">

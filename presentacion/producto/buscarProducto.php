@@ -1,3 +1,15 @@
+<?php
+require "logica/Log.php";
+date_default_timezone_set('America/Bogota');
+if ($_SESSION["rol"] == "administrador"){
+    $log = new Log($_SESSION["id"],"buscar","buscar producto" , date('Y-m-d'),date('H:i:s'),"administrador");
+    $log -> crear();
+}
+elseif ($_SESSION["rol"] == "cliente"){
+    $log = new Log($_SESSION["id"],"buscar","buscar producto", date('Y-m-d'),date('H:i:s'),"cliente");
+    $log -> crear();
+}
+?>
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-3"></div>

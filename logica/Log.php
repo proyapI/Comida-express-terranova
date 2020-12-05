@@ -70,6 +70,12 @@ class Log{
         $this->conexion = new Conexion();
         $this->logDAO = new LogDAO($pidLog, $paccion, $pdatos, $pfecha, $phora, $pactor);
     }
+    
+    function crear(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> logDAO -> agregar());
+        $this -> conexion -> cerrar();
+    }
 
     function consultarTodos(){
         $this -> conexion -> abrir();

@@ -59,7 +59,7 @@ if($_SESSION["rol"] == "administrador"){
     								placeholder="Correo" required="required">
     						</div>
     						<div class="form-group">
-    							<input type="text" name="clave" class="form-control"
+    							<input type="password" name="clave" class="form-control"
     								placeholder="Clave" required="required">    						
     						</div>
     						<div class="form-group">

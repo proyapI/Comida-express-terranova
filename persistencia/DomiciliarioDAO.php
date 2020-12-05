@@ -38,7 +38,7 @@ class DomiciliarioDAO{
     }
     
     function consultar(){
-        return "select nombre, apellido, ciudad, direccion, telefono, imagen, correo, estado
+        return "select nombre, apellido, ciudad, direccion, telefono, imagen, correo, clave, estado
                 from Domiciliario where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     

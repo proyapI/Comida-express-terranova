@@ -91,7 +91,9 @@ class Domiciliario{
         $this -> conexion -> ejecutar($this -> domiciliarioDAO -> autenticar());
         $this -> conexion -> cerrar();
         if($this -> conexion -> numFilas() == 1){
-            $this -> idDomiciliario = $this -> conexion -> extraer()[0];
+            $resultado = $this -> conexion -> extraer();
+            $this -> idDomiciliario = $resultado[0];
+            $this -> estado = $resultado[1];
             return true;
         }else{
             return false;
@@ -110,7 +112,8 @@ class Domiciliario{
         $this -> telefono = $resultado[4];
         $this -> imagen = $resultado[5];
         $this -> correo = $resultado[6];
-        $this -> estado = $resultado[7];
+        $this -> clave = $resultado[7];
+        $this -> estado = $resultado[8];        
     }
     
     function consultarTodos(){

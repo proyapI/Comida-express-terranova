@@ -16,9 +16,11 @@ if($administrador -> autenticar()){
     }else{
         $domiciliario = new Domiciliario("", "", "", "","","","",$correo, $clave,"");
         if($domiciliario -> autenticar()){
-            if($domiciliario -> getEstado() == 1){
-                $_SESSION["id"] = $domiciliario -> getIdDomiciliario();
-                $_SESSION["rol"] = "domiciliario";
+            echo $domiciliario -> getIdDomiciliario();
+            if($domiciliario -> getEstado() == 1){                
+                echo "hola";
+                $_SESSION["id"] = $domiciliario -> getIdDomiciliario();                
+                $_SESSION["rol"] = "domiciliario";                
                 header("Location: index.php?pid=" . base64_encode("presentacion/sesionDomiciliario.php"));
             }
         }else{

@@ -1,10 +1,14 @@
 <?php  
+require "logica/Log.php";
 if($_SESSION["rol"] == "administrador"){
     $creado = false;
     if(isset($_POST["crear"])){
-        $producto = new Producto($_POST["id"], $_POST["nombre"], $_POST["descripcion"],$_POST["imagen"],$_POST["cantidad_und"], $_POST["valor"]);
+        $producto = new Producto($_POST["id"], $_POST["nombre"], $_POST["descripcion"],'',$_POST["cantidad_und"], $_POST["valor"]);
         $producto -> crear();
-        $creado = true;
+        $creado = true;      
+        date_default_timezone_set('America/Bogota');
+        $log = new Log($_SESSION["id"],"crear","crear producto: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+        $log -> crear();
     }
 }
 ?>
@@ -24,7 +28,7 @@ if($_SESSION["rol"] == "administrador"){
     							<button type="button" class="close" data-dismiss="alert"
     								aria-label="Close">
     								<span aria-hidden="true">&times;</span>
-    							</button>
+    							</button>    							
     						</div>
     					<?php } ?>
     					<form
@@ -41,11 +45,7 @@ if($_SESSION["rol"] == "administrador"){
     						<div class="form-group">
     							<input type="text" name="descripcion" class="form-control"
     								placeholder="Descripcion" required="required">
-    						</div>
-    						<div class="form-group">    							
-    							<input type="text" name="imagen" class="form-control"
-    								placeholder="Imagen" required="required">    								
-    						</div>
+    						</div>    						
     						<div class="form-group">
     							<input type="number" name="cantidad_und" class="form-control"
     								placeholder="Cantidad_unidades" required="required">

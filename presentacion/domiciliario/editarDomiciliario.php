@@ -91,7 +91,7 @@ elseif ($_SESSION["rol"] == "domiciliario"){
 								value="<?php echo $domiciliario -> getImagen() ?>">
 							</div>
     						<div class="form-group">
-    							<input type="text" name="clave" value="<?php echo $domiciliario -> getClave() ?>" class="form-control"
+    							<input type="password" name="clave" value="<?php echo $domiciliario -> getClave() ?>" class="form-control"
     								placeholder="Clave" required="required">    						
     						</div>
 						<?php } elseif ($_SESSION["rol"] == "administrador") { ?>

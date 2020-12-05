@@ -12,6 +12,9 @@ $domiciliario -> consultar();
 				<div class="card-body">
 					Domiciliario: <?php echo $domiciliario -> getNombre() . " " . $domiciliario -> getApellido() ?>
 				</div>
+				<div class="card-body">
+					<?php echo "<img src='" . $domiciliario -> getImagen() . "' width='30%' />";?>
+				</div>
 			</div>
 		</div>
 	</div>

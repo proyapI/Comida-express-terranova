@@ -16,6 +16,11 @@ class LogDAO{
         $this -> actor = $pActor;
     }
     
+    function agregar(){
+        return "insert into log (idLog, accion, datos,  fecha, hora, actor)
+                values ('".$this -> idLog ."','".$this -> accion . "', '".$this -> datos . "','" . $this -> fecha . "','" . $this -> hora ."', '".$this -> actor ."')";
+    }
+    
     function consultarTodos () {
         return "select idLog, accion, datos, fecha, hora, actor from log";
     }
