@@ -14,7 +14,7 @@ if($administrador -> autenticar()){
         $_SESSION["rol"] = "cliente";
             header("Location: index.php?pid=" . base64_encode("presentacion/sesionCliente.php"));
     }else{
-        $domiciliario = new Domiciliario("", "", "", "","","","",$correo, $clave);
+        $domiciliario = new Domiciliario("", "", "", "","","","",$correo, $clave,"");
         if($domiciliario -> autenticar()){
             if($domiciliario -> getEstado() == 1){
                 $_SESSION["id"] = $domiciliario -> getIdDomiciliario();
