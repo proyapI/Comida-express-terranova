@@ -1,4 +1,5 @@
 <?php
+require "logica/Log.php";
 $cantidad = 5;
 if(isset($_GET["cantidad"])){
     $cantidad = $_GET["cantidad"];
@@ -88,7 +89,11 @@ if($totalRegistros%$cantidad != 0){
 						    }
 						    echo "</td>";
 						    echo "</tr>";
-						    
+						    date_default_timezone_set('America/Bogota');
+						    if ($_SESSION["rol"] == "administrador"){
+						        $log = new Log($_SESSION["id"],"consultar","consultar cliente" , date('Y-m-d'),date('H:i:s'),"administrador");
+						        $log -> crear();
+						    }
 						}						
 						?>						
 						</tbody>

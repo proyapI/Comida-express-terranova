@@ -77,12 +77,10 @@ if($totalRegistros%$cantidad != 0){
 						}						
 						date_default_timezone_set('America/Bogota');
 						if ($_SESSION["rol"] == "administrador"){
-						    $i=1;
 						    $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"administrador");
 						    $log -> crear();
 						}
 						elseif ($_SESSION["rol"] == "cliente"){
-						    $i=1;
 						    $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"cliente");
 						    $log -> crear();
 						}

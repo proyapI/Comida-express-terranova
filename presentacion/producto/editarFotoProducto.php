@@ -7,7 +7,10 @@ if(isset($_POST["editarFoto"])){
     if($tipo == "image/jpeg" || $tipo == "image/png"){
         $producto = new Producto($_GET["id_prod"]);
         $producto -> consultar();
-        if($producto -> getImagen() == ""){
+        if($producto -> getImagen() == "" || $producto-> getImagen() == '...'){
+            $producto -> getImagen();
+        }
+        else{
             unlink($producto -> getImagen());
         }
         $urlServidor = "imagenes/" . time() . ".png";
@@ -18,8 +21,10 @@ if(isset($_POST["editarFoto"])){
     }else{
         $error = 1;
     }
+    $producto = new Producto($_GET["id_prod"]);
+    $producto -> consultar();
     date_default_timezone_set('America/Bogota');
-    $log = new Log($_SESSION["id"],"editar","editar foto producto: " . $_GET["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+    $log = new Log($_SESSION["id"],"editar","editar foto producto: " . $producto->getNombre() , date('Y-m-d'),date('H:i:s'),"administrador");
     $log -> crear();
 }
 ?>

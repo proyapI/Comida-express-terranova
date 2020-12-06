@@ -1,10 +1,26 @@
 <?php
+require "logica/Log.php";
 if($_SESSION["rol"] == "administrador"){
     $editado = false;
-    if(isset($_POST["editar"])){
-        $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["direccion"], $_GET["telefono"], $_POST["correo"], $_GET["clave"], $_GET["estado"]);
-        $domiciliario -> editar();
-        $editado = true;
+    if(isset($_POST["editar"])){  
+        $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
+        $domiciliario -> consultar();
+        if ($domiciliario-> getImagen()== '' || $domiciliario ->getImagen() == '...'){
+            $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["direccion"], $_GET["telefono"],'...' ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
+            $domiciliario -> editar();
+            $editado = true;        
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
+        }
+        else{
+            $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["direccion"], $_GET["telefono"],$_GET["imagen"] ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
+            $domiciliario -> editar();
+            $editado = true;
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
+        }
     }else{
         $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
         $domiciliario -> consultar();
@@ -20,10 +36,16 @@ elseif ($_SESSION["rol"] == "domiciliario"){
                 $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], $_POST["clave"]);
                 $domiciliario -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
+                $log -> crear();
             }else{
-                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_GET["correo"], $_POST["clave"]);
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], $_POST["clave"]);
                 $domiciliario -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
+                $log -> crear();
             }
         }
         else{
@@ -31,10 +53,16 @@ elseif ($_SESSION["rol"] == "domiciliario"){
                 $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], md5($_POST["clave"]));
                 $domiciliario -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
+                $log -> crear();
             }else{
-                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_GET["correo"], md5($_POST["clave"]));
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], md5($_POST["clave"]));
                 $domiciliario -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
+                $log -> crear();
             }
         }
     }else{

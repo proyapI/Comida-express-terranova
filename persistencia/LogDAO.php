@@ -21,8 +21,31 @@ class LogDAO{
                 values ('".$this -> idLog ."','".$this -> accion . "', '".$this -> datos . "','" . $this -> fecha . "','" . $this -> hora ."', '".$this -> actor ."')";
     }
     
+    function consultar(){
+        return "select accion, datos, fecha, hora, actor
+                from Log where idLog = '" . $this -> idLog . "'";
+    }
+    
     function consultarTodos () {
         return "select idLog, accion, datos, fecha, hora, actor from log";
+    }
+    
+    function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
+        if($orden == "" || $dir == ""){
+            return "select idLog, accion, datos, hora, fecha, actor
+                from log
+                limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
+        }else{
+            return "select idLog, accion, datos, hora, fecha, actor
+                from log
+                order by " . $orden . " " . $dir . "
+                limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
+        }
+    }
+    
+    function consultarTotalRegistros(){
+        return "select count(idLog)
+                from log";
     }
 }
 ?>

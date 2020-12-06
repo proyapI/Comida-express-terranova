@@ -12,49 +12,31 @@ class Log{
     private $conexion;
     private $logDAO;
 
-    /**
-     * @return mixed
-     */
     public function getIdLog()
     {
         return $this->idLog;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAccion()
     {
         return $this->accion;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDatos()
     {
         return $this->datos;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFecha()
     {
         return $this->fecha;
     }
 
-    /**
-     * @return mixed
-     */
     public function getHora()
     {
         return $this->hora;
     }
 
-    /**
-     * @return mixed
-     */
     public function getActor()
     {
         return $this->actor;
@@ -76,6 +58,18 @@ class Log{
         $this -> conexion -> ejecutar($this -> logDAO -> agregar());
         $this -> conexion -> cerrar();
     }
+    
+    function consultar(){        
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> logDAO -> consultar());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        $this -> accion = $resultado[0];
+        $this -> datos = $resultado[1];
+        $this -> fecha = $resultado[2];
+        $this -> hora = $resultado[3];
+        $this -> actor = $resultado[4];
+    }
 
     function consultarTodos(){
         $this -> conexion -> abrir();
@@ -83,9 +77,38 @@ class Log{
         $this -> conexion -> cerrar();
         $log = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($log, new Cliente_producto($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            array_push($log, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
         }
         return $log;
+    }
+    
+    function consultarPorPagina($cantidad, $pagina, $orden, $dir, $rol){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> logDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));
+        $this -> conexion -> cerrar();
+        $logs = array();
+        if ($rol == "administrador"){
+            while(($resultado = $this -> conexion -> extraer()) != null){
+                array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            }
+        }elseif ($rol == "cliente"){
+            while(($resultado = $this -> conexion -> extraer()) != null && $this -> actor = "cliente"){
+                array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            }
+        }elseif ($rol == "domiciliario"){
+            while(($resultado = $this -> conexion -> extraer()) != null && $this -> actor = "domiciliario"){
+                array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            }
+        }
+        return $logs;
+    }
+    
+    function consultarTotalRegistros(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
     }
 
 }

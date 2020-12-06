@@ -1,5 +1,5 @@
 <?php
-
+require "logica/Log.php";
     $editado = false;
     if(isset($_POST["editar"])){
         $cliente = new Cliente($_GET["idCliente"]);
@@ -9,11 +9,17 @@
                 $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
                 $cliente -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                $log -> crear();
             }
             else{
                 $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
                 $cliente -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                $log -> crear();
             }
             
         }else{
@@ -21,11 +27,18 @@
                 $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
                 $cliente -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                $log -> crear();
+                
             }
             else{
                 $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], md5($_POST["clave"]));
                 $cliente -> editar();
                 $editado = true;
+                date_default_timezone_set('America/Bogota');
+                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                $log -> crear();
             }
         }
         

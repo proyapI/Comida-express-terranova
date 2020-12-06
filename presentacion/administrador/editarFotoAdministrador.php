@@ -19,6 +19,11 @@ if(isset($_POST["editarFoto"])){
     }else{
         $error = 1;
     }
+    $administrador = new Administrador($_GET["idAdministrador"]);
+    $administrador -> consultar();
+    date_default_timezone_set('America/Bogota');
+    $log = new Log($_SESSION["id"],"editar","editar foto administrador: " . $administrador->getNombre() , date('Y-m-d'),date('H:i:s'),"administrador");
+    $log -> crear();
 }
 ?>
 <div class="container">

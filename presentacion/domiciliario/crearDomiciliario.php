@@ -1,10 +1,14 @@
 <?php
+require "logica/Log.php";
 if($_SESSION["rol"] == "administrador"){
     $creado = false;
     if(isset($_POST["crear"])){
         $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"], $_POST["estado"]);
         $domiciliario -> crear();
         $creado = true;
+        date_default_timezone_set('America/Bogota');
+        $log = new Log($_SESSION["id"],"crear","crear domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+        $log -> crear();
     }
 }
 ?>

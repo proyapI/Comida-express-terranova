@@ -1,4 +1,5 @@
 <?php
+require "logica/Log.php";
 $cantidad = 5;
 if(isset($_GET["cantidad"])){
     $cantidad = $_GET["cantidad"];
@@ -99,6 +100,12 @@ if($totalRegistros%$cantidad != 0){
                             echo "</td>";
                             echo "</tr>";
 						}
+						
+						date_default_timezone_set('America/Bogota');
+						if ($_SESSION["rol"] == "administrador"){
+						    $log = new Log($_SESSION["id"],"consultar","consultar domiciliario" , date('Y-m-d'),date('H:i:s'),"administrador");
+						    $log -> crear();
+						}
 						?>
 						</tbody>
 					</table>
@@ -172,8 +179,7 @@ $(document).ready(function(){
 $i = 1;
 foreach ($domiciliarios as $domiciliarioActual){
     echo "\t$(\"#cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "\").click(function(){\n";
-    echo "\t console.log('Hola Oscar');\n";
-    echo "\t\t const url = \"indexAjax.php?pid=" . base64_encode("presentacion/domiciliario/cambiarEstadoDomiciliarioAjax.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "\"\n";
+    echo "\t\t const url = \"indexAjax.php?pid=" . base64_encode("presentacion/domiciliario/cambiarEstadoDomiciliarioAjax.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual->getNombre() .  "&idSesion=" . $_SESSION["id"] . "\"\n";
     echo "\t\t$(\"#estado" . $domiciliarioActual -> getIdDomiciliario() . "\").load(url);\n";
     echo "\t});\n\n";
 }	

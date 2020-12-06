@@ -57,7 +57,7 @@ if (isset($pid)) {
             include "presentacion/menuAdministrador.php";
         }elseif ($_SESSION["rol"] == "cliente") {
             include "presentacion/menuCliente.php";
-        }else {
+        }elseif ($_SESSION["rol"] == "domiciliario") {
             include "presentacion/menuDomiciliario.php";
         }     
         include $pid;

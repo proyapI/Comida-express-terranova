@@ -22,7 +22,7 @@ $domiciliario -> consultar();
           Resumen
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Consultar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/log/consultarLog.php") ?>">Consultar</a>
         </div>
       </li>
     </ul>

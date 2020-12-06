@@ -1,4 +1,5 @@
 <?php
+require "logica/Log.php";
 $editado = false;
 if(isset($_POST["editar"])){
     $administrador = new Administrador($_GET["idAdministrador"]);
@@ -8,22 +9,34 @@ if(isset($_POST["editar"])){
             $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],'...',$_POST["correo"], $_POST["clave"]);
             $administrador -> editar();
             $editado = true;
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idAdministrador"],"editar","editar administrador: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
         }
         else{
             $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
             $administrador -> editar();
             $editado = true;
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idAdministrador"],"editar","editar administrador: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
         }
     }else{
         if ($administrador ->getImagen() == '' || $administrador ->getImagen() == '...'){
             $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"],'...',$_POST["correo"], md5($_POST["clave"]));
             $administrador -> editar();
             $editado = true;
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idAdministrador"],"editar","editar administrador: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
         }
         else{
             $administrador = new Administrador($_GET["idAdministrador"], $_POST["nombre"], $_POST["apellido"], $_POST["imagen"], $_POST["correo"], md5($_POST["clave"]));
             $administrador -> editar();
             $editado = true;
+            date_default_timezone_set('America/Bogota');
+            $log = new Log($_SESSION["id"] . "." . $_GET["idAdministrador"],"editar","editar administrador: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
+            $log -> crear();
         }
     }
 }else{
