@@ -10,9 +10,8 @@ if($_SESSION["rol"] == "administrador"){
         $log = new Log($_SESSION["id"],"crear","crear producto: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
         $log -> crear();
     }
-}
-?>
-<div class="container">
+    ?>
+	<div class="container">
     	<div class="row mt-3">
     		<div class="col-3"></div>
     		<div class="col-6">
@@ -63,3 +62,8 @@ if($_SESSION["rol"] == "administrador"){
     		</div>
     	</div>
     </div>
+<?php 
+} else {
+    echo "Lo siento. Usted no tiene permisos";
+}
+?>    
