@@ -34,12 +34,18 @@ class Cliente_producto{
         return $this->cantidad_und;
     }
     
-    function Cliente_productoDAO($pid_cliente="", $pid_prod="", $pcantidad_und=""){
+    function Cliente_producto ($pid_cliente="", $pid_prod="", $pcantidad_und=""){
         $this -> id_cliente = $pid_cliente;
         $this -> id_prod = $pid_prod;
         $this -> cantidad_und = $pcantidad_und;
         $this -> conexion = new Conexion();
         $this -> cliente_productoDAO = new Cliente_productoDAO($pid_cliente, $pid_prod, $pcantidad_und);
+    }
+    
+    function crear(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> crear());
+        $this -> conexion -> cerrar();
     }
     
     function consultarTodos(){

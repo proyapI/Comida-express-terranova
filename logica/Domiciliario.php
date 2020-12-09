@@ -178,7 +178,11 @@ class Domiciliario{
         $this -> conexion -> cerrar();
     }
     
+    function eliminar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> eliminar());
+        $this -> conexion -> cerrar();
+    }
+    
 }
-
-
 ?>

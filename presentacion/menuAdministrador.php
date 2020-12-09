@@ -16,7 +16,7 @@ $administrador -> consultar();
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/producto/crearProducto.php")?>">Crear</a>
-          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/producto/consultarProducto.php")?>">Consultar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/producto/consultarProducto.php"). "&click=" . "consultar" ?>">Consultar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/producto/buscarProducto.php")?>">Buscar</a>
         </div>
@@ -57,7 +57,7 @@ $administrador -> consultar();
           Log
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/log/consultarLog.php") ?>">Consultar</a>
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/log/consultarLog.php") . "&click=" . "consultarLog" ?>">Consultar</a>
         </div>
       </li>
 
@@ -66,10 +66,10 @@ $administrador -> consultar();
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Administrador: <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido(); ?>
-        </a>
+        </a>        
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarAdministrador.php")."&idAdministrador=".$_SESSION["id"]?>">Editar Perfil</a>
-          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarFotoAdministrador.php")."&idAdministrador=".$_SESSION["id"]?>"">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarFotoAdministrador.php")."&idAdministrador=".$_SESSION["id"]?>">Editar Foto</a>
         </div>
       </li>      
       <li class="nav-item">

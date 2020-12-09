@@ -71,7 +71,6 @@ if($_SESSION["rol"] == "administrador"){
     								<th width="20%">Telefono</th>
     								<th width="20%">Imagen</th>
     								<th width="20%">Correo</th>														
-    								<th>Servicios</th>
     							</tr>
     						</thead>
     						<tbody>
@@ -82,19 +81,8 @@ if($_SESSION["rol"] == "administrador"){
     						    echo "<td>" . $clienteActual -> getIdCliente() . "</td><td>" . $clienteActual -> getNombre() . "</td><td>" . $clienteActual -> getApellido() . "</td>";
     						    echo "<td>" . $clienteActual -> getCiudad() . "</td><td>" . $clienteActual -> getDireccion() . "</td><td>" . $clienteActual -> getTelefono() . "</td>";
     						    echo "<td><img src='" . $clienteActual -> getImagen() . "' width='50px' /></td>";
-    						    echo "<td>" . $clienteActual -> getCorreo() . "</td>";
-    						    echo "<td>";
-    						    if($_SESSION["rol"] == "cliente"){
-    						        echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente/editarCliente.php") . "&idCliente=" . $clienteActual -> getIdCliente() . "'><i class='fas fa-edit'></i></a>";
-    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/cliente/editarFotoCliente.php") . "&idCliente=" . $clienteActual -> getIdCliente() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
-    						    }
-    						    echo "</td>";
-    						    echo "</tr>";
-    						    date_default_timezone_set('America/Bogota');
-    						    if ($_SESSION["rol"] == "administrador"){
-    						        $log = new Log($_SESSION["id"],"consultar","consultar cliente" , date('Y-m-d'),date('H:i:s'),"administrador");
-    						        $log -> crear();
-    						    }
+    						    echo "<td>" . $clienteActual -> getCorreo() . "</td>";    						    
+    						    echo "</tr>";    						    
     						}						
     						?>						
     						</tbody>
@@ -106,7 +94,11 @@ if($_SESSION["rol"] == "administrador"){
     									<?php
     									if($pagina == 1){
                                             echo "<li class='page-item disabled'><span class='page-link'>Anterior</span></li>";
-    
+                                            date_default_timezone_set('America/Bogota');
+                                            if ($_SESSION["rol"] == "administrador"){
+                                                $log = new Log($_SESSION["id"],"consultar","consultar cliente" , date('Y-m-d'),date('H:i:s'),"administrador");
+                                                $log -> crear();
+                                            }
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/cliente/consultarCliente.php") . "&pagina=" . ($pagina-1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Anterior</a></li>";
     									}
@@ -134,7 +126,7 @@ if($_SESSION["rol"] == "administrador"){
     									        echo "..."; 
     									    } 
     									}			
-    									if($pagina == $totalPaginas){
+    									if($pagina == $totalPaginas || $totalRegistros==0){
     									    echo "<li class='page-item disabled'><span class='page-link'>Siguiente</span></li>";
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/cliente/consultarCliente.php") . "&pagina=" . ($pagina+1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Siguiente</a></li>";

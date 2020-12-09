@@ -70,6 +70,18 @@ class Log{
         $this -> hora = $resultado[3];
         $this -> actor = $resultado[4];
     }
+    
+    function consultarLog($consultar){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> logDAO -> consultarLog($consultar));
+        $this -> conexion -> cerrar();
+        $logs = array();
+        while(($resultado = $this -> conexion -> extraer()) != null){
+            array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
+                $resultado[5]));
+        }
+        return $logs;
+    }
 
     function consultarTodos(){
         $this -> conexion -> abrir();
@@ -84,7 +96,7 @@ class Log{
     
     function consultarPorPagina($cantidad, $pagina, $orden, $dir, $rol){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> logDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));
+        $this -> conexion -> ejecutar($this -> logDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir,$rol));
         $this -> conexion -> cerrar();
         $logs = array();
         if ($rol == "administrador"){
@@ -92,25 +104,34 @@ class Log{
                 array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
             }
         }elseif ($rol == "cliente"){
-            while(($resultado = $this -> conexion -> extraer()) != null && $this -> actor = "cliente"){
-                array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            if ($this -> actor = "cliente"){                
+                while(($resultado = $this -> conexion -> extraer()) != null){
+                    array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+                }      
             }
         }elseif ($rol == "domiciliario"){
-            while(($resultado = $this -> conexion -> extraer()) != null && $this -> actor = "domiciliario"){
-                array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+            if ($this -> actor = "domiciliario"){
+                while(($resultado = $this -> conexion -> extraer()) != null){
+                    array_push($logs, new Log($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5]));
+                }
             }
         }
         return $logs;
     }
     
-    function consultarTotalRegistros(){
-        $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros());
+    function consultarTotalRegistros($rol){        
+        $this -> conexion -> abrir();      
+        if ($rol == "administrador"){
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+        } elseif ($rol == "cliente"){
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+        } elseif ($rol == "domiciliario"){
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+        }
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         return $resultado[0];
     }
-
 }
     
 ?>

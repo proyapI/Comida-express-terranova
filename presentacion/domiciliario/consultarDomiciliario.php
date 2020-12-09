@@ -90,23 +90,18 @@ if($_SESSION["rol"] == "administrador"){
                                 if($_SESSION["rol"] == "domiciliario"){
                                     echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                     "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&correo=" . $domiciliarioActual -> getCorreo() .
-                                    "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>";
+                                    "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>&nbsp";
                                     echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
                                 } elseif ($_SESSION["rol"] == "administrador") {
                                     echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                     "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
                                     "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() .
-                                    "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>";
+                                    "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>&nbsp";
+                                    echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/eliminarDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Domiciliario' onclick='return ConfirmDelete()'></i></a></td>";
                                 }
                                 echo "</td>";
                                 echo "</tr>";
-    						}
-    						
-    						date_default_timezone_set('America/Bogota');
-    						if ($_SESSION["rol"] == "administrador"){
-    						    $log = new Log($_SESSION["id"],"consultar","consultar domiciliario" , date('Y-m-d'),date('H:i:s'),"administrador");
-    						    $log -> crear();
-    						}
+    						}    						    					
     						?>
     						</tbody>
     					</table>
@@ -117,7 +112,11 @@ if($_SESSION["rol"] == "administrador"){
     									<?php
     									if($pagina == 1){
                                             echo "<li class='page-item disabled'><span class='page-link'>Anterior</span></li>";
-    
+                                            date_default_timezone_set('America/Bogota');
+                                            if ($_SESSION["rol"] == "administrador"){
+                                                $log = new Log($_SESSION["id"],"consultar","consultar domiciliario" , date('Y-m-d'),date('H:i:s'),"administrador");
+                                                $log -> crear();
+                                            }
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/domiciliario/consultarDomiciliario.php") . "&pagina=" . ($pagina-1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Anterior</a></li>";
     									}
@@ -145,7 +144,7 @@ if($_SESSION["rol"] == "administrador"){
     									        echo "..."; 
     									    } 
     									}			
-    									if($pagina == $totalPaginas){
+    									if($pagina == $totalPaginas || $totalRegistros==0){
     									    echo "<li class='page-item disabled'><span class='page-link'>Siguiente</span></li>";
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/domiciliario/consultarDomiciliario.php") . "&pagina=" . ($pagina+1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Siguiente</a></li>";
@@ -186,6 +185,16 @@ if($_SESSION["rol"] == "administrador"){
     }	
     ?>
     });
+    </script>
+    <script>
+        function ConfirmDelete(){
+            var respuesta = confirm("¿Esta de acuerdo con eleminar el domiciliario?");
+            if (respuesta == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
     </script>
 <?php 
 } else {

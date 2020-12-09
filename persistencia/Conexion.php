@@ -17,7 +17,7 @@ class Conexion{
     }
     
     function extraer(){
-        return $this -> resultado -> fetch_row();
+        return $this -> resultado -> fetch_row();        
     }
     
     function numFilas(){

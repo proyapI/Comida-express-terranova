@@ -32,7 +32,7 @@ if($_SESSION["rol"] == "administrador"){
     $(document).ready(function(){
     	$("#filtro").keyup(function(){
     		if($("#filtro").val().length > 0){
-    			url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/domiciliario/buscarDomiciliarioAjax.php") ?>&filtro=" + $("#filtro").val();
+    			url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/domiciliario/buscarDomiciliarioAjax.php") . "&rol=" . $_SESSION["rol"] ?>&filtro=" + $("#filtro").val();
     			$("#resultados").load(url);
     
     		}

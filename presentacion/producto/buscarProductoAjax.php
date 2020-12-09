@@ -1,5 +1,5 @@
 <?php
-if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
+if($_GET["rol"] == "administrador" || $_GET["rol"] == "cliente"){
     $filtro = $_GET["filtro"];
     $producto = new Producto();
     $productos = $producto -> buscar($filtro);

@@ -38,7 +38,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     $(document).ready(function(){
     	$("#filtro").keyup(function(){
     		if($("#filtro").val().length > 0){
-    			url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/producto/buscarProductoAjax.php") ?>&filtro=" + $("#filtro").val();
+    			url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/producto/buscarProductoAjax.php") . "&rol=" . $_SESSION["rol"] ?>&filtro=" + $("#filtro").val();
     			$("#resultados").load(url);
     
     		}

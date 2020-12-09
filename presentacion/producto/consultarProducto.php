@@ -1,6 +1,6 @@
 <?php
 require "logica/Log.php";
-if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
+if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){        
     $cantidad = 5;
     if(isset($_GET["cantidad"])){
         $cantidad = $_GET["cantidad"];
@@ -24,7 +24,9 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     $totalPaginas = intval(($totalRegistros/$cantidad));
     if($totalRegistros%$cantidad != 0){
         $totalPaginas++;
-    }
+    }         
+    /*$carrito = new Cliente_producto($_SESSION["id"],$_GET["id_prod"],$_POST["unidades"]);
+    $carrito -> crear();*/    
     ?>
     <div class="container">
     	<div class="row mt-3">
@@ -38,7 +40,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     						<thead>
     							<tr>
     								<th width="8%">#</th>
-    								<th width="40%">Nombre 
+    								<th width="20%">Nombre 
     								<?php 
     								if($orden != "nombre"){
     								    echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/consultarProducto.php") . "&cantidad=" . $cantidad . "&orden=nombre&dir=asc'><i class='fas fa-sort-amount-up'></i></a> 
@@ -52,10 +54,10 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     								}								
     								?>
     								</th>
-    								<th width="40%">Descripcion</th>
-    								<th width="40%">Imagen</th> 	
-    								<th width="40%">Unidades</th>
-    								<th width="40%">Valor</th>							
+    								<th width="30%">Descripcion</th>
+    								<th width="8%">Imagen</th> 	
+    								<th width="8%">Unidades</th>
+    								<th width="10%">Valor</th>							
     								<th>Servicios</th>
     							</tr>
     						</thead>
@@ -69,22 +71,21 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     						    echo "<td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
     						    echo "<td>";
     						    if($_SESSION["rol"] == "administrador"){
-    						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>";
-    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
+    						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>&nbsp";
+    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a>&nbsp";
+    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/eliminarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Producto' onclick='return ConfirmDelete()'></i></a></td>";
     						    }
+    						    if($_SESSION["rol"] == "cliente"){
+                                	echo "<select style='width:75%' class='custom-select' id='unidades' name='unidades'> 
+                                          <option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option>
+                                          <option value='5'>5</option><option value='6'>6</option><option value='Mas de 6'>Mas de 6</option> </select>&nbsp";
+                                	echo "<div class='button'><a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .    
+                                	"&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-shopping-bag' ></i></a></div></td>";?>
+                                	                                	   						       
+    						    <?php }
     						    echo "</td>";
-    						    echo "</tr>";
-    						    
-    						}						
-    						date_default_timezone_set('America/Bogota');
-    						if ($_SESSION["rol"] == "administrador"){
-    						    $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"administrador");
-    						    $log -> crear();
-    						}
-    						elseif ($_SESSION["rol"] == "cliente"){
-    						    $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"cliente");
-    						    $log -> crear();
-    						}
+    						    echo "</tr>";    						    
+    						}				    						
     						?>											
     						</tbody>
     					</table>
@@ -95,7 +96,15 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     									<?php
     									if($pagina == 1){
                                             echo "<li class='page-item disabled'><span class='page-link'>Anterior</span></li>";
-    
+                                            date_default_timezone_set('America/Bogota');
+                                            if ($_SESSION["rol"] == "administrador"){
+                                                $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"administrador");
+                                                $log -> crear();
+                                            }
+                                            elseif ($_SESSION["rol"] == "cliente"){
+                                                $log = new Log($_SESSION["id"],"consultar","consultar producto" , date('Y-m-d'),date('H:i:s'),"cliente");
+                                                $log -> crear();
+                                            }    
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/producto/consultarProducto.php") . "&pagina=" . ($pagina-1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Anterior</a></li>";
     									}
@@ -123,7 +132,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     									        echo "..."; 
     									    } 
     									}			
-    									if($pagina == $totalPaginas){
+    									if($pagina == $totalPaginas || $totalRegistros==0){
     									    echo "<li class='page-item disabled'><span class='page-link'>Siguiente</span></li>";
     									}else{
     									    echo "<li class='page-item'><a class='page-link' href='index.php?pid=" . base64_encode("presentacion/producto/consultarProducto.php") . "&pagina=" . ($pagina+1) . "&cantidad=" . $cantidad . (($orden!="")?"&orden=" . $orden:"") . (($dir!="")?"&dir=" . $dir:"") . "'>Siguiente</a></li>";
@@ -151,6 +160,22 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     	//alert (url);
     	location.replace(url);
     });
+    </script>
+    <script>
+        function ConfirmDelete(){
+            var respuesta = confirm("¿Esta de acuerdo con eliminar el producto?");
+            if (respuesta == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    </script>
+    <script>
+    	function ObtenerValor(){
+    		var valor = document.getElementById('unidades').value;
+    		return valor;
+    	}
     </script>
 <?php 
 } else {

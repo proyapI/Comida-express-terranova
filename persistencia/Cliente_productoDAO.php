@@ -12,6 +12,11 @@ class Cliente_productoDAO{
         $this -> cantidad_und = $pcantidad_und;
     }
     
+    function crear(){
+        return "insert into cliente_producto (id_cliente,id_prod,cantidad_und)
+                values ('".$this -> id_cliente ."','".$this -> id_prod . "', '".$this -> cantidad_und . "')";
+    }
+    
     function consultarTodos () {
         return "select id_cliente, id_prod, cantidad_und
                 from cliente_producto";

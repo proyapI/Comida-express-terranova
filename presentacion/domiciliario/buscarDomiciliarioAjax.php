@@ -1,5 +1,5 @@
 <?php
-if($_SESSION["rol"] == "administrador"){
+if($_GET["rol"] == "administrador"){
     $filtro = $_GET["filtro"];
     $domiciliario = new Domiciliario();
     $domiciliarios = $domiciliario -> buscar($filtro);

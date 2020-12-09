@@ -69,6 +69,10 @@ class ProductoDAO {
                 where id_prod = '" . $this -> id_prod . "'";
     }
     
+    function eliminar(){
+        return "delete from producto where id_prod = '".$this -> id_prod."'";
+    }
+    
 }
 
 ?>

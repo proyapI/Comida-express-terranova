@@ -47,14 +47,17 @@ $cliente -> consultar();
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarCliente.php")."&idCliente=".$_SESSION["id"]?>">Editar Perfil</a>
-          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarFotoCliente.php")."&idCliente=".$_SESSION["id"]?>"">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarFotoCliente.php")."&idCliente=".$_SESSION["id"]?>">Editar Foto</a>
         </div>
       </li>      
       <li class="nav-item">
         <a class="nav-link" href="index.php?sesion=0">Cerrar Sesión</a>
-      </li>
-      
+      </li>      
     </ul>
-	
+	<ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <?php echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente_producto/cliente_producto.php") . "'><i class='fas fa-shopping-cart'></i></a>" ?>
+      </li>     
+    </ul>	
   </div>
 </nav>

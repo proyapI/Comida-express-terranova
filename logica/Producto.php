@@ -125,6 +125,12 @@ class Producto{
         $this -> conexion -> ejecutar($this -> productoDAO -> editarFoto());
         $this -> conexion -> cerrar();
     }
+    
+    function eliminar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> eliminar());
+        $this -> conexion -> cerrar();
+    }
 }
 
 ?>

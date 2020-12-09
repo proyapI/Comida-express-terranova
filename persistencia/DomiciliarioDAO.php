@@ -89,6 +89,10 @@ class DomiciliarioDAO{
                 where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     
+    function eliminar(){
+        return "delete from domiciliario where idDomiciliario = '".$this -> idDomiciliario."'";
+    }
+    
 }
 
 ?>
