@@ -1,4 +1,5 @@
 <?php
+
 class DomiciliarioDAO{
     private $idDomiciliario;
     private $nombre;
@@ -91,8 +92,6 @@ class DomiciliarioDAO{
     
     function eliminar(){
         return "delete from domiciliario where idDomiciliario = '".$this -> idDomiciliario."'";
-    }
-    
+    }   
 }
-
 ?>

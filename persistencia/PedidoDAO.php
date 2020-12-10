@@ -54,8 +54,6 @@ class PedidoDAO{
     function consultarTotalRegistros(){
         return "select count(id_pedido)
                 from pedido";
-    }
-    
+    }   
 }
-
 ?>

@@ -88,6 +88,4 @@ class Administrador{
         $this -> conexion -> cerrar();
     }
 }
-
-
 ?>

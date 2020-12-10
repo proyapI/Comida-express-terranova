@@ -77,6 +77,6 @@ class LogDAO{
             return "SELECT Count(*) As Total FROM log WHERE actor= '" . "domiciliario" . "'";
         }
     }
-    
+  
 }
 ?>

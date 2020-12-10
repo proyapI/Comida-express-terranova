@@ -1,5 +1,4 @@
 <?php
-
 require "persistencia/PedidoDAO.php";
 
 class Pedido{
@@ -14,65 +13,41 @@ class Pedido{
     private $conexion;
     private $pedidoDAO;
     
-    /**
-     * @return mixed
-     */
     public function getId_pedido()
     {
         return $this->id_pedido;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId_cliente()
     {
         return $this->id_cliente;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId_prod()
     {
         return $this->id_prod;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId_domiciliario()
     {
         return $this->id_domiciliario;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFecha_hora()
     {
         return $this->fecha_hora;
     }
 
-    /**
-     * @return mixed
-     */
     public function getValor_total()
     {
         return $this->valor_total;
     }
 
-    /**
-     * @return mixed
-     */
     public function getObservaciones()
     {
         return $this->observaciones;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEstado()
     {
         return $this->estado;
@@ -139,8 +114,6 @@ class Pedido{
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         return $resultado[0];
-    }
-    
+    }   
 }
-
 ?>

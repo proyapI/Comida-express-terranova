@@ -1,5 +1,4 @@
 <?php
-
 require "persistencia/Cliente_productoDAO.php";
 
 class Cliente_producto{
@@ -11,18 +10,12 @@ class Cliente_producto{
     private $total;
     private $conexion;
     private $cliente_productoDAO;
-    
-    /**
-     * @return mixed
-     */
+
     public function getId_cliente()
     {
         return $this->id_cliente;
     }
-
-    /**
-     * @return mixed
-     */
+   
     public function getId_prod()
     {
         return $this->id_prod;
@@ -33,9 +26,6 @@ class Cliente_producto{
         return $this->nombre_producto;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCantidad_und()
     {
         return $this->cantidad_und;
@@ -93,8 +83,6 @@ class Cliente_producto{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> eliminar());
         $this -> conexion -> cerrar();
-    }
-    
+    }   
 }
-
 ?>

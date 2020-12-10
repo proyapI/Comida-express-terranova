@@ -1,5 +1,4 @@
 <?php
-
 require "persistencia/LogDAO.php";
 
 class Log{
@@ -132,6 +131,5 @@ class Log{
         $resultado = $this -> conexion -> extraer();
         return $resultado[0];
     }
-}
-    
+}    
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 require "persistencia/ProductoDAO.php";
 
 class Producto{
@@ -138,5 +137,4 @@ class Producto{
         $this -> conexion -> cerrar();
     }
 }
-
 ?>

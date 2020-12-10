@@ -78,8 +78,6 @@ class ClienteDAO{
     function editarFoto() {
         return "update Cliente set imagen = '" . $this -> imagen . "'
                 where idCliente = '" . $this -> idCliente . "'";
-    }
-   
+    }  
 }
-
 ?>

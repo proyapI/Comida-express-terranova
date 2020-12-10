@@ -39,8 +39,6 @@ class Cliente_productoDAO{
     
     function eliminar(){
         return "delete from cliente_producto where id_cliente = '".$this -> id_cliente."' and id_prod = '".$this -> id_prod."'";
-    }
-    
+    }   
 }
-
 ?>

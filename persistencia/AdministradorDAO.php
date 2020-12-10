@@ -39,7 +39,5 @@ class AdministradorDAO{
                 $this -> imagen . "',correo = '".$this -> correo . "', clave = '" . $this -> clave . "'
                 where idAdministrador = '" . $this -> idAdministrador . "'";
     }
-
 }
-
 ?>

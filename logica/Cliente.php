@@ -159,10 +159,6 @@ class Cliente{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> clienteDAO -> editarFoto());
         $this -> conexion -> cerrar();
-    }
-    
-    
+    }     
 }
-
-
 ?>
