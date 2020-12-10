@@ -40,6 +40,12 @@ class ProductoDAO {
                 where id_prod = '" . $this -> id_prod . "'";
     }
     
+    function editarUnidades($id_prod,$restante){
+        return "update Producto
+                set cantidad_und = '". $restante . "'
+                where id_prod = '" . $id_prod . "'";
+    }
+    
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
         if($orden == "" || $dir == ""){
             return "select id_prod, nombre, descripcion, imagen, cantidad_und, valor

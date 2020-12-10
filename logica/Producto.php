@@ -90,6 +90,12 @@ class Producto{
         $this -> conexion -> cerrar();
     }
     
+    function editarUnidades($id_prod,$restante){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> productoDAO -> editarUnidades($id_prod,$restante));
+        $this -> conexion -> cerrar();
+    }
+    
     function consultarPorPagina($cantidad, $pagina, $orden, $dir){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> productoDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));

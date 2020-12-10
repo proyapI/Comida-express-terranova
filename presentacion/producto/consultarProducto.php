@@ -1,6 +1,6 @@
 <?php
 require "logica/Log.php";
-if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){        
+if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){    
     $cantidad = 5;
     if(isset($_GET["cantidad"])){
         $cantidad = $_GET["cantidad"];
@@ -24,9 +24,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     $totalPaginas = intval(($totalRegistros/$cantidad));
     if($totalRegistros%$cantidad != 0){
         $totalPaginas++;
-    }         
-    /*$carrito = new Cliente_producto($_SESSION["id"],$_GET["id_prod"],$_POST["unidades"]);
-    $carrito -> crear();*/    
+    }                 
     ?>
     <div class="container">
     	<div class="row mt-3">
@@ -62,7 +60,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     							</tr>
     						</thead>
     						<tbody>
-    						<?php 
+    						<?php     						
     						$i = (($pagina - 1) * $cantidad) + 1;
     						foreach ($productos as $productoActual){
     						    echo "<tr>";
@@ -75,12 +73,9 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a>&nbsp";
     						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/eliminarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Producto' onclick='return ConfirmDelete()'></i></a></td>";
     						    }
-    						    if($_SESSION["rol"] == "cliente"){
-                                	echo "<select style='width:75%' class='custom-select' id='unidades' name='unidades'> 
-                                          <option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option>
-                                          <option value='5'>5</option><option value='6'>6</option><option value='Mas de 6'>Mas de 6</option> </select>&nbsp";
-                                	echo "<div class='button'><a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .    
-                                	"&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-shopping-bag' ></i></a></div></td>";?>
+    						    if($_SESSION["rol"] == "cliente"){                                	                                
+                                	echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .    
+                                	"&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-shopping-bag' ></i></a></td>";?>
                                 	                                	   						       
     						    <?php }
     						    echo "</td>";
@@ -172,13 +167,13 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
         }
     </script>
     <script>
-    	function ObtenerValor(){
-    		var valor = document.getElementById('unidades').value;
-    		return valor;
-    	}
-    </script>
-<?php 
+		function (){
+			document.formulario.submit();
+		}		
+	</script>	
+<?php    
 } else {
     echo "Lo siento. Usted no tiene permisos";
 }
-?>    
+?>  
+  

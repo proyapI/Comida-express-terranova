@@ -5,6 +5,7 @@ if($_SESSION["rol"] == "administrador"){
     if(isset($_POST["editar"])){
         $producto = new Producto($_GET["id_prod"]);
         $producto -> consultar();
+        $imagen = $producto -> getImagen();
         if ($producto-> getImagen()== '' || $producto ->getImagen() == '...'){
             $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],'...',$_POST["unidades"], $_POST["valor"]);
             $producto -> editar();
@@ -13,7 +14,7 @@ if($_SESSION["rol"] == "administrador"){
             $log = new Log($_SESSION["id"] . "." . $_GET["id_prod"],"editar","editar producto: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
             $log -> crear();
         } else{
-            $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$_GET["imagen"],$_POST["unidades"], $_POST["valor"]);
+            $producto = new Producto($_GET["id_prod"], $_POST["nombre"], $_POST["descripcion"],$imagen,$_POST["unidades"], $_POST["valor"]);
             $producto -> editar();
             $editado = true;
             date_default_timezone_set('America/Bogota');
@@ -54,7 +55,7 @@ if($_SESSION["rol"] == "administrador"){
     						<div class="form-group">
     							<input type="text" name="descripcion" class="form-control"
     								placeholder="Descripcion" value="<?php echo $producto -> getDescripcion() ?>" required="required">
-    						</div>
+    						</div>    						
     						<div class="form-group">
     							<input type="text" name="unidades" class="form-control"
     								placeholder="Unidades" value="<?php echo $producto -> getCantidad_und() ?>" required="required">

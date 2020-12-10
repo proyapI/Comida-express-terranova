@@ -1,5 +1,4 @@
 <?php
-
 if($_SESSION["rol"] == "administrador"){
     $producto = new Producto($_GET["id_prod"]);
     $producto -> eliminar();
@@ -8,5 +7,4 @@ if($_SESSION["rol"] == "administrador"){
 }else{
     echo "Lo siento. Usted no tiene permisos";
 }
-
 ?>
