@@ -188,7 +188,7 @@ if($_SESSION["rol"] == "administrador"){
     </script>
     <script>
         function ConfirmDelete(){
-            var respuesta = confirm("¿Esta de acuerdo con eleminar el domiciliario?");
+            var respuesta = confirm("¿Esta de acuerdo con eliminar el domiciliario?");
             if (respuesta == true){
                 return true;
             }else{
