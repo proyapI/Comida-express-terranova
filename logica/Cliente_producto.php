@@ -83,6 +83,26 @@ class Cliente_producto{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> eliminar());
         $this -> conexion -> cerrar();
-    }   
+    }
+    
+    function consultarPorPagina($cantidad, $pagina, $orden, $dir){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir));
+        $this -> conexion -> cerrar();
+        $cliente_prod = array();
+        while(($resultado = $this -> conexion -> extraer()) != null){
+            array_push($cliente_prod, new Cliente_producto($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4]));
+        }
+        return $cliente_prod;
+    }
+    
+    function consultarTotalRegistros(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
 }
 ?>

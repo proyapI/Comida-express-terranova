@@ -39,6 +39,24 @@ class Cliente_productoDAO{
     
     function eliminar(){
         return "delete from cliente_producto where id_cliente = '".$this -> id_cliente."' and id_prod = '".$this -> id_prod."'";
-    }   
+    }  
+    
+    function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
+        if($orden == "" || $dir == ""){
+            return "select id_cliente, id_prod, nombre_producto, cantidad_und, total
+                from cliente_producto
+                limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
+        }else{
+            return "select id_cliente, id_prod, nombre_producto, cantidad_und, total
+                from cliente_producto
+                order by " . $orden . " " . $dir . "
+                limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
+        }
+    }
+    
+    function consultarTotalRegistros(){
+        return "select count(id_cliente)
+                from cliente_producto";
+    }
 }
 ?>

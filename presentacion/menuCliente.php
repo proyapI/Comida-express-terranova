@@ -56,7 +56,7 @@ $cliente -> consultar();
     </ul>
 	<ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <?php echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente_producto/cliente_producto.php") . "'><i class='fas fa-shopping-cart'></i></a>" ?>
+        <?php echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente_producto/consultarCliente_producto.php") . "'><i class='fas fa-shopping-cart'></i></a>" ?>
       </li>     
     </ul>	
   </div>
