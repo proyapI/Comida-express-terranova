@@ -11,15 +11,20 @@ class PedidoDAO{
     private $observaciones;
     private $estado;
     
-    function PedidoDAO($pid_pedido, $pid_cliente, $pid_prod, $pid_domiciliario, $pfecha_hora, $pvalor_hora, $pobservaciones, $pestado){
+    function PedidoDAO($pid_pedido, $pid_cliente, $pid_prod, $pid_domiciliario, $pfecha_hora, $pvalor_total, $pobservaciones, $pestado){
         $this -> id_pedido = $pid_pedido;
         $this -> id_cliente = $pid_cliente;
         $this -> id_prod = $pid_prod;
         $this -> id_domiciliario = $pid_domiciliario;
         $this -> fecha_hora = $pfecha_hora;
-        $this -> valor_total = $pvalor_hora;
+        $this -> valor_total = $pvalor_total;
         $this -> observaciones = $pobservaciones;
         $this -> estado = $pestado;
+    }
+    
+    function agregar($idPe,$idC,$idP,$idD,$fechaH,$valorT,$observa,$estado){        
+        return "insert into pedido (id_pedido, id_cliente, id_prod, id_domiciliario, fecha_hora, valor_total, observaciones, estado)
+                values ('".$idPe ."','".$idC . "', '".$idP . "','" . $idD . "','" . $fechaH ."', '".$valorT ."', '".$observa ."' , '".$estado ."')";
     }
     
     function consultarTodos () {

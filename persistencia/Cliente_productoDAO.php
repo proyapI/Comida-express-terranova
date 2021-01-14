@@ -32,13 +32,13 @@ class Cliente_productoDAO{
                 from cliente_producto where id_cliente = '" . $idC . "' and id_prod = '" . $idP . "'";
     }
     
-    function consultarTodos () {
+    function consultarTodos () {        
         return "select id_cliente, id_prod,nombre_producto,cantidad_und, total
                 from cliente_producto";
     }
     
-    function eliminar(){
-        return "delete from cliente_producto where id_cliente = '".$this -> id_cliente."' and id_prod = '".$this -> id_prod."'";
+    function eliminar($idC,$idP){        
+        return "delete from cliente_producto where id_cliente = '".$idC."' and id_prod = '".$idP."'";
     }  
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {

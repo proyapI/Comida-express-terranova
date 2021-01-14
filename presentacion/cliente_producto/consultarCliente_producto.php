@@ -16,7 +16,7 @@ if($_SESSION["rol"] == "cliente"){
     $dir = "";
     if(isset($_GET["dir"])){
         $dir = $_GET["dir"];
-    }
+    }   
     
     $cliente_prod = new Cliente_producto();
     $cliente_prods = $cliente_prod -> consultarPorPagina($cantidad, $pagina, $orden, $dir);
@@ -79,8 +79,8 @@ if($_SESSION["rol"] == "cliente"){
             						    <?php }        						    
             						    echo "</td>";        						            						    
             						    echo "</tr>"; 
-            						    $total = $total+$cp -> getTotal();              						    
-        						    }    						    
+            						    $total = $total+$cp -> getTotal();             						    
+        						    }    						            						            						    
         						}                						
         						?>    						    					
         						</tbody>
@@ -138,8 +138,8 @@ if($_SESSION["rol"] == "cliente"){
         								<option value="20" <?php echo ($cantidad==20)?"selected":"" ?>>20</option>
         							</select>						
         						</div>
-        					</div>
-        					<form action="<?php echo "index.php?pid=" . base64_encode("presentacion/cliente_producto/finalizarCompra.php") ?>"
+        					</div>        					
+        					<form action="<?php echo "index.php?pid=" . base64_encode("presentacion/cliente_producto/finalizarCompra.php") . "&total=" . $total?>"
     							method="post">    		    										    									
             					<div class="float-right">    						
     								<table class="text-center">

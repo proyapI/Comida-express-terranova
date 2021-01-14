@@ -64,7 +64,7 @@ class Producto{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> productoDAO -> consultar());
         $this -> conexion -> cerrar();
-        $resultado = $this -> conexion -> extraer();
+        $resultado = $this -> conexion -> extraer();        
         $this -> nombre = $resultado[0];
         $this -> descripcion = $resultado[1];
         $this -> imagen = $resultado[2];

@@ -25,6 +25,10 @@ class DomiciliarioDAO{
         $this -> estado = $pEstado;
     }
     
+    function domiciliarioSeleccionado(){
+        return "SELECT idDomiciliario FROM Domiciliario ORDER BY RAND() LIMIT 1";
+    }
+    
     function crear () {
         return "insert into Domiciliario (idDomiciliario, nombre, apellido, ciudad, direccion, telefono, imagen, correo, clave, estado)
                 values ('" . $this -> idDomiciliario . "','" . $this -> nombre . "', '" . $this -> apellido . "','" . $this -> ciudad . "',

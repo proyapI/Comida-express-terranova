@@ -53,17 +53,23 @@ class Pedido{
         return $this->estado;
     }
 
-    function PedidoDAO($pid_pedido="", $pid_cliente="", $pid_prod="", $pid_domiciliario="", $pfecha_hora="", $pvalor_hora="", $pobservaciones="", $pestado=""){
+    function Pedido($pid_pedido="", $pid_cliente="", $pid_prod="", $pid_domiciliario="", $pfecha_hora="", $pvalor_total="", $pobservaciones="", $pestado=""){
         $this -> id_pedido = $pid_pedido;
         $this -> id_cliente = $pid_cliente;
         $this -> id_prod = $pid_prod;
         $this -> id_domiciliario = $pid_domiciliario;
         $this -> fecha_hora = $pfecha_hora;
-        $this -> valor_total = $pvalor_hora;
+        $this -> valor_total = $pvalor_total;
         $this -> observaciones = $pobservaciones;
         $this -> estado = $pestado;
         $this -> conexion = new Conexion();
-        $this -> pedidoDAO = new PedidoDAO($pid_pedido, $pid_cliente, $pid_prod, $pid_domiciliario, $pfecha_hora, $pvalor_hora, $pobservaciones, $pestado);
+        $this -> pedidoDAO = new PedidoDAO($pid_pedido, $pid_cliente, $pid_prod, $pid_domiciliario, $pfecha_hora, $pvalor_total, $pobservaciones, $pestado);
+    }
+    
+    function crear($idPe,$idC,$idP,$idD,$fechaH,$valorT,$observa,$estado){        
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> pedidoDAO -> agregar($idPe,$idC,$idP,$idD,$fechaH,$valorT,$observa,$estado));
+        $this -> conexion -> cerrar();
     }
     
     function consultarTodos(){

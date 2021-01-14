@@ -69,19 +69,19 @@ class Cliente_producto{
     }
     
     function consultarTodos(){
-        $this -> conexion -> abrir();
+        $this -> conexion -> abrir();        
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarTodos());
         $this -> conexion -> cerrar();
         $cliente_productos = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($cliente_productos, new Cliente_producto($resultado[0], $resultado[1], $resultado[2]),$resultado[3],$resultado[4]);
-        }
+            array_push($cliente_productos, new Cliente_producto($resultado[0], $resultado[1], $resultado[2],$resultado[3],$resultado[4]));
+        }        
         return $cliente_productos;
     }
     
-    function eliminar(){
+    function eliminar($idC,$idP){                
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> eliminar());
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> eliminar($idC,$idP));
         $this -> conexion -> cerrar();
     }
     
