@@ -26,7 +26,7 @@ class DomiciliarioDAO{
     }
     
     function domiciliarioSeleccionado(){
-        return "SELECT idDomiciliario FROM Domiciliario ORDER BY RAND() LIMIT 1";
+        return "SELECT idDomiciliario FROM Domiciliario ORDER BY RAND() LIMIT 1" ;
     }
     
     function crear () {

@@ -58,7 +58,7 @@ class Cliente_producto{
         $this -> conexion -> cerrar();
     }
     
-    function consultar($idC,$idP){
+    function consultar($idC,$idP){           
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultar($idC,$idP));
         $this -> conexion -> cerrar();

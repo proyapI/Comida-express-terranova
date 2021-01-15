@@ -85,7 +85,7 @@ class Domiciliario{
         $this -> conexion -> ejecutar($this -> domiciliarioDAO -> domiciliarioSeleccionado());
         $this -> conexion -> cerrar();    
         $resultado = $this -> conexion -> extraer();
-        $this -> idDomiciliario = $resultado[0];
+        $this -> idDomiciliario = $resultado[0];        
         return $resultado[0];
     }
     

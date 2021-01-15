@@ -78,12 +78,13 @@ if($_SESSION["rol"] == "cliente"){
                                         	                                	   						       
             						    <?php }        						    
             						    echo "</td>";        						            						    
-            						    echo "</tr>"; 
-            						    $total = $total+$cp -> getTotal();             						    
+            						    echo "</tr>";             						    
+            						    $total = $total+$cp -> getTotal();            						    
         						    }    						            						            						    
         						}                						
         						?>    						    					
         						</tbody>
+        					<?php if ($total!=0){?>
         					</table>        										
         					<div class="row">
         						<div class="col-11">
@@ -138,27 +139,32 @@ if($_SESSION["rol"] == "cliente"){
         								<option value="20" <?php echo ($cantidad==20)?"selected":"" ?>>20</option>
         							</select>						
         						</div>
-        					</div>        					
-        					<form action="<?php echo "index.php?pid=" . base64_encode("presentacion/cliente_producto/finalizarCompra.php") . "&total=" . $total?>"
-    							method="post">    		    										    									
-            					<div class="float-right">    						
-    								<table class="text-center">
-                                    	<thead>
-                                    		<tr>
-                                   				<th> <?php echo "<strong>" . "Total" . "</strong>" ?> </th>
-        									</tr>
-        								</thead>   
-        								<tbody>
-        									<tr>
-        										<td> <?php echo $total; ?> </td>
-        									</tr>
-    										<tr>
-    											<td> <button type="submit" name="finalizar compra" class="btn btn-primary">Finalizar compra</button> </td>
-    										</tr>
-    									</tbody>									                         				                            		                            				
-                               		</table>                            	    							
-        						</div>    		
-        					</form>				
+        					</div>         					       				
+            					<form action="<?php echo "index.php?pid=" . base64_encode("presentacion/cliente_producto/finalizarCompra.php") . "&total=" . $total  ?>"
+        							method="post">    		    										    									
+                					<div class="float-right">    						
+        								<table class="text-center">
+                                        	<thead>
+                                        		<tr>
+                                       				<th> <?php echo "<strong>" . "Total" . "</strong>" ?> </th>
+            									</tr>
+            								</thead>   
+            								<tbody>
+            									<tr>
+            										<td> <?php echo $total; ?> </td>
+            									</tr>
+        										<tr>
+        											<td> <button type="submit" name="finalizar compra" class="btn btn-primary">Finalizar compra</button> </td>
+        										</tr>
+        									</tbody>									                         				                            		                            				
+                                   		</table>                            	    							
+            						</div>    		
+            					</form>				
+            			<?php } elseif ($total==0){?>
+            				<div class="text-center">    						
+								<?php echo "<strong>" . "NO HAY PRODUCTOS" . "</strong>" ?>        						                        	    							
+       						</div>    		
+            			<?php }?>
     					</div>    					
     				</div>
     			</div>

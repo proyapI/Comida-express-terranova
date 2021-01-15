@@ -27,7 +27,7 @@ class Cliente_productoDAO{
                 where id_cliente = '" . $idC . "' and id_prod = '" . $idP . "'";
     }
     
-    function consultar($idC,$idP){        
+    function consultar($idC,$idP){             
         return "select nombre_producto, cantidad_und,total
                 from cliente_producto where id_cliente = '" . $idC . "' and id_prod = '" . $idP . "'";
     }

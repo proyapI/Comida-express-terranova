@@ -25,7 +25,7 @@ class ProductoDAO {
     
     function consultar(){
         return "select nombre, descripcion, imagen, cantidad_und, valor
-                from Producto where id_prod = '" . $this->id_prod . "'";
+                from Producto where id_prod = '" . $this-> id_prod . "'";
     }
     
     function consultarTodos(){

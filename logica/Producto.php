@@ -60,7 +60,7 @@ class Producto{
         $this -> conexion -> cerrar();
     }
     
-    function consultar(){
+    function consultar(){             
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> productoDAO -> consultar());
         $this -> conexion -> cerrar();
