@@ -5,18 +5,16 @@ if($_SESSION["rol"] == "cliente"){
    $carrito = new Cliente_producto();   
    $pedido = new Pedido();
    $domiciliario = new Domiciliario();
-   $nDomiciliario = $domiciliario -> domiciliarioSeleccionado();
-   $domiciliario = new Domiciliario($nDomiciliario);
-   $producto = new Producto();
    $cliente = new Cliente($_SESSION["id"]);
    $cliente -> consultar();
+   $nDomiciliario = $domiciliario -> domiciliarioSeleccionado($cliente ->getCiudad());   
+   $producto = new Producto();   
    $consulta = $carrito -> consultarTodos();
    $consultar = $producto -> consultarTodos();   
    $nPedido = rand(1000,2000);      
    $domiciliario -> consultar();   
    date_default_timezone_set('America/Bogota');   
-   if ($domiciliario->getCiudad()==$cliente ->getCiudad()){
-       echo "hh";
+   if ($nDomiciliario != ''){
        foreach ($consulta as $c){
           $valorU = $total/$c -> getCantidad_und();
           if ($c -> getId_cliente() == $_SESSION["id"]){

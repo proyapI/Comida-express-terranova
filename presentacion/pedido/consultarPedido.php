@@ -52,37 +52,39 @@ if($_SESSION["rol"] == "cliente" || $_SESSION["rol"] == "domiciliario" || $_SESS
         						<tbody>
         						<?php     						
         						$i = (($pagina - 1) * $cantidad) + 1;        						
-        						foreach ($pedidos as $p){          						    
-        						    if($_SESSION["rol"] == "administrador"){
-        						        echo "<tr>";
-        						        echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
-        						        echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";
-        						        echo "</tr>";
-        						    }elseif($_SESSION["rol"] == "cliente"){        	        						        
-            						    if ($p -> getId_cliente() == $_SESSION["id"]){
-                						    echo "<tr>";
-                						    echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
-                						    echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";                                        
-                						    echo "<td>";            						    
-                						    echo "<a href='index.php?pid=" . base64_encode("presentacion/pedido/eliminarPedido.php") . "&id_pedido=" . $p -> getId_pedido() . "&id_cliente=" . $p -> getId_cliente() . "&id_producto=" . $p -> getId_prod() . "&id_domiciliario=" . $p -> getId_domiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Pedido' onclick='return ConfirmDelete()'></i></a>&nbsp";
-                						    echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/domiciliario/modalDomiciliario.php") . "&idDomiciliario=" . $p -> getId_domiciliario() . "' data-toggle='modal' data-target='#modalDomiciliario'><i class='fas fa-eye' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>&nbsp";                                                            						                    						                				
-                						    echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/pedido/modalPedido.php") . "&idPedido=" . $p -> getId_pedido() . "&idCliente=" . $p -> getId_cliente() . "&idProducto=" . $p -> getId_prod() . "' data-toggle='modal' data-target='#modalPedido'><i class='fas fa-info-circle' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>";
-                						    echo "</td>";        						            						    
-                						    echo "</tr>";             						    
-            						    }   
-                                    }elseif ($_SESSION["rol"] == "domiciliario"){
-                                        if ($p -> getId_domiciliario() == $_SESSION["id"]){
-                                            echo "<tr>";
-                                            echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
-                                            echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";
-                                            echo "<td>";                                            
-                                            echo "<a href='index.php?pid=" . base64_encode("presentacion/pedido/confirmarPedido.php") . "&id_pedido=" . $p -> getId_pedido() . "&id_cliente=" . $p -> getId_cliente() . "&id_producto=" . $p -> getId_prod() . "&id_domiciliario=" . $p -> getId_domiciliario() ."'><i class='fas fa-clipboard-check' data-toggle='tooltip' data-placement='bottom' title='Confirmar Pedido' onclick='return ConfirmPedido()'></i></a>&nbsp";
-                                            echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/cliente/modalCliente.php") . "&idCliente=" . $p -> getId_cliente() . "' data-toggle='modal' data-target='#modalCliente'><i class='fas fa-eye' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>&nbsp";                                                            						                    						                				
-                                            echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/pedido/modalPedido.php") . "&idPedido=" . $p -> getId_pedido() . "&idCliente=" . $p -> getId_cliente() . "&idProducto=" . $p -> getId_prod() . "' data-toggle='modal' data-target='#modalPedido'><i class='fas fa-info-circle' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>";
-                                            echo "</td>";
-                                            echo "</tr>";
-                                        }   
-                                    }
+        						foreach ($pedidos as $p){          			
+            						    if($_SESSION["rol"] == "administrador"){
+            						        echo "<tr>";
+            						        echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
+            						        echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";
+            						        echo "</tr>";
+            						    }elseif($_SESSION["rol"] == "cliente"){        	        						        
+                						    if ($p -> getId_cliente() == $_SESSION["id"]){
+                    						    echo "<tr>";
+                    						    echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
+                    						    echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";                                        
+                    						    echo "<td>";        
+                    						    if ($p -> getEstado()=='Pendiente'){
+                    						      echo "<a href='index.php?pid=" . base64_encode("presentacion/pedido/eliminarPedido.php") . "&id_pedido=" . $p -> getId_pedido() . "&id_cliente=" . $p -> getId_cliente() . "&id_producto=" . $p -> getId_prod() . "&id_domiciliario=" . $p -> getId_domiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Pedido' onclick='return ConfirmDelete()'></i></a>&nbsp";
+                    						    }
+                    						    echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/domiciliario/modalDomiciliario.php") . "&idDomiciliario=" . $p -> getId_domiciliario() . "' data-toggle='modal' data-target='#modalDomiciliario'><i class='fas fa-eye' data-toggle='tooltip' data-placement='bottom' title='Ver detalles domiciliario'></i></a>&nbsp";                                                            						                    						                				
+                    						    echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/pedido/modalPedido.php") . "&idPedido=" . $p -> getId_pedido() . "&idCliente=" . $p -> getId_cliente() . "&idProducto=" . $p -> getId_prod() . "' data-toggle='modal' data-target='#modalPedido'><i class='fas fa-info-circle' data-toggle='tooltip' data-placement='bottom' title='Ver informacion del pedido'></i></a>";
+                    						    echo "</td>";        						            						    
+                    						    echo "</tr>";             						    
+                						    }   
+                                        }elseif ($_SESSION["rol"] == "domiciliario"){
+                                            if ($p -> getId_domiciliario() == $_SESSION["id"]){
+                                                echo "<tr>";
+                                                echo "<td>" . $p -> getId_pedido() . "</td><td>" . $p -> getId_cliente() . "</td><td>" . $p -> getId_prod() . "</td><td>" . $p -> getId_domiciliario() . "</td>";
+                                                echo "<td>" . $p -> getUnidades() . "</td><td>" . $p -> getFecha_hora() . "</td><td>" . $p -> getValor_total() . "</td><td>" . $p -> getObservaciones() . "</td><td>" . $p -> getEstado() . "</td>";
+                                                echo "<td>";                                            
+                                                echo "<a href='index.php?pid=" . base64_encode("presentacion/pedido/confirmarPedido.php") . "&id_pedido=" . $p -> getId_pedido() . "&id_cliente=" . $p -> getId_cliente() . "&id_producto=" . $p -> getId_prod() . "&id_domiciliario=" . $p -> getId_domiciliario() ."'><i class='fas fa-clipboard-check' data-toggle='tooltip' data-placement='bottom' title='Confirmar Pedido' onclick='return ConfirmPedido()'></i></a>&nbsp";
+                                                echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/cliente/modalCliente.php") . "&idCliente=" . $p -> getId_cliente() . "' data-toggle='modal' data-target='#modalCliente'><i class='fas fa-eye' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>&nbsp";                                                            						                    						                				
+                                                echo "<a href='indexModal.php?pid=" . base64_encode("presentacion/pedido/modalPedido.php") . "&idPedido=" . $p -> getId_pedido() . "&idCliente=" . $p -> getId_cliente() . "&idProducto=" . $p -> getId_prod() . "' data-toggle='modal' data-target='#modalPedido'><i class='fas fa-info-circle' data-toggle='tooltip' data-placement='bottom' title='Ver detalles'></i></a>";
+                                                echo "</td>";
+                                                echo "</tr>";
+                                            }   
+                                        }        						   
         						}                						
         						?>    						    					
         						</tbody>

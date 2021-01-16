@@ -63,23 +63,43 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     						<?php     						
     						$i = (($pagina - 1) * $cantidad) + 1;
     						foreach ($productos as $productoActual){
-    						    echo "<tr>";
-    						    echo "<td>" . $productoActual -> getId_prod() . "</td><td>" . $productoActual -> getNombre() . "</td><td>" . $productoActual -> getDescripcion() . "</td>";
-    						    echo "<td><img src='" . $productoActual -> getImagen() . "' width='50px' /></td>";
-    						    echo "<td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
-    						    echo "<td>";
-    						    if($_SESSION["rol"] == "administrador"){
-    						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>&nbsp";
-    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a>&nbsp";
-    						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/eliminarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Producto' onclick='return ConfirmDelete()'></i></a></td>";
+    						    if ($productoActual -> getCantidad_und() != 0){    						    
+        						    echo "<tr>";
+        						    echo "<td>" . $productoActual -> getId_prod() . "</td><td>" . $productoActual -> getNombre() . "</td><td>" . $productoActual -> getDescripcion() . "</td>";
+        						    echo "<td><img src='" . $productoActual -> getImagen() . "' width='50px' /></td>";
+        						    echo "<td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
+        						    echo "<td>";
+        						    if($_SESSION["rol"] == "administrador"){
+        						        echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>&nbsp";
+        						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a>&nbsp";
+        						        echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/eliminarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Producto' onclick='return ConfirmDelete()'></i></a></td>";
+        						    }
+        						    if($_SESSION["rol"] == "cliente"){                                	                                
+                                    	echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .    
+                                    	"&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-shopping-bag' ></i></a></td>";?>
+                                    	                                	   						       
+        						    <?php }    						        						   
+        						    echo "</td>";
+        						    echo "</tr>";   
+    						    }elseif ($_SESSION["rol"] == "administrador"){
+    						        echo "<tr>";
+    						        echo "<td>" . $productoActual -> getId_prod() . "</td><td>" . $productoActual -> getNombre() . "</td><td>" . $productoActual -> getDescripcion() . "</td>";
+    						        echo "<td><img src='" . $productoActual -> getImagen() . "' width='50px' /></td>";
+    						        echo "<td>" . $productoActual -> getCantidad_und() . "</td><td>" . $productoActual -> getValor() . "</td>";
+    						        echo "<td>";
+    						        if($_SESSION["rol"] == "administrador"){
+    						            echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/editarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-edit'></i></a>&nbsp";
+    						            echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a>&nbsp";
+    						            echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/eliminarProducto.php") . "&id_prod=" . $productoActual -> getId_prod() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Producto' onclick='return ConfirmDelete()'></i></a></td>";
+    						        }
+    						        if($_SESSION["rol"] == "cliente"){
+    						            echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .
+    						            "&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-shopping-bag' ></i></a></td>";?>
+                                    	                                	   						       
+        						    <?php }    						        						   
+        						    echo "</td>";
+        						    echo "</tr>";
     						    }
-    						    if($_SESSION["rol"] == "cliente"){                                	                                
-                                	echo "<a href='index.php?pid= " . base64_encode("presentacion/producto/comprarProducto.php" ) .    
-                                	"&id_prod=" . $productoActual -> getId_prod() . "'><i class='fas fa-shopping-bag' ></i></a></td>";?>
-                                	                                	   						       
-    						    <?php }
-    						    echo "</td>";
-    						    echo "</tr>";    						    
     						}				    						
     						?>											
     						</tbody>

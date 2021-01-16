@@ -39,12 +39,12 @@ if($_SESSION["rol"] == "cliente"){
     ?>
 	<div class="container">
     	<div class="row mt-3">
-    		<div class="col-3"></div>
+    		<div class="col-3"></div>    		
     		<div class="col-6">
-    			<div class="card">
-    				<div class="card-header">
-    					<h3>Agregar producto</h3>
-    				</div>
+    			<div class="card">    
+        			<div class="card-header">
+        				<h3>Agregar Producto</h3>
+        			</div>				
     				<div class="card-body">
     					<?php 
     					   if ($agregado) { 						

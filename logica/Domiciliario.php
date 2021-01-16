@@ -80,10 +80,10 @@ class Domiciliario{
         $this -> domiciliarioDAO = new DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave, $pEstado);
     }
     
-    function domiciliarioSeleccionado(){
+    function domiciliarioSeleccionado($ciudad){        
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> domiciliarioSeleccionado());
-        $this -> conexion -> cerrar();    
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> domiciliarioSeleccionado($ciudad));
+        $this -> conexion -> cerrar();         
         $resultado = $this -> conexion -> extraer();
         $this -> idDomiciliario = $resultado[0];        
         return $resultado[0];

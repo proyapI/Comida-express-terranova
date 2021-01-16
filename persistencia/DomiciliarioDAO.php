@@ -25,8 +25,8 @@ class DomiciliarioDAO{
         $this -> estado = $pEstado;
     }
     
-    function domiciliarioSeleccionado(){
-        return "SELECT idDomiciliario FROM Domiciliario ORDER BY RAND() LIMIT 1" ;
+    function domiciliarioSeleccionado($ciudad){
+        return "SELECT idDomiciliario FROM Domiciliario where ciudad='" . $ciudad . "'  ORDER BY RAND() LIMIT 1" ;
     }
     
     function crear () {
