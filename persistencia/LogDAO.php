@@ -29,54 +29,53 @@ class LogDAO{
     function consultarLog($consultar){
         return "select idLog, accion, datos, fecha, hora
                 from log where actor = '" . $consultar . "'";
-    }
+    }       
     
     function consultarTodos () {
         return "select idLog, accion, datos, fecha, hora, actor from log";
     }
     
-    function consultarPorPagina ($cantidad, $pagina, $orden, $dir,$rol) {
+    function consultarPorPagina ($cantidad, $pagina, $orden, $dir,$rol,$id) {
         if ($rol == "administrador"){
             if($orden == "" || $dir == ""){
-                return "select idLog, accion, datos, hora, fecha, actor
+                return "select idLog, accion, datos, fecha, hora, actor
                         from log
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }else{
-                return "select idLog, accion, datos, hora, fecha, actor
+                return "select idLog, accion, datos, fecha, hora, actor
                         from log
                         order by " . $orden . " " . $dir . "
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }     
         }elseif ($rol == "cliente"){
             if($orden == "" || $dir == ""){
-                return "select * from log where actor= '" . "cliente" . "'
+                return "select * from log where idLog = '" . $id . "' and actor= '" . "cliente" . "'
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }else{
-                return "select * from log actor= '" . "cliente" . "'
+                return "select * from log where where idLog = '" . $id . "' and actor= '" . "cliente" . "'
                         order by " . $orden . " " . $dir . "
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }     
         }elseif ($rol == "domiciliario"){
             if($orden == "" || $dir == ""){
-                return "select * from log where actor= '" . "domiciliario" . "'
+                return "select * from log where idLog = '" . $id . "' and actor= '" . "domiciliario" . "'
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }else{
-                return "select * from log actor= '" . "cliente" . "'
+                return "select * from log where idLog = '" . $id . "' and actor= '" . "domiciliario" . "'
                         order by " . $orden . " " . $dir . "
                         limit " . strval(($pagina - 1) * $cantidad) . ", " . $cantidad;
             }
         }
     }    
     
-    function consultarTotalRegistros($rol){
+    function consultarTotalRegistros($rol,$id){
         if ($rol == "administrador"){
             return "select count(idLog) from log";
         }elseif ($rol == "cliente"){
-            return "SELECT Count(*) As Total FROM log WHERE actor= '" . "cliente" . "'";
+            return "select count(idLog) from log WHERE idLog = '" . $id . "' and actor= '" . "cliente" . "'";
         }elseif ($rol == "domiciliario"){
-            return "SELECT Count(*) As Total FROM log WHERE actor= '" . "domiciliario" . "'";
+            return "select count(idLog) from log WHERE idLog = '" . $id . "' and actor= '" . "domiciliario" . "'";
         }
-    }
-  
+    }      
 }
 ?>

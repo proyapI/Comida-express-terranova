@@ -97,20 +97,17 @@ class Pedido{
         return $pedidos;
     }
     
-    function consultar(){
+    function consultar($idpedido,$idC, $prod,$domiciliario){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> pedidoDAO -> consultar());
+        $this -> conexion -> ejecutar($this -> pedidoDAO -> consultar($idpedido,$idC, $prod,$domiciliario));
         $this -> conexion -> cerrar();
-        $resultado = $this -> conexion -> extraer();
-        $this -> id_cliente = $resultado[0];
-        $this -> id_prod = $resultado[1];
-        $this -> id_domiciliario = $resultado[2];
-        $this -> unidades = $resultado[3];
-        $this -> fecha_hora = $resultado[4];
-        $this -> valor_unidad = $resultado[5];
-        $this -> valor_total = $resultado[6];
-        $this -> observaciones = $resultado[7];
-        $this -> estado = $resultado[8];        
+        $resultado = $this -> conexion -> extraer();        
+        $this -> unidades = $resultado[0];
+        $this -> fecha_hora = $resultado[1];
+        $this -> valor_unidad = $resultado[2];
+        $this -> valor_total = $resultado[3];
+        $this -> observaciones = $resultado[4];
+        $this -> estado = $resultado[5];        
     }    
     
     function consultarPorPagina($cantidad, $pagina, $orden, $dir){
@@ -124,9 +121,23 @@ class Pedido{
         return $pedidos;
     }
     
+    function eliminar($idpedido,$idC, $prod,$domiciliario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> pedidoDAO -> eliminar($idpedido,$idC, $prod,$domiciliario));
+        $this -> conexion -> cerrar();
+    }
+    
     function consultarTotalRegistros(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> pedidoDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
+    function consultarRegistros($id,$idC, $prod,$domiciliario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> pedidoDAO -> consultarRegistros($id,$idC, $prod,$domiciliario));
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         return $resultado[0];

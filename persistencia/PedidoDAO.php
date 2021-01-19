@@ -36,10 +36,11 @@ class PedidoDAO{
                 from pedido";
     }
     
-    function consultar() {
-        return "select id_cliente, id_prod, id_domiciliario, unidades, fecha_hora, valor_unidad, valor_total, observaciones, estado
+    function consultar($idpedido,$idC, $prod,$domiciliario) {
+        return "select unidades, fecha_hora, valor_unidad, valor_total, observaciones, estado
                 from pedido
-                where id_pedido = '" . $this -> id_pedido . "'";
+                where id_pedido = '" . $idpedido . "' and id_cliente = '" . $idC . "' and id_prod = '"
+                    . $prod . "' and id_domiciliario = '" . $domiciliario . "'";
     }
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {
@@ -55,9 +56,19 @@ class PedidoDAO{
         }
     }
     
+    function eliminar($idpedido,$idC, $prod,$domiciliario){
+        return "delete from pedido where id_pedido = '" . $idpedido . "' and id_cliente = '" . $idC . "' and id_prod = '"
+                    . $prod . "' and id_domiciliario = '" . $domiciliario . "'";
+    }  
+    
     function consultarTotalRegistros(){
         return "select count(id_pedido)
                 from pedido";
+    }
+    
+    function consultarRegistros($id,$idC, $prod,$domiciliario){
+        return "select count(id_pedido)
+                from pedido where id_pedido='" . $id . "'";
     }   
 }
 ?>

@@ -1,9 +1,13 @@
-<?php 
+<?php
+require 'logica/Log.php';
+date_default_timezone_set('America/Bogota');
 if($_SESSION["rol"] == "cliente" || $_SESSION["rol"] == "domiciliario"){    
     $producto = new Producto($_GET["idProducto"]);    
     $producto -> consultar();
-    $pedido = new Pedido($_GET["idPedido"]);
-    $pedido -> consultar();
+    $prod = $_GET["idProducto"];
+    $domiciliario = $_GET["id_domiciliario"];
+    $pedido = new Pedido();
+    $pedido -> consultar($_GET["idPedido"],$_SESSION["id"],$prod,$domiciliario);
     ?>
     <div class="modal-header">
     	<h5 class="modal-title" id="exampleModalLabel"><b><?php echo "Pedido #" . $pedido -> getId_pedido() ?></b></h5>
@@ -17,6 +21,16 @@ if($_SESSION["rol"] == "cliente" || $_SESSION["rol"] == "domiciliario"){
     	<?php  echo $producto -> getNombre() ?><br><b> <?php echo "Descripcion del producto: " ?> </b> <?php  echo $producto -> getDescripcion() ?> 
     	<br><b> <?php echo "Valor por unidad: " ?> </b> <?php  echo $pedido -> getValor_unidad() ?>
     </div>
+    
+    <?php 
+    if ($_SESSION["rol"] == "cliente"){
+        $log = new Log($_SESSION["id"],"ver","ver informacion del pedido" , date('Y-m-d'),date('H:i:s'),"cliente");
+        $log -> crear();
+    }else{
+        $log = new Log($_SESSION["id"],"ver","ver informacion del pedido" , date('Y-m-d'),date('H:i:s'),"domiciliario");
+        $log -> crear();
+    }
+    ?>    
 <?php 
 } else {
     echo "Lo siento. Usted no tiene permisos";

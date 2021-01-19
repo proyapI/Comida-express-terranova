@@ -86,19 +86,12 @@ if($_SESSION["rol"] == "administrador"){
                                 echo "<td><img src='" . $domiciliarioActual -> getImagen() . "' width='50px' /></td>";
                                 echo "<td>" . $domiciliarioActual -> getCorreo() . "</td>";
                                 echo "<td> <div id='estado" . $domiciliarioActual -> getIdDomiciliario() . "'>" . (($domiciliarioActual -> getEstado()==1)?"<i class='fas fa-check-circle' data-toggle='tooltip' data-placement='bottom' title='Habilitado'></i>":"<i class='fas fa-times-circle' data-toggle='tooltip' data-placement='bottom' title='Deshabilitado'></i>") . "<div></td>";
-                                echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";                            
-                                if($_SESSION["rol"] == "domiciliario"){
-                                    echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
-                                    "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&correo=" . $domiciliarioActual -> getCorreo() .
-                                    "&estado=" . $domiciliarioActual -> getEstado() . "'><i class='fas fa-edit'></i></a>&nbsp";
-                                    echo "<a href='index.php?pid=" . base64_encode("presentacion/producto/editarFotoDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-camera' data-toggle='tooltip' data-placement='bottom' title='Cambiar Foto'></i></a></td>";
-                                } elseif ($_SESSION["rol"] == "administrador") {
+                                echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";                                                            
                                     echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                     "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
                                     "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() .
                                     "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>&nbsp";
                                     echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/eliminarDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Domiciliario' onclick='return ConfirmDelete()'></i></a></td>";
-                                }
                                 echo "</td>";
                                 echo "</tr>";
     						}    						    					

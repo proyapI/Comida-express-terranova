@@ -1,6 +1,11 @@
 <?php
+if ($_SESSION["rol"]=="domiciliario"){
+require 'logica/Log.php';
+date_default_timezone_set('America/Bogota');
 $domiciliario = new Domiciliario($_SESSION["id"]);
 $domiciliario -> consultar();
+$log = new Log($_SESSION["id"],"iniciar","iniciar sesion" , date('Y-m-d'),date('H:i:s'),"domiciliario");
+$log -> crear();
 ?>
 <div class="container">
 	<div class="row mt-3">
@@ -19,3 +24,6 @@ $domiciliario -> consultar();
 		</div>
 	</div>
 </div>
+<?php }else{
+    echo "Lo siento. Usted no tiene permisos";
+}?>

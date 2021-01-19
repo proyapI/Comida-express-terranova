@@ -68,7 +68,7 @@ class Log{
         $this -> fecha = $resultado[2];
         $this -> hora = $resultado[3];
         $this -> actor = $resultado[4];
-    }
+    }      
     
     function consultarLog($consultar){
         $this -> conexion -> abrir();
@@ -93,9 +93,9 @@ class Log{
         return $log;
     }
     
-    function consultarPorPagina($cantidad, $pagina, $orden, $dir, $rol){
+    function consultarPorPagina($cantidad, $pagina, $orden, $dir, $rol,$id){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> logDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir,$rol));
+        $this -> conexion -> ejecutar($this -> logDAO -> consultarPorPagina($cantidad, $pagina, $orden, $dir,$rol,$id));
         $this -> conexion -> cerrar();
         $logs = array();
         if ($rol == "administrador"){
@@ -118,18 +118,19 @@ class Log{
         return $logs;
     }
     
-    function consultarTotalRegistros($rol){        
+    function consultarTotalRegistros($rol,$id){
         $this -> conexion -> abrir();      
-        if ($rol == "administrador"){
-            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+        if ($rol == "administrador"){            
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol,$id));
         } elseif ($rol == "cliente"){
-            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol,$id));
         } elseif ($rol == "domiciliario"){
-            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol));
+            $this -> conexion -> ejecutar($this -> logDAO -> consultarTotalRegistros($rol,$id));
         }
         $this -> conexion -> cerrar();
-        $resultado = $this -> conexion -> extraer();
+        $resultado = $this -> conexion -> extraer();        
         return $resultado[0];
     }
+      
 }    
 ?>

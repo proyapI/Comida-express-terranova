@@ -1,4 +1,6 @@
-<?php 
+<?php
+require 'logica/Log.php';
+date_default_timezone_set('America/Bogota');
 if($_SESSION["rol"] == "cliente"){
     $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
     $domiciliario -> consultar();
@@ -15,6 +17,8 @@ if($_SESSION["rol"] == "cliente"){
     	<br> <b> <?php echo "Telefono: " ?> </b> <?php echo $domiciliario -> getTelefono() ?> <br><b> <?php echo "Correo: " ?> </b> <?php echo $domiciliario -> getCorreo()?>
     </div>
 <?php 
+    $log = new Log($_SESSION["id"],"ver","ver informacion del domiciliario" , date('Y-m-d'),date('H:i:s'),"cliente");
+    $log -> crear();
 } else {
     echo "Lo siento. Usted no tiene permisos";
 }

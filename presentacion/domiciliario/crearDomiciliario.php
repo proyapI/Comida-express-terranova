@@ -1,15 +1,18 @@
 <?php
 require "logica/Log.php";
 if($_SESSION["rol"] == "administrador"){
-    $creado = false;
-    if(isset($_POST["crear"])){
+    $creado = false;        
+    $solicitud = new Solicitud($_GET["idD"]);
+    $solicitud -> consultar();
+    if(isset($_POST["crear"])){        
         $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"], $_POST["estado"]);
         $domiciliario -> crear();
         $creado = true;
         date_default_timezone_set('America/Bogota');
         $log = new Log($_SESSION["id"],"crear","crear domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"administrador");
         $log -> crear();
-    }
+        $solicitud -> eliminar($_POST["id"]);
+    }    
 ?>
 <div class="container">
     	<div class="row mt-3">
@@ -23,39 +26,61 @@ if($_SESSION["rol"] == "administrador"){
     					<?php if ($creado) { ?>						
     						<div class="alert alert-success alert-dismissible fade show"
     							role="alert">
-    							<strong>Datos ingresados</strong>
-    							<button type="button" class="close" data-dismiss="alert"
-    								aria-label="Close">
-    								<span aria-hidden="true">&times;</span>
-    							</button>
+    							<?php     							 
+    							echo "<script>alert('Datos ingresados');window.location = 'index.php?pid=".base64_encode("presentacion/domiciliario/consultarDomiciliario.php")."';</script>";
+    							?>
     						</div>
-    					<?php } ?>
+    					<?php } ?>    					
     					<form
-    						action=<?php echo "index.php?pid=" . base64_encode("presentacion/domiciliario/crearDomiciliario.php") ?>
-    						method="post">
+    						action=<?php echo "index.php?pid=" . base64_encode("presentacion/domiciliario/crearDomiciliario.php") . "&idD=" . $solicitud -> getId() ?>
+    						method="post">    						
+    						<div class="form-group">
+    							<input type="hidden" name="id" class="form-control"
+    								placeholder="ID" value="<?php echo $solicitud -> getId() ?>">
+    						</div>
     						<div class="form-group">
     							<input type="text" name="id" class="form-control"
-    								placeholder="ID" required="required">
+    								placeholder="ID" value="<?php echo $solicitud -> getId() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="nombre" class="form-control"
+    								placeholder="Nombre" value="<?php echo $solicitud -> getNombre() ?>">
     						</div>
     						<div class="form-group">
     							<input type="text" name="nombre" class="form-control"
-    								placeholder="Nombre" required="required">
+    								placeholder="Nombre" value="<?php echo $solicitud -> getNombre() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="apellido" class="form-control"
+    								placeholder="Apellido" value="<?php echo $solicitud -> getApellido() ?>">
     						</div>
     						<div class="form-group">
     							<input type="text" name="apellido" class="form-control"
-    								placeholder="Apellido" required="required">
+    								placeholder="Apellido" value="<?php echo $solicitud -> getApellido() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="ciudad" class="form-control"
+    								placeholder="Ciudad" value="<?php echo $solicitud -> getCiudad() ?>">
     						</div>
     						<div class="form-group">
     							<input type="text" name="ciudad" class="form-control"
-    								placeholder="Ciudad" required="required">
+    								placeholder="Ciudad" value="<?php echo $solicitud -> getCiudad() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="direccion" class="form-control"
+    								placeholder="Direccion" value="<?php echo $solicitud -> getDireccion() ?>">
     						</div>
     						<div class="form-group">
     							<input type="text" name="direccion" class="form-control"
-    								placeholder="Direccion" required="required">
+    								placeholder="Direccion" value="<?php echo $solicitud -> getDireccion() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="telefono" class="form-control"
+    								placeholder="Telefono" value="<?php echo $solicitud -> getTelefono() ?>" >
     						</div>
     						<div class="form-group">
     							<input type="text" name="telefono" class="form-control"
-    								placeholder="Telefono" required="required">
+    								placeholder="Telefono" value="<?php echo $solicitud -> getTelefono() ?>" disabled>
     						</div>
     						<div class="form-group">
     							<input type="text" name="correo" class="form-control"

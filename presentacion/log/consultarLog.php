@@ -18,11 +18,11 @@ if(isset($_GET["dir"])){
 }
 
 $log = new Log();
-$logs = $log -> consultarPorPagina($cantidad, $pagina, $orden, $dir, $_SESSION["rol"]);
-$totalRegistros = $log -> consultarTotalRegistros($_SESSION["rol"]);
+$logs = $log -> consultarPorPagina($cantidad, $pagina, $orden, $dir, $_SESSION["rol"],$_SESSION["id"]);
+$totalRegistros = $log -> consultarTotalRegistros($_SESSION["rol"],$_SESSION["id"]);
 $totalPaginas = intval(($totalRegistros/$cantidad));
 if($totalRegistros%$cantidad != 0){
-    $totalPaginas++;
+    $totalPaginas++;    
 }
 ?>
 <div class="container">
@@ -46,28 +46,27 @@ if($totalRegistros%$cantidad != 0){
 						</thead>
 						<tbody>
 						<?php 
-						$i = (($pagina - 1) * $cantidad) + 1;
-						foreach ($logs as $logActual){							     
-						    if($_SESSION["rol"] == "administrador"){
-						        echo "<tr>";
-						        echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
-						        echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
-						        echo "</tr>";						        
-						    }
-						    elseif ($_SESSION["rol"] == "cliente" && $logActual -> getActor()  =="cliente" && $logActual -> getIdLog() == $_SESSION["id"]){
-						          echo "<tr>";
-						          echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
-						          echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
-						          echo "</tr>";
-						    }
-						    elseif ($_SESSION["rol"] == "domiciliario" && $logActual -> getActor() =="domiciliario" && $logActual -> getIdLog() == $_SESSION["id"]){
-						        echo "<tr>";
-						        echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
-						        echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
-						        echo "</tr>";
-						    }
-						    
-						}												
+						$i = (($pagina - 1) * $cantidad) + 1;						
+						foreach ($logs as $logActual){			
+    						  if($_SESSION["rol"] == "administrador"){
+    						      echo "<tr>";
+    						      echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
+    						      echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
+    						      echo "</tr>";						        
+    						    }
+    						    elseif ($_SESSION["rol"] == "cliente"){    						            						        
+    						          echo "<tr>";
+    						          echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
+    						          echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
+    						          echo "</tr>";    						         					        
+    						    }
+    						    elseif ($_SESSION["rol"] == "domiciliario"){
+    						        echo "<tr>";
+    						        echo "<td>" . $logActual -> getIdLog() . "</td><td>" . $logActual -> getAccion() . "</td><td>" . $logActual -> getDatos() . "</td>";
+    						        echo "<td>" . $logActual -> getFecha() . "</td><td>" . $logActual -> getHora() . "</td><td>" . $logActual -> getActor() . "</td>";
+    						        echo "</tr>";
+    						    }    						    
+                            }
 						?>											
 						</tbody>
 					</table>
@@ -147,5 +146,3 @@ $("#cantidad").on("change", function() {
 	location.replace(url);
 });
 </script>
-
-?>

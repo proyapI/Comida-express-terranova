@@ -26,13 +26,22 @@ $administrador -> consultar();
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Domiciliario
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/crearDomiciliario.php")?>">Crear</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/consultarDomiciliario.php")?>">Consultar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/buscarDomiciliario.php")?>">Buscar</a>
         </div>
       </li>
+
+	<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Solicitudes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/consultarSolicitudes.php")?>">Consultar</a>          
+        </div>
+      </li>
+	
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

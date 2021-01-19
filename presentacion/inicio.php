@@ -55,7 +55,9 @@ if (isset($_GET["error"])){
 						</div>
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary">Autenticar</button>	
-							<button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/registrarCliente.php")?>'" class="btn btn-primary"> Registrarse </button>						 
+							<button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/registrarCliente.php")?>'" class="btn btn-primary"> Registrarse </button>
+							<p></p>			 
+							<button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/Solicitar.php")?>'" class="btn btn-primary"> Solicitar unirse a la empresa </button>
 						</div>								
 						<p class="text-center">							
 							<a href="<?php echo "index.php?pid=" . base64_encode("presentacion/recuperarClave.php") ?>"> &#191&#211lvido

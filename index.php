@@ -6,12 +6,14 @@ require "logica/Cliente_producto.php";
 require "logica/Domiciliario.php";
 require "logica/Pedido.php";
 require "logica/Producto.php";
+require "logica/Solicitud.php";
 require "persistencia/Conexion.php";
 
 $pagSinSesion = array(
     "presentacion/registrarCliente.php",
     "presentacion/recuperarClave.php",
-    "presentacion/autenticar.php"
+    "presentacion/autenticar.php",
+    "presentacion/Solicitar.php"
 );
 
 if (isset($_GET["sesion"]) && $_GET["sesion"] == 0) {
