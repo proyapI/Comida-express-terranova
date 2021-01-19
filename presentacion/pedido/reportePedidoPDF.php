@@ -2,7 +2,7 @@
 require 'logica/Log.php';
 date_default_timezone_set('America/Bogota');
 if ($_SESSION["rol"]=='cliente'){    
-    require 'presentacion/pedido/fpdf/fpdf.php';
+    require 'fpdf/fpdf.php';
     
     class reportePedidoPDF extends FPDF
     {
