@@ -5,7 +5,7 @@ if($_SESSION["rol"] == "domiciliario"){
     if(isset($_POST["editarFoto"])){
         $foto = $_FILES["foto"];
         $tipo = $foto["type"];
-        if($tipo == "image/jpeg" || $tipo == "image/png"){
+        if($tipo == "image/jpeg" || $tipo == "image/png" || $tipo == "image/jpg"){
             $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
             $domiciliario -> consultar();
             if($domiciliario -> getImagen() == "" || $domiciliario -> getImagen() == '...'){
@@ -17,7 +17,7 @@ if($_SESSION["rol"] == "domiciliario"){
             $urlServidor = "imagenes/" . time() . ".png";
             $urlLocal = $foto["tmp_name"];
             copy($urlLocal, $urlServidor);
-            $domiciliario= new Domiciliario($_GET["idDomiciliario"], "", "", "", "", "", $urlServidor , "", "", "");
+            $domiciliario= new Domiciliario($_GET["idDomiciliario"], "", "", "","", "", "", $urlServidor , "", "", "");
             $domiciliario -> editarFoto();
         }else{
             $error = 1;

@@ -15,7 +15,7 @@ $log -> crear();
 					<h3>Bienvenido</h3>
 				</div>
 				<div class="card-body">
-					<h4>Administrador: <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido() ?></h4>
+					<h4><strong>Administrador: </strong> <?php echo $administrador -> getNombre() . " " . $administrador -> getApellido() ?></h4>
 				</div>
 				<div class="card-body">
 					<?php echo "<img src='" . $administrador -> getImagen() . "' width='30%' />";?>

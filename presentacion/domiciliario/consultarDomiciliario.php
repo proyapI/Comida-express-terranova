@@ -38,7 +38,7 @@ if($_SESSION["rol"] == "administrador"){
     						<thead>
     							<tr>
     								<th width="8%">#</th>
-    								<th width="20%">Nombre 
+    								<th width="35%">Nombre 
     								<?php 
     								if($orden != "nombre"){
     								    echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/consultarDomiciliario.php") . "&cantidad=" . $cantidad . "&orden=nombre&dir=asc'><i class='fas fa-sort-amount-up'></i></a> 
@@ -52,7 +52,7 @@ if($_SESSION["rol"] == "administrador"){
     								}								
     								?>
     								</th>
-    								<th width="20%">Apellido
+    								<th width="35%">Apellido
     								<?php 
     								if($orden != "apellido"){
     								    echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/consultarDomiciliario.php") . "&cantidad=" . $cantidad . "&orden=apellido&dir=asc'><i class='fas fa-sort-amount-up'></i></a> 
@@ -66,10 +66,11 @@ if($_SESSION["rol"] == "administrador"){
     								}								
     								?>
     								</th>								
-    								<th width="20%">Ciudad</th> 	
+    								<th width="15%">Ciudad</th> 	
+    								<th width="15%">Localidad</th>
     								<th width="20%">Direccion</th>
     								<th width="20%">Telefono</th>
-    								<th width="20%">Imagen</th>
+    								<th width="15%">Imagen</th>
     								<th width="20%">Correo</th>
     								<th width="20%">Estado</th>															
     								<th>Servicios</th>
@@ -80,8 +81,9 @@ if($_SESSION["rol"] == "administrador"){
     						$i = (($pagina - 1) * $cantidad) + 1;
     						foreach ($domiciliarios as $domiciliarioActual){
     						    echo "<tr>";
-    						    echo "<td>" . $domiciliarioActual->getIdDomiciliario() . "</td><td>" . $domiciliarioActual -> getNombre() . "</td>";
+    						    echo "<td>" . $domiciliarioActual-> getIdDomiciliario() . "</td><td>" . $domiciliarioActual -> getNombre() . "</td>";
                                 echo "<td>" . $domiciliarioActual -> getApellido() . "</td><td>" . $domiciliarioActual -> getCiudad() . "</td>";
+                                echo "<td>" . $domiciliarioActual -> getLocalidad() . "</td>";
                                 echo "<td>" . $domiciliarioActual -> getDireccion() . "</td><td>" . $domiciliarioActual -> getTelefono() . "</td>";
                                 echo "<td><img src='" . $domiciliarioActual -> getImagen() . "' width='50px' /></td>";
                                 echo "<td>" . $domiciliarioActual -> getCorreo() . "</td>";
@@ -89,7 +91,7 @@ if($_SESSION["rol"] == "administrador"){
                                 echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";                                                            
                                     echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
                                     "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
-                                    "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() .
+                                    "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() ."&localidad=" . $domiciliarioActual -> getCiudad() .
                                     "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>&nbsp";
                                     echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/eliminarDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Domiciliario' onclick='return ConfirmDelete()'></i></a></td>";
                                 echo "</td>";

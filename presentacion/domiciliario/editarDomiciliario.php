@@ -7,7 +7,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
             $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
             $domiciliario -> consultar();
             if ($domiciliario-> getImagen()== '' || $domiciliario ->getImagen() == '...'){
-                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["direccion"], $_GET["telefono"],'...' ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["localidad"],$_GET["direccion"], $_GET["telefono"],'...' ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
                 $domiciliario -> editar();
                 $editado = true;        
                 date_default_timezone_set('America/Bogota');
@@ -15,7 +15,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
                 $log -> crear();
             }
             else{
-                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["direccion"], $_GET["telefono"],$_GET["imagen"] ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
+                $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_GET["nombre"], $_GET["apellido"],$_GET["ciudad"],$_GET["localidad"],$_GET["direccion"], $_GET["telefono"],$_GET["imagen"] ,$_POST["correo"], $_GET["clave"], $_GET["estado"]);
                 $domiciliario -> editar();
                 $editado = true;
                 date_default_timezone_set('America/Bogota');
@@ -28,20 +28,20 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
         }
     }
     elseif ($_SESSION["rol"] == "domiciliario"){
-        $editado = false;    
+        $editado = false;  
         if(isset($_POST["editar"])){
             $domiciliario = new Domiciliario($_GET["idDomiciliario"]);
             $domiciliario -> consultar();
             if($_POST["clave"] == $domiciliario -> getClave()){
                 if ($domiciliario ->getImagen() == '' || $domiciliario ->getImagen() == '...'){
-                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], $_POST["clave"]);
+                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], $_POST["clave"]);
                     $domiciliario -> editar();
                     $editado = true;
                     date_default_timezone_set('America/Bogota');
                     $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
                     $log -> crear();
                 }else{
-                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], $_POST["clave"]);
+                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], $_POST["clave"]);
                     $domiciliario -> editar();
                     $editado = true;
                     date_default_timezone_set('America/Bogota');
@@ -51,14 +51,14 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
             }
             else{
                 if ($domiciliario ->getImagen() == '' || $domiciliario ->getImagen() == '...'){
-                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], md5($_POST["clave"]));
+                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_GET["correo"], md5($_POST["clave"]));
                     $domiciliario -> editar();
                     $editado = true;
                     date_default_timezone_set('America/Bogota');
                     $log = new Log($_SESSION["id"] . "." . $_GET["idDomiciliario"],"editar","editar domiciliario: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"domiciliario");
                     $log -> crear();
                 }else{
-                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], md5($_POST["clave"]));
+                    $domiciliario = new Domiciliario($_GET["idDomiciliario"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_GET["imagen"], $_GET["correo"], md5($_POST["clave"]));
                     $domiciliario -> editar();
                     $editado = true;
                     date_default_timezone_set('America/Bogota');
@@ -84,11 +84,11 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
     					<?php if ($editado) { ?>						
     						<div class="alert alert-success alert-dismissible fade show"
     							role="alert">
-    							<strong>Datos editados</strong>
-    							<button type="button" class="close" data-dismiss="alert"
-    								aria-label="Close">
-    								<span aria-hidden="true">&times;</span>
-    							</button>
+    							<?php 
+        							 echo "Datos editados";
+            					     session_destroy();
+            					     echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";
+        						?>
     						</div>
     					<?php } ?>
     					<form
@@ -106,6 +106,10 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "domiciliario"){
         						<div class="form-group">
         							<input type="text" name="ciudad" class="form-control"
         								placeholder="Ciudad" value="<?php echo $domiciliario -> getCiudad() ?>" required="required">
+        						</div>
+        						<div class="form-group">
+        							<input type="text" name="localidad" class="form-control"
+        								placeholder="Ciudad" value="<?php echo $domiciliario -> getLocalidad() ?>" required="required">
         						</div>
         						<div class="form-group">
         							<input type="text" name="direccion" class="form-control"

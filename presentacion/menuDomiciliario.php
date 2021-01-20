@@ -34,10 +34,8 @@ $domiciliario -> consultar();
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/domiciliario/editarDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>">Editar Perfil</a>
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/domiciliario/editarFotoDomiciliario.php")."&idDomiciliario=".$_SESSION["id"]?>">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?sesion=0">Cerrar Sesión</a>
         </div>
-      </li>      
-      <li class="nav-item">
-        <a class="nav-link" href="index.php?sesion=0">Cerrar Sesión</a>
       </li>      
     </ul>	
   </div>

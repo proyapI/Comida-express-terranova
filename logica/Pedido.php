@@ -141,6 +141,12 @@ class Pedido{
         $this -> conexion -> cerrar();
         $resultado = $this -> conexion -> extraer();
         return $resultado[0];
-    }   
+    }
+    
+    function actualizarEstado($idP, $estado){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> pedidoDAO -> actualizarEstado($idP, $estado));
+        $this -> conexion -> cerrar();
+    }
 }
 ?>

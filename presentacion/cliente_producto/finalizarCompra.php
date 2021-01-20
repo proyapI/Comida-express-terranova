@@ -7,7 +7,7 @@ if($_SESSION["rol"] == "cliente"){
    $domiciliario = new Domiciliario();
    $cliente = new Cliente($_SESSION["id"]);
    $cliente -> consultar();
-   $nDomiciliario = $domiciliario -> domiciliarioSeleccionado($cliente ->getCiudad());   
+   $nDomiciliario = $domiciliario -> domiciliarioSeleccionado($cliente ->getCiudad(),$cliente ->getLocalidad());   
    $producto = new Producto();   
    $consulta = $carrito -> consultarTodos();
    $consultar = $producto -> consultarTodos();   

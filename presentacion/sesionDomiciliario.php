@@ -15,7 +15,7 @@ $log -> crear();
 					<h3>Bienvenido</h3>
 				</div>
 				<div class="card-body">
-					Domiciliario: <?php echo $domiciliario -> getNombre() . " " . $domiciliario -> getApellido() ?>
+					<h4><strong> Domiciliario: </strong><?php echo $domiciliario -> getNombre() . " " . $domiciliario -> getApellido() ?></h4>	
 				</div>
 				<div class="card-body">
 					<?php echo "<img src='" . $domiciliario -> getImagen() . "' width='30%' />";?>

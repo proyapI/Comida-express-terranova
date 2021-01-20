@@ -38,7 +38,7 @@ if($_SESSION["rol"] == "administrador"){
     						<thead>
     							<tr>
     								<th width="8%">#</th>
-    								<th width="40%">Nombre 
+    								<th width="20%">Nombre 
     								<?php 
     								if($orden != "nombre"){
     								    echo "<a href='index.php?pid=" . base64_encode("presentacion/cliente/consultarCliente.php") . "&cantidad=" . $cantidad . "&orden=nombre&dir=asc'><i class='fas fa-sort-amount-up'></i></a> 
@@ -52,7 +52,7 @@ if($_SESSION["rol"] == "administrador"){
     								}								
     								?>
     								</th>
-    								<th width="40%">Apellido
+    								<th width="20%">Apellido
     								<?php 
     								if($orden != "apellido"){
     								    echo "<a href='index.php?pid=" . base64_encode("presentacion/cliente/consultarCliente.php") . "&cantidad=" . $cantidad . "&orden=apellido&dir=asc'><i class='fas fa-sort-amount-up'></i></a> 
@@ -66,11 +66,12 @@ if($_SESSION["rol"] == "administrador"){
     								}								
     								?>
     								</th>								
-    								<th width="20%">Ciudad</th> 	
+    								<th width="15%">Ciudad</th>
+    								<th width="15%">Localidad</th> 	
     								<th width="20%">Direccion</th>
-    								<th width="20%">Telefono</th>
-    								<th width="20%">Imagen</th>
-    								<th width="20%">Correo</th>														
+    								<th width="15%">Telefono</th>
+    								<th width="15%">Imagen</th>
+    								<th width="15%">Correo</th>														
     							</tr>
     						</thead>
     						<tbody>
@@ -79,7 +80,7 @@ if($_SESSION["rol"] == "administrador"){
     						foreach ($clientes as $clienteActual){
     						    echo "<tr>";
     						    echo "<td>" . $clienteActual -> getIdCliente() . "</td><td>" . $clienteActual -> getNombre() . "</td><td>" . $clienteActual -> getApellido() . "</td>";
-    						    echo "<td>" . $clienteActual -> getCiudad() . "</td><td>" . $clienteActual -> getDireccion() . "</td><td>" . $clienteActual -> getTelefono() . "</td>";
+    						    echo "<td>" . $clienteActual -> getCiudad() . "</td><td>" . $clienteActual -> getLocalidad() . "</td><td>" . $clienteActual -> getDireccion() . "</td><td>" . $clienteActual -> getTelefono() . "</td>";
     						    echo "<td><img src='" . $clienteActual -> getImagen() . "' width='50px' /></td>";
     						    echo "<td>" . $clienteActual -> getCorreo() . "</td>";    						    
     						    echo "</tr>";    						    

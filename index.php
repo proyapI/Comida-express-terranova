@@ -13,7 +13,8 @@ $pagSinSesion = array(
     "presentacion/registrarCliente.php",
     "presentacion/recuperarClave.php",
     "presentacion/autenticar.php",
-    "presentacion/Solicitar.php"
+    "presentacion/Solicitar.php",
+    "presentacion/consultarCatalogo.php"
 );
 
 if (isset($_GET["sesion"]) && $_GET["sesion"] == 0) {

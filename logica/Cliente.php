@@ -6,6 +6,7 @@ class Cliente{
     private $nombre;
     private $apellido;
     private $ciudad;
+    private $localidad;
     private $direccion;
     private $telefono;
     private $imagen;
@@ -34,6 +35,11 @@ class Cliente{
         return $this->ciudad;
     }
     
+    public function getLocalidad()
+    {
+        return $this->localidad;
+    }
+    
     public function getDireccion()
     {
         return $this->direccion;
@@ -59,18 +65,19 @@ class Cliente{
         return $this->clave;
     }
     
-    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="", $pImagen="", $pCorreo="", $pClave="") {
+    function Cliente ($pIdCliente="", $pNombre="", $pApellido="", $pCiudad="", $pLocalidad="",$pDireccion="", $pTelefono="", $pImagen="", $pCorreo="", $pClave="") {
         $this -> idCliente = $pIdCliente;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
+        $this -> localidad = $pLocalidad;
         $this -> direccion = $pDireccion;
         $this -> telefono = $pTelefono;
         $this -> imagen = $pImagen;
         $this -> correo = $pCorreo;
         $this -> clave = $pClave;          
         $this -> conexion = new Conexion();
-        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave);
+        $this -> clienteDAO = new ClienteDAO($pIdCliente, $pNombre, $pApellido, $pCiudad, $pLocalidad,$pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave);
     }
     
     function crear(){
@@ -99,11 +106,12 @@ class Cliente{
         $this -> nombre = $resultado[0];
         $this -> apellido = $resultado[1];
         $this -> ciudad = $resultado[2];
-        $this -> direccion = $resultado[3];
-        $this -> telefono = $resultado[4];
-        $this -> imagen = $resultado[5];
-        $this -> correo = $resultado[6]; 
-        $this -> clave = $resultado[7];
+        $this -> localidad = $resultado[3];
+        $this -> direccion = $resultado[4];
+        $this -> telefono = $resultado[5];
+        $this -> imagen = $resultado[6];
+        $this -> correo = $resultado[7]; 
+        $this -> clave = $resultado[8];
     }
     
     function consultarTodos(){
@@ -112,7 +120,8 @@ class Cliente{
         $this -> conexion -> cerrar();
         $clientes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
-            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5], $resultado[6],""));
+            array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], $resultado[5], 
+                $resultado[6],$resultado[7],$resultado[8],""));
         }
         return $clientes;
     }
@@ -130,7 +139,7 @@ class Cliente{
         $clientes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
-                $resultado[5], $resultado[6], $resultado[7],""));
+                $resultado[5], $resultado[6], $resultado[7],$resultado[8],""));
         }
         return $clientes;
     }
@@ -150,7 +159,7 @@ class Cliente{
         $clientes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($clientes, new Cliente($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
-                $resultado[5], $resultado[6], $resultado[7],""));
+                $resultado[5], $resultado[6], $resultado[7],$resultado[8],""));
         }
         return $clientes;
     }

@@ -23,7 +23,11 @@ if($_SESSION["rol"] == "cliente"){
                 if ($_POST["unidades"] > 0 && $_POST["unidades"] <= $_POST ["cantidadU"]){
                     $carrito = new Cliente_producto($_SESSION["id"], $_POST["id_prod"], $_POST["nombreP"], $_POST["unidades"], $valorTotal);
                     $carrito -> crear();
-                } else{
+                } elseif ($_POST["unidades"] == 0){
+                    echo "<script>window.location = 'index.php?pid=".base64_encode("presentacion/producto/consultarProducto.php"). "&id_prod=" . $_POST["id_prod"] ."';</script>";
+                }elseif($_POST["unidades"] < 0){
+                    echo "<script>alert('La cantidad de unidades que intenta agregar no es valida');window.location = 'index.php?pid=".base64_encode("presentacion/producto/comprarProducto.php"). "&id_prod=" . $_POST["id_prod"] ."';</script>";
+                }else{
                     echo "<script>alert('Stock no disponible, no puede agregar la cantidad de unidades');window.location = 'index.php?pid=".base64_encode("presentacion/producto/comprarProducto.php"). "&id_prod=" . $_POST["id_prod"] ."';</script>";
                 }
             }                       

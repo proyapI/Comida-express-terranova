@@ -15,6 +15,7 @@ if ($_SESSION["rol"] == "domiciliario"){
     <div class="modal-body">
         <img src="<?php echo $cliente -> getImagen() ?>" width="30%">
         <br><strong>Ciudad: </strong><?php echo $cliente -> getCiudad() ?>
+        <br><strong>Localidad: </strong><?php echo $cliente -> getLocalidad() ?>
         <br><strong>Direcci&oacute;n: </strong><?php echo $cliente -> getDireccion() ?>
         <br><strong>Tel&eacute;fono: </strong><?php echo $cliente -> getTelefono() ?>
     </div>

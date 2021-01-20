@@ -6,6 +6,7 @@ class Domiciliario{
     private $nombre;
     private $apellido;
     private $ciudad;
+    private $localidad;
     private $direccion;
     private $telefono;
     private $imagen;
@@ -33,6 +34,11 @@ class Domiciliario{
     public function getCiudad()
     {
         return $this->ciudad;
+    }
+    
+    public function getLocalidad()
+    {
+        return $this->localidad;
     }
     
     public function getDireccion()
@@ -65,11 +71,12 @@ class Domiciliario{
         return $this->estado;
     }
     
-    function Domiciliario ($pIdDomiciliario="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="",$pImagen="" ,$pCorreo="", $pClave="", $pEstado="") {
+    function Domiciliario ($pIdDomiciliario="", $pNombre="", $pApellido="", $pCiudad="", $pLocalidad="",$pDireccion="", $pTelefono="",$pImagen="" ,$pCorreo="", $pClave="", $pEstado="") {
         $this -> idDomiciliario = $pIdDomiciliario;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
+        $this -> localidad = $pLocalidad;
         $this -> direccion = $pDireccion;
         $this -> telefono = $pTelefono;
         $this -> imagen = $pImagen;
@@ -77,12 +84,12 @@ class Domiciliario{
         $this -> clave = $pClave;
         $this -> estado = $pEstado;
         $this -> conexion = new Conexion();
-        $this -> domiciliarioDAO = new DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave, $pEstado);
+        $this -> domiciliarioDAO = new DomiciliarioDAO ($pIdDomiciliario, $pNombre, $pApellido, $pCiudad, $pLocalidad,$pDireccion, $pTelefono, $pImagen, $pCorreo, $pClave, $pEstado);
     }
     
-    function domiciliarioSeleccionado($ciudad){        
+    function domiciliarioSeleccionado($ciudad,$localidad){        
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> domiciliarioSeleccionado($ciudad));
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> domiciliarioSeleccionado($ciudad,$localidad));
         $this -> conexion -> cerrar();         
         $resultado = $this -> conexion -> extraer();
         $this -> idDomiciliario = $resultado[0];        
@@ -117,12 +124,13 @@ class Domiciliario{
         $this -> nombre = $resultado[0];
         $this -> apellido = $resultado[1];
         $this -> ciudad = $resultado[2];
-        $this -> direccion = $resultado[3];        
-        $this -> telefono = $resultado[4];
-        $this -> imagen = $resultado[5];
-        $this -> correo = $resultado[6];
-        $this -> clave = $resultado[7];
-        $this -> estado = $resultado[8];        
+        $this -> localidad = $resultado[3];
+        $this -> direccion = $resultado[4];        
+        $this -> telefono = $resultado[5];
+        $this -> imagen = $resultado[6];
+        $this -> correo = $resultado[7];
+        $this -> clave = $resultado[8];
+        $this -> estado = $resultado[9];        
     }
     
     function consultarTodos(){
@@ -132,7 +140,7 @@ class Domiciliario{
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
-                $resultado[5], $resultado[6], $resultado[7],"",$resultado[8]));
+                $resultado[5], $resultado[6], $resultado[7],$resultado[8],"",$resultado[9]));
         }
         return $domiciliarios;
     }
@@ -150,7 +158,7 @@ class Domiciliario{
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
-                $resultado[5], $resultado[6], $resultado[7],"",$resultado[8]));
+                $resultado[5], $resultado[6], $resultado[7],$resultado[8],"",$resultado[9]));
         }
         return $domiciliarios;
     }
@@ -176,7 +184,7 @@ class Domiciliario{
         $domiciliarios = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($domiciliarios, new Domiciliario($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
-                $resultado[5], $resultado[6], $resultado[7],"",$resultado[8]));
+                $resultado[5], $resultado[6], $resultado[7],$resultado[8],"",$resultado[9]));
         }
         return $domiciliarios;
     }

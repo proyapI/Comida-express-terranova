@@ -67,6 +67,7 @@ if($_SESSION["rol"] == "administrador"){
     								?>
     								</th>								
     								<th width="20%">Ciudad</th> 	
+    								<th width="20%">Localidad</th>
     								<th width="20%">Direccion</th>
     								<th width="20%">Telefono</th>    																						
     								<th>Servicios</th>
@@ -79,6 +80,7 @@ if($_SESSION["rol"] == "administrador"){
     						    echo "<tr>";
     						    echo "<td>" . $solicitudActual -> getId() . "</td><td>" . $solicitudActual -> getNombre() . "</td>";
                                 echo "<td>" . $solicitudActual -> getApellido() . "</td><td>" . $solicitudActual -> getCiudad() . "</td>";
+                                echo "<td>" . $solicitudActual -> getLocalidad() . "</td>";
                                 echo "<td>" . $solicitudActual -> getDireccion() . "</td><td>" . $solicitudActual -> getTelefono() . "</td>";
                                 echo "<td>";
                                 echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/crearDomiciliario.php") . "&idD="  . $solicitudActual -> getId() . "'><i class='fas fa-user-plus'></i></a>&nbsp";

@@ -5,7 +5,7 @@ if($_SESSION["rol"] == "administrador"){
     $solicitud = new Solicitud($_GET["idD"]);
     $solicitud -> consultar();
     if(isset($_POST["crear"])){        
-        $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"], $_POST["estado"]);
+        $domiciliario = new Domiciliario($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"], $_POST["estado"]);
         $domiciliario -> crear();
         $creado = true;
         date_default_timezone_set('America/Bogota');
@@ -65,6 +65,14 @@ if($_SESSION["rol"] == "administrador"){
     						<div class="form-group">
     							<input type="text" name="ciudad" class="form-control"
     								placeholder="Ciudad" value="<?php echo $solicitud -> getCiudad() ?>" disabled>
+    						</div>
+    						<div class="form-group">
+    							<input type="hidden" name="localidad" class="form-control"
+    								placeholder="Ciudad" value="<?php echo $solicitud -> getLocalidad() ?>">
+    						</div>
+    						<div class="form-group">
+    							<input type="text" name="localidad" class="form-control"
+    								placeholder="Ciudad" value="<?php echo $solicitud -> getLocalidad() ?>" disabled>
     						</div>
     						<div class="form-group">
     							<input type="hidden" name="direccion" class="form-control"

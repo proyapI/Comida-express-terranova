@@ -1,7 +1,7 @@
 <?php  
     $creado = false;
     if(isset($_POST["registrar"])){
-        $cliente = new Cliente ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"]);
+        $cliente = new Cliente ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"]);
         $cliente -> crear();
         $creado = true;
     }
@@ -42,6 +42,10 @@
     						<div class="form-group">
     							<input type="text" name="ciudad" class="form-control"
     								placeholder="Ciudad" required="required">
+    						</div>
+    						<div class="form-group">
+    							<input type="text" name="localidad" class="form-control"
+    								placeholder="Localidad" required="required">
     						</div>
     						<div class="form-group">
     							<input type="text" name="direccion" class="form-control"

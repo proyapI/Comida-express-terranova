@@ -10,11 +10,12 @@ if (isset($_GET["error"])){
 		<div class="col-lg-8">
 			<div class="card">
 				<div class="card-header">
-					<h3>Comida Express Terranova</h3>
+					<h3>Comida Express Terranova <?php echo "<a href='index.php?pid=" . base64_encode("presentacion/consultarCatalogo.php") . "' ><i class='fas fa-eye' data-toggle='tooltip' data-placement='bottom' title='Consultar catalogo'></i></a>"?></h3>					
 				</div>
 				<div class="card-body">
 					<img src="img/img1.jpg" width="100%">
-				</div>
+				</div>				
+                <br>
 			</div>
 		</div>
 		<div class="col-lg-4">

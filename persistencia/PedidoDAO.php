@@ -69,6 +69,16 @@ class PedidoDAO{
     function consultarRegistros($id,$idC, $prod,$domiciliario){
         return "select count(id_pedido)
                 from pedido where id_pedido='" . $id . "'";
-    }   
+    }
+    
+    function actualizarEstado($idP, $estado){
+        if($estado == "proceso"){
+            return "update pedido set estado = 'En proceso' where id_pedido ='".$idP."'";
+        }elseif ($estado == "confirmar"){
+            return "update pedido set estado = 'Confirmado' where id_pedido ='".$idP."'";
+        }
+        
+    }
+    
 }
 ?>

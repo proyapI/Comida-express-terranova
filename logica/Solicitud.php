@@ -6,6 +6,7 @@ class Solicitud{
     private $nombre;
     private $apellido;
     private $ciudad;
+    private $localidad;
     private $direccion;
     private $telefono;    
     private $conexion;
@@ -31,6 +32,11 @@ class Solicitud{
         return $this->ciudad;
     }
     
+    public function getLocalidad()
+    {
+       return $this->localidad;
+    }    
+    
     public function getDireccion()
     {
         return $this->direccion;
@@ -42,15 +48,16 @@ class Solicitud{
     }
         
     
-    function Solicitud($pId="", $pNombre="", $pApellido="", $pCiudad="", $pDireccion="", $pTelefono="") {
+    function Solicitud($pId="", $pNombre="", $pApellido="", $pCiudad="", $pLocalidad="",$pDireccion="", $pTelefono="") {
         $this -> id = $pId;
         $this -> nombre = $pNombre;
         $this -> apellido = $pApellido;
         $this -> ciudad = $pCiudad;
+        $this -> localidad = $pLocalidad;
         $this -> direccion = $pDireccion;
         $this -> telefono = $pTelefono;
         $this -> conexion = new Conexion();
-        $this -> solicitudDAO = new SolicitudDAO($pId, $pNombre, $pApellido, $pCiudad, $pDireccion, $pTelefono);
+        $this -> solicitudDAO = new SolicitudDAO($pId, $pNombre, $pApellido, $pCiudad, $pLocalidad, $pDireccion, $pTelefono);
     }
     
     function crear(){
@@ -67,8 +74,9 @@ class Solicitud{
         $this -> nombre = $resultado[0];
         $this -> apellido = $resultado[1];
         $this -> ciudad = $resultado[2];
-        $this -> direccion = $resultado[3];
-        $this -> telefono = $resultado[4];       
+        $this -> localidad = $resultado[3];
+        $this -> direccion = $resultado[4];
+        $this -> telefono = $resultado[5];       
     }
         
     function consultarTodos(){
@@ -78,7 +86,7 @@ class Solicitud{
         $solicitudes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($solicitudes, new Solicitud($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4], 
-                $resultado[5]));
+                $resultado[5],$resultado[6]));
         }
         return $solicitudes;
     }
@@ -90,7 +98,7 @@ class Solicitud{
         $solicitudes = array();
         while(($resultado = $this -> conexion -> extraer()) != null){
             array_push($solicitudes, new Solicitud($resultado[0], $resultado[1], $resultado[2], $resultado[3], $resultado[4],
-                $resultado[5]));
+                $resultado[5],$resultado[6]));
         }
         return $solicitudes;
     }

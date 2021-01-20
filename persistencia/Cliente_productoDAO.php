@@ -32,6 +32,11 @@ class Cliente_productoDAO{
                 from cliente_producto where id_cliente = '" . $idC . "' and id_prod = '" . $idP . "'";
     }
     
+    function consultarUnidades($idC){
+        return "select SUM(cantidad_und)
+                from cliente_producto where id_cliente = '" . $idC . "'";
+    }
+    
     function consultarTodos () {        
         return "select id_cliente, id_prod,nombre_producto,cantidad_und, total
                 from cliente_producto";
@@ -57,6 +62,11 @@ class Cliente_productoDAO{
     function consultarTotalRegistros(){
         return "select count(id_cliente)
                 from cliente_producto";
+    }
+    
+    function consultarRegistros(){
+        return "select count(id_cliente)
+                from cliente_producto where id_cliente='" . $this->id_cliente . "'";
     }
 }
 ?>

@@ -68,6 +68,15 @@ class Cliente_producto{
         $this -> total = $resultado[2];
     }
     
+    function consultarUnidades ($idC){        
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarUnidades($idC));
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        $this -> cantidad_und = $resultado[0];        
+        return $resultado[0];
+    }
+    
     function consultarTodos(){
         $this -> conexion -> abrir();        
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarTodos());
@@ -97,6 +106,14 @@ class Cliente_producto{
     }
     
     function consultarTotalRegistros(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarTotalRegistros());
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
+    function consultarRegistros(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> cliente_productoDAO -> consultarTotalRegistros());
         $this -> conexion -> cerrar();

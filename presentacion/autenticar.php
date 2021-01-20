@@ -8,17 +8,16 @@ if($administrador -> autenticar()){
     $_SESSION["rol"] = "administrador";
     header("Location: index.php?pid=" . base64_encode("presentacion/sesionAdministrador.php"));
 }else{
-    $cliente = new Cliente("", "", "", "","","","", $correo, $clave);
+    $cliente = new Cliente("", "", "", "","","","","", $correo, $clave);
     if($cliente -> autenticar()){
         $_SESSION["id"] = $cliente -> getIdCliente();
         $_SESSION["rol"] = "cliente";
             header("Location: index.php?pid=" . base64_encode("presentacion/sesionCliente.php"));
     }else{
-        $domiciliario = new Domiciliario("", "", "", "","","","",$correo, $clave,"");
+        $domiciliario = new Domiciliario("", "","", "", "","","","",$correo, $clave,"");
         if($domiciliario -> autenticar()){
             echo $domiciliario -> getIdDomiciliario();
             if($domiciliario -> getEstado() == 1){                
-                echo "hola";
                 $_SESSION["id"] = $domiciliario -> getIdDomiciliario();                
                 $_SESSION["rol"] = "domiciliario";                
                 header("Location: index.php?pid=" . base64_encode("presentacion/sesionDomiciliario.php"));

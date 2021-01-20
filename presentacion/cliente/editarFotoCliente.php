@@ -5,7 +5,7 @@ if($_SESSION["rol"] == "cliente"){
     if(isset($_POST["editarFoto"])){
         $foto = $_FILES["foto"];
         $tipo = $foto["type"];
-        if($tipo == "image/jpeg" || $tipo == "image/png"){
+        if($tipo == "image/jpeg" || $tipo == "image/png" || $tipo == "image/jpg"){
             $cliente = new Cliente($_GET["idCliente"]);
             $cliente -> consultar();
             if($cliente -> getImagen() == "" || $cliente -> getImagen() == '...'){
@@ -16,7 +16,7 @@ if($_SESSION["rol"] == "cliente"){
             $urlServidor = "imagenes/" . time() . ".png";
             $urlLocal = $foto["tmp_name"];
             copy($urlLocal, $urlServidor);
-            $cliente= new Cliente($_GET["idCliente"], "", "", "", "", "", $urlServidor , "", "");
+            $cliente= new Cliente($_GET["idCliente"], "", "","", "", "", "", $urlServidor , "", "");
             $cliente -> editarFoto();
         }else{
             $error = 1;

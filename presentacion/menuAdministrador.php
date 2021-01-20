@@ -24,6 +24,15 @@ $administrador -> consultar();
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Solicitudes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/consultarSolicitudes.php")?>">Consultar</a>          
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Domiciliario
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
@@ -31,17 +40,7 @@ $administrador -> consultar();
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/domiciliario/buscarDomiciliario.php")?>">Buscar</a>
         </div>
-      </li>
-
-	<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Solicitudes
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
-          <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("presentacion/consultarSolicitudes.php")?>">Consultar</a>          
-        </div>
-      </li>
-	
+      </li>	
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,12 +78,9 @@ $administrador -> consultar();
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarAdministrador.php")."&idAdministrador=".$_SESSION["id"]?>">Editar Perfil</a>
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/administrador/editarFotoAdministrador.php")."&idAdministrador=".$_SESSION["id"]?>">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?sesion=0">Cerrar Sesión</a>
         </div>
-      </li>      
-      <li class="nav-item">
-        <a class="nav-link" href="index.php?sesion=0">Cerrar Sesión</a>
-      </li>
-      
+      </li>            
     </ul>
 	
   </div>

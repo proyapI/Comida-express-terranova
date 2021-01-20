@@ -5,9 +5,9 @@ if($_SESSION["rol"] == "cliente"){
     if(isset($_POST["editar"])){
         $cliente = new Cliente($_GET["idCliente"]);
         $cliente -> consultar();
-        if($_POST["clave"] == $cliente -> getClave()){
+        if($_POST["clave"] == $cliente -> getClave() || $_POST["correo"] == $cliente -> getCorreo()){
             if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
                 $cliente -> editar();
                 $editado = true;
                 date_default_timezone_set('America/Bogota');
@@ -15,7 +15,7 @@ if($_SESSION["rol"] == "cliente"){
                 $log -> crear();
             }
             else{
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
                 $cliente -> editar();
                 $editado = true;
                 date_default_timezone_set('America/Bogota');
@@ -24,7 +24,7 @@ if($_SESSION["rol"] == "cliente"){
             }
         }else{
             if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
                 $cliente -> editar();
                 $editado = true;
                 date_default_timezone_set('America/Bogota');
@@ -32,7 +32,7 @@ if($_SESSION["rol"] == "cliente"){
                 $log -> crear();
             }
             else{
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], md5($_POST["clave"]));
+                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], md5($_POST["clave"]));
                 $cliente -> editar();
                 $editado = true;
                 date_default_timezone_set('America/Bogota');
@@ -58,9 +58,9 @@ if($_SESSION["rol"] == "cliente"){
     						<div class="alert alert-success alert-dismissible fade show"
     							role="alert">
     							<?php 
-        							 echo "Datos editados"; 
-        							 session_destroy();
-        							 echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";
+        							 echo "Datos editados";
+            				         session_destroy();
+            					     echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";
         						?>
     						</div>
     					<?php } ?>
@@ -78,6 +78,10 @@ if($_SESSION["rol"] == "cliente"){
     						<div class="form-group">
     							<input type="text" name="ciudad" class="form-control"
     								placeholder="Ciudad" value="<?php echo $cliente -> getCiudad() ?>" required="required">
+    						</div>
+    						<div class="form-group">
+    							<input type="text" name="localidad" class="form-control"
+    								placeholder="Localidad" value="<?php echo $cliente -> getLocalidad() ?>" required="required">
     						</div>
     						<div class="form-group">
     							<input type="text" name="direccion" class="form-control"

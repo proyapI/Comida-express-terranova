@@ -4,6 +4,8 @@ if($_SESSION["rol"] == "cliente"){
     $prod = $_GET["id_prod"];
     $carrito = new Cliente_producto();
     $carrito -> consultar($_SESSION["id"], $prod);
+    $producto = new Producto($prod);
+    $producto ->consultar();
     if ($_GET["accion"] == "eliminar"){
         if ($carrito -> getCantidad_und()!=0){
             $resta = $carrito -> getCantidad_und() - 1;
@@ -21,8 +23,8 @@ if($_SESSION["rol"] == "cliente"){
         }   
     }
     elseif ($_GET["accion"] == "agregar"){
-        $suma = $carrito -> getCantidad_und() + 1;
-        if ($suma > 0 && $suma <= $carrito -> getCantidad_und()){
+        $suma = $carrito -> getCantidad_und() + 1;        
+        if ($suma > 0 && $suma <= $producto -> getCantidad_und()){
             $valorTotalP = ($_GET["total"]/$_GET["unidades"])* $suma;
             $carrito -> actualizarUnidadesyTotal($_SESSION["id"], $prod, $suma ,$valorTotalP);
             echo "<script>window.location = 'index.php?pid=".base64_encode("presentacion/cliente_producto/consultarCliente_producto.php")."';</script>";

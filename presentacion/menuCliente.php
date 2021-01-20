@@ -1,6 +1,8 @@
 <?php
 $cliente = new Cliente($_SESSION["id"]);
+$carrito = new Cliente_producto();
 $cliente -> consultar();
+$unidades = $carrito -> consultarUnidades($_SESSION["id"])
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("presentacion/sesionCliente.php")?>"><i class="fas fa-home"></i></a>
@@ -48,16 +50,15 @@ $cliente -> consultar();
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarCliente.php")."&idCliente=".$_SESSION["id"]?>">Editar Perfil</a>
           <a class="dropdown-item" href="index.php?pid= <?php echo base64_encode("presentacion/cliente/editarFotoCliente.php")."&idCliente=".$_SESSION["id"]?>">Editar Foto</a>
+          <a class="dropdown-item" href="index.php?sesion=0">Cerrar Sesión</a>
         </div>
-      </li>      
+      </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.php?sesion=0">Cerrar Sesión</a>
-      </li>      
-    </ul>
-	<ul class="navbar-nav">
+        <?php echo "<a class='nav-link' href='index.php?pid= " . base64_encode("presentacion/cliente_producto/consultarCliente_producto.php") . "'><i class='fas fa-shopping-cart'></i></a>" ?>        
+      </li>                 
       <li class="nav-item dropdown">
-        <?php echo "<a href='index.php?pid= " . base64_encode("presentacion/cliente_producto/consultarCliente_producto.php") . "'><i class='fas fa-shopping-cart'></i></a>" ?>
-      </li>     
+        	<?php echo $unidades ?> 
+        </li>
     </ul>	
   </div>
 </nav>

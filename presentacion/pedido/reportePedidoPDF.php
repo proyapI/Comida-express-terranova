@@ -116,6 +116,12 @@ if ($_SESSION["rol"]=='cliente'){
     $pdf->Ln(6);
     
     $pdf->SetFont('Arial','B',12);
+    $pdf->Cell(70,6,'LOCALIDAD DEL DOMICILIARIO: ',0,0,'C');
+    $pdf->SetFont('Arial','',12);
+    $pdf->Cell(19,6,$dom -> getLocalidad(),0,0,'C');
+    $pdf->Ln(6);
+    
+    $pdf->SetFont('Arial','B',12);
     $pdf->Cell(68,6,'TELEFONO DEL DOMICILIARIO: ',0,0,'C');
     $pdf->SetFont('Arial','',12);
     $pdf->Cell(23,6,$dom -> getTelefono(),0,0,'C');
