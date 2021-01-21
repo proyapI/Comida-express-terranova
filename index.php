@@ -8,13 +8,16 @@ require "logica/Pedido.php";
 require "logica/Producto.php";
 require "logica/Solicitud.php";
 require "persistencia/Conexion.php";
+require "logica/cambioClave.php";
 
 $pagSinSesion = array(
     "presentacion/registrarCliente.php",
     "presentacion/recuperarClave.php",
     "presentacion/autenticar.php",
     "presentacion/Solicitar.php",
-    "presentacion/consultarCatalogo.php"
+    "presentacion/consultarCatalogo.php",
+    "presentacion/enviarCorreo.php",
+    "presentacion/cambioContraseña.php"
 );
 
 if (isset($_GET["sesion"]) && $_GET["sesion"] == 0) {

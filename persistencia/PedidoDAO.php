@@ -73,9 +73,9 @@ class PedidoDAO{
     
     function actualizarEstado($idP, $estado){
         if($estado == "proceso"){
-            return "update pedido set estado = 'En proceso' where id_pedido ='".$idP."'";
+            return "update pedido set estado = 'En proceso', observaciones = 'En proceso de envio' where id_pedido ='".$idP."'";
         }elseif ($estado == "confirmar"){
-            return "update pedido set estado = 'Confirmado' where id_pedido ='".$idP."'";
+            return "update pedido set estado = 'Confirmado', observaciones = 'Pedido entregado' where id_pedido ='".$idP."'";
         }
         
     }

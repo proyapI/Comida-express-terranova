@@ -40,6 +40,11 @@ class ClienteDAO{
                 from Cliente where idCliente = '" . $this -> idCliente . "'";
     }
     
+    function consultarCorreo($correo){
+        return "select correo
+                from Cliente where correo = '" . $correo . "'";
+    }
+    
     function consultarTodos () {
         return "select idCliente, nombre, apellido, ciudad, localidad,direccion, telefono, imagen, correo
                 from Cliente";
@@ -52,6 +57,12 @@ class ClienteDAO{
                 telefono = '" . $this -> telefono . "', imagen = '" . $this -> imagen . "', correo = '" . $this -> correo . "' ,
                 clave = '" . $this -> clave . "'
                 where idCliente = '" . $this -> idCliente . "'";
+    }
+    
+    function editarClave($clave,$correo){
+        return "update Cliente
+                set clave = '" . md5 ($clave) . "'
+                where correo = '" . $correo . "'";
     }
     
     function consultarPorPagina ($cantidad, $pagina, $orden, $dir) {

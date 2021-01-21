@@ -102,6 +102,12 @@ class Domiciliario{
         $this -> conexion -> cerrar();
     }
     
+    function editarClave($clave,$correo){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> editarClave($clave,$correo));
+        $this -> conexion -> cerrar();
+    }
+    
     function autenticar () {
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> domiciliarioDAO -> autenticar());
@@ -131,6 +137,14 @@ class Domiciliario{
         $this -> correo = $resultado[7];
         $this -> clave = $resultado[8];
         $this -> estado = $resultado[9];        
+    }
+    
+    function consultarCorreo($correo){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultarCorreo($correo));
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return  $resultado[0];
     }
     
     function consultarTodos(){

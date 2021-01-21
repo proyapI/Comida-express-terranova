@@ -114,6 +114,14 @@ class Cliente{
         $this -> clave = $resultado[8];
     }
     
+    function consultarCorreo($correo){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultarCorreo($correo));
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
     function consultarTodos(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> clienteDAO -> consultarTodos());
@@ -129,6 +137,12 @@ class Cliente{
     function editar(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> clienteDAO -> editar());
+        $this -> conexion -> cerrar();
+    }
+    
+    function editarClave($clave,$correo){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> editarClave($clave,$correo));
         $this -> conexion -> cerrar();
     }
     
