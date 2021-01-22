@@ -19,7 +19,7 @@
     		<div class="col-7; text-center">
     			<div class="card">
     				<div class="card-header">
-    					<h3>SOLICITUD CAMBIO DE CONTRASENA</h3>
+    					<h3>SOLICITUD CAMBIO DE CONTRASE&#209;A</h3>
     				</div>
     				<div class="card-body">
     					<?php if ($enviado) { ?>						

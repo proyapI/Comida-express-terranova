@@ -123,6 +123,7 @@
                             </div>
                         </div>
                         <div class="text-right">
+                        	<button onclick="location.href='<?php echo "index.php" ?>'" class="btn btn-primary"> Volver </button>
                             <button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/registrarCliente.php")?>'" class="btn btn-primary"> Registrarse </button>
                         </div>
                     </div>
