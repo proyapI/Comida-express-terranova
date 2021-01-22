@@ -102,6 +102,14 @@ class Domiciliario{
         $this -> conexion -> cerrar();
     }
     
+    function consultar_existe($id){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultar_existe($id));
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
     function editarClave($clave,$correo){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> domiciliarioDAO -> editarClave($clave,$correo));

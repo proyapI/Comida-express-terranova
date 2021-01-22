@@ -1,9 +1,15 @@
 <?php
     $solicitado = false;
     if(isset($_POST["solicitar"])){
-        $solicitud = new Solicitud ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"]);
-        $solicitud -> crear();
-        $solicitado = true;
+        $domiciliario_existe = new Domiciliario();
+        if ($_POST["id"] == $domiciliario_existe ->consultar_existe($_POST["id"])){
+            echo "<script>alert('El id ingresado ya se encuentra registrado');</script>";
+            $solicitado = false;
+        }else{
+            $solicitud = new Solicitud ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"]);
+            $solicitud -> crear();
+            $solicitado = true;
+        }
     }
 ?>
 <div class="container">

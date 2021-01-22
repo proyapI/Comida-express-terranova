@@ -50,6 +50,11 @@ class DomiciliarioDAO{
                 where correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
     }
     
+    function consultar_existe($id){
+        return "select idDomiciliario
+                from Domiciliario where idDomiciliario = '" . $id . "'";
+    }
+    
     function consultar(){
         return "select nombre, apellido, ciudad, localidad, direccion, telefono, imagen, correo, clave, estado
                 from Domiciliario where idDomiciliario = '" . $this -> idDomiciliario . "'";
@@ -69,7 +74,7 @@ class DomiciliarioDAO{
         return "update Domiciliario
                 set nombre = '".$this -> nombre . "', apellido ='" . $this -> apellido . "', ciudad ='" .
                 $this -> ciudad . "',localidad ='" . $this -> localidad . "',direccion = '".$this -> direccion . "', 
-                telefono = '" . $this -> telefono . "' correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
+                telefono = '" . $this -> telefono . "',correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
                 where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     

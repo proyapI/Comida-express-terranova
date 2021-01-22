@@ -22,7 +22,7 @@
     $mail->AddAddress($address);
     try {
         $mail->send();
-        echo "<script>alert('Message has been sent successfully');window.location = 'index.php';</script>";
+        echo "<script>window.location = 'index.php';</script>";
     } catch (Exception $e) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     }

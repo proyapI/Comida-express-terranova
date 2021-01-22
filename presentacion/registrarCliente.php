@@ -1,9 +1,15 @@
 <?php  
     $creado = false;
     if(isset($_POST["registrar"])){
-        $cliente = new Cliente ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"]);
-        $cliente -> crear();
-        $creado = true;
+        $cliente_existe = new Cliente();        
+        if ($_POST["id"] == $cliente_existe ->consultar_existe($_POST["id"])){
+            echo "<script>alert('El id ingresado ya se encuentra registrado');</script>";
+            $creado = false;
+        }else{
+            $cliente = new Cliente ($_POST["id"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...' , $_POST["correo"],$_POST["clave"]);
+            $cliente -> crear();
+            $creado = true;
+        }
     }
 ?>
 <div class="container">

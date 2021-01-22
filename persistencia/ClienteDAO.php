@@ -40,6 +40,11 @@ class ClienteDAO{
                 from Cliente where idCliente = '" . $this -> idCliente . "'";
     }
     
+    function consultar_existe($id){
+        return "select idCliente
+                from Cliente where idCliente = '" . $id . "'";
+    }
+    
     function consultarCorreo($correo){
         return "select correo
                 from Cliente where correo = '" . $correo . "'";
