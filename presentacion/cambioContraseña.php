@@ -11,9 +11,11 @@
             if ($correoCliente == $correo){
                 $enviado = true;
                 $cliente ->editarClave($_POST["clave"],$correo);
-            }elseif ($correoDomiciliario == $_POST["correo"]){                
+                $correoC ->eliminar($correo);
+            }elseif ($correoDomiciliario == $correo){                
                 $enviado = true;
-                $domiciliario ->editarClave($_POST["clave"],$correo);
+                $domiciliario -> editarClave($_POST["clave"],$correo);
+                $correoC ->eliminar($correo);            
             }else{
                 $enviado = false;
                 echo "<script>alert('El correo no se encuentra registrado');</script>";
@@ -21,7 +23,7 @@
         }else{
             $enviado = false;
             echo "<script>alert('Las claves no coinciden, intente de nuevo');</script>";
-        }
+        }        
     }
 ?>
 <div class="container">
@@ -30,7 +32,7 @@
     		<div class="col-7; text-center">
     			<div class="card">
     				<div class="card-header">
-    					<h3>CAMBIO DE CONTRASENA</h3>
+    					<h3>CAMBIO DE CONTRASE&#209;A</h3>
     				</div>
     				<div class="card-body">
     					<?php if ($enviado) { ?>						
@@ -46,11 +48,11 @@
                           		method="post" class="form_contact">            	
     						<div class="form-group">
     							<input type="password" name="clave" class="form-control"
-    								placeholder="Contraseña nueva" required="required">
+    								placeholder="Contrase&#241;a nueva" required="required">
     						</div>
     						<div class="form-group">
     							<input type="password" name="clave1" class="form-control"
-    								placeholder="Ingrese de nuevo la contraseña nueva" required="required">
+    								placeholder="Ingrese de nuevo la contrase&#241;a nueva" required="required">
     						</div>
     						<div class="form-group">
     							<button  type="submit" name="enviar" class="btn btn-primary btn-block"> Enviar</button>   							

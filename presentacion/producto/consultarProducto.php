@@ -178,7 +178,7 @@ if($_SESSION["rol"] == "administrador" || $_SESSION["rol"] == "cliente"){
     </script>
     <script>
         function ConfirmDelete(){
-            var respuesta = confirm("¿Esta de acuerdo con eliminar el producto?");
+            var respuesta = confirm("\277Esta de acuerdo con eliminar el producto?");
             if (respuesta == true){
                 return true;
             }else{

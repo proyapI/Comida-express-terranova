@@ -61,7 +61,7 @@ if (isset($_GET["error"])){
 							<button onclick="location.href='<?php echo "index.php?pid=" . base64_encode("presentacion/Solicitar.php")?>'" class="btn btn-primary"> Solicitar unirse a la empresa </button>
 						</div>								
 						<p class="text-center">							
-							<a href="<?php echo "index.php?pid=" . base64_encode("presentacion/recuperarClave.php") ?>"> &#191&#211lvido
+							<a href="<?php echo "index.php?pid=" . base64_encode("presentacion/recuperarClave.php") ?>"> &#191Olvidó
 								la clave?</a>
 						</p>										
 					</form>									

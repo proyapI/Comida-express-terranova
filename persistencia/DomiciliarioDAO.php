@@ -69,7 +69,7 @@ class DomiciliarioDAO{
         return "update Domiciliario
                 set nombre = '".$this -> nombre . "', apellido ='" . $this -> apellido . "', ciudad ='" .
                 $this -> ciudad . "',localidad ='" . $this -> localidad . "',direccion = '".$this -> direccion . "', 
-                telefono = '" . $this -> telefono . "' correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
+                telefono = '" . $this -> telefono . "',correo = '" . $this -> correo . "' ,clave = '" . $this -> clave . "'
                 where idDomiciliario = '" . $this -> idDomiciliario . "'";
     }
     

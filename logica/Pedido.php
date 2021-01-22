@@ -101,13 +101,14 @@ class Pedido{
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> pedidoDAO -> consultar($idpedido,$idC, $prod,$domiciliario));
         $this -> conexion -> cerrar();
-        $resultado = $this -> conexion -> extraer();        
-        $this -> unidades = $resultado[0];
-        $this -> fecha_hora = $resultado[1];
-        $this -> valor_unidad = $resultado[2];
-        $this -> valor_total = $resultado[3];
-        $this -> observaciones = $resultado[4];
-        $this -> estado = $resultado[5];        
+        $resultado = $this -> conexion -> extraer();
+        $this -> id_pedido = $resultado[0];
+        $this -> unidades = $resultado[1];
+        $this -> fecha_hora = $resultado[2];
+        $this -> valor_unidad = $resultado[3];
+        $this -> valor_total = $resultado[4];
+        $this -> observaciones = $resultado[5];
+        $this -> estado = $resultado[6];        
     }    
     
     function consultarPorPagina($cantidad, $pagina, $orden, $dir){

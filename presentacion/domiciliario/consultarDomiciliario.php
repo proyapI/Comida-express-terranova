@@ -90,9 +90,7 @@ if($_SESSION["rol"] == "administrador"){
                                 echo "<td> <div id='estado" . $domiciliarioActual -> getIdDomiciliario() . "'>" . (($domiciliarioActual -> getEstado()==1)?"<i class='fas fa-check-circle' data-toggle='tooltip' data-placement='bottom' title='Habilitado'></i>":"<i class='fas fa-times-circle' data-toggle='tooltip' data-placement='bottom' title='Deshabilitado'></i>") . "<div></td>";
                                 echo "<td nowrap><a href='#'><i id='cambiarEstado" . $domiciliarioActual -> getIdDomiciliario() . "' class='fas fa-user-edit' data-toggle='tooltip' data-placement='bottom' title='Cambiar Estado'></i></a> ";                                                            
                                     echo "<a href='index.php?pid= " . base64_encode("presentacion/domiciliario/editarDomiciliario.php") .
-                                    "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "&nombre=" . $domiciliarioActual -> getNombre() .
-                                    "&apellido=" . $domiciliarioActual -> getApellido() . "&ciudad=" . $domiciliarioActual -> getCiudad() ."&localidad=" . $domiciliarioActual -> getCiudad() .
-                                    "&direccion=" . $domiciliarioActual -> getDireccion() . "&telefono=" . $domiciliarioActual -> getTelefono() . "'><i class='fas fa-edit'></i></a>&nbsp";
+                                    "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() . "'><i class='fas fa-edit'></i></a>&nbsp";
                                     echo "<a href='index.php?pid=" . base64_encode("presentacion/domiciliario/eliminarDomiciliario.php") . "&idDomiciliario=" . $domiciliarioActual -> getIdDomiciliario() ."'><i class='fas fa-trash' data-toggle='tooltip' data-placement='bottom' title='Eliminar Domiciliario' onclick='return ConfirmDelete()'></i></a></td>";
                                 echo "</td>";
                                 echo "</tr>";
@@ -183,7 +181,7 @@ if($_SESSION["rol"] == "administrador"){
     </script>
     <script>
         function ConfirmDelete(){
-            var respuesta = confirm("Esta de acuerdo con eliminar el domiciliario?");
+            var respuesta = confirm("\277Esta de acuerdo con eliminar el domiciliario?");
             if (respuesta == true){
                 return true;
             }else{

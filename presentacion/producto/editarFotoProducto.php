@@ -40,12 +40,11 @@ if($_SESSION["rol"] == "administrador"){
     				<div class="card-body">
     					<?php if (isset($_POST["editarFoto"]) && $error == 0) { ?>						
     						<div class="alert alert-success alert-dismissible fade show"
-    							role="alert">
-    							<strong>Foto editada</strong>
-    							<button type="button" class="close" data-dismiss="alert"
-    								aria-label="Close">
-    								<span aria-hidden="true">&times;</span>
-    							</button>
+                					role="alert">
+                					<?php 
+                    					echo "Foto editada";
+                				        echo "<script>setTimeout(\"location.href = 'index.php?pid=" . base64_encode("presentacion/producto/consultarProducto.php") . "';\",1500);</script>";                						
+                				    ?>
     						</div>
     					<?php } else if(isset($_POST["editarFoto"]) && $error == 1) { ?>
     						<div class="alert alert-danger alert-dismissible fade show"

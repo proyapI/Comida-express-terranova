@@ -37,7 +37,7 @@ class PedidoDAO{
     }
     
     function consultar($idpedido,$idC, $prod,$domiciliario) {
-        return "select unidades, fecha_hora, valor_unidad, valor_total, observaciones, estado
+        return "select id_pedido, unidades, fecha_hora, valor_unidad, valor_total, observaciones, estado
                 from pedido
                 where id_pedido = '" . $idpedido . "' and id_cliente = '" . $idC . "' and id_prod = '"
                     . $prod . "' and id_domiciliario = '" . $domiciliario . "'";
@@ -57,8 +57,7 @@ class PedidoDAO{
     }
     
     function eliminar($idpedido,$idC, $prod,$domiciliario){
-        return "delete from pedido where id_pedido = '" . $idpedido . "' and id_cliente = '" . $idC . "' and id_prod = '"
-                    . $prod . "' and id_domiciliario = '" . $domiciliario . "'";
+        return "delete from pedido where id_pedido = '" . $idpedido . "'";
     }  
     
     function consultarTotalRegistros(){

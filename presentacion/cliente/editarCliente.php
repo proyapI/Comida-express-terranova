@@ -3,26 +3,50 @@ require "logica/Log.php";
 if($_SESSION["rol"] == "cliente"){
     $editado = false;
     if(isset($_POST["editar"])){
+        $salir = 0;
         $cliente = new Cliente($_GET["idCliente"]);
         $cliente -> consultar();
-        if($_POST["clave"] == $cliente -> getClave() || $_POST["correo"] == $cliente -> getCorreo()){
-            if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
-                $cliente -> editar();
-                $editado = true;
-                date_default_timezone_set('America/Bogota');
-                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
-                $log -> crear();
-            }
-            else{
-                $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
-                $cliente -> editar();
-                $editado = true;
-                date_default_timezone_set('America/Bogota');
-                $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
-                $log -> crear();
+        if($_POST["clave"] == $cliente -> getClave()){            
+            $salir = 0;
+            if ($_POST["correo"] == $cliente -> getCorreo()){
+                $salir = 0;
+                if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
+                    $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
+                    $cliente -> editar();
+                    $editado = true;
+                    date_default_timezone_set('America/Bogota');
+                    $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                    $log -> crear();
+                }
+                else{
+                    $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
+                    $cliente -> editar();
+                    $editado = true;
+                    date_default_timezone_set('America/Bogota');
+                    $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                    $log -> crear();
+                }
+            }else{
+                $salir = 1;
+                if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
+                    $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], $_POST["clave"]);
+                    $cliente -> editar();
+                    $editado = true;
+                    date_default_timezone_set('America/Bogota');
+                    $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                    $log -> crear();
+                }
+                else{
+                    $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], $_POST["imagen"], $_POST["correo"], $_POST["clave"]);
+                    $cliente -> editar();
+                    $editado = true;
+                    date_default_timezone_set('America/Bogota');
+                    $log = new Log($_SESSION["id"] . "." . $_GET["idCliente"],"editar","editar cliente: " . $_POST["nombre"] , date('Y-m-d'),date('H:i:s'),"cliente");
+                    $log -> crear();
+                }
             }
         }else{
+            $salir = 1;
             if ($cliente ->getImagen() == '' || $cliente ->getImagen() == '...'){
                 $cliente = new Cliente($_GET["idCliente"], $_POST["nombre"], $_POST["apellido"],$_POST["ciudad"],$_POST["localidad"],$_POST["direccion"], $_POST["telefono"], '...', $_POST["correo"], md5($_POST["clave"]));
                 $cliente -> editar();
@@ -54,16 +78,24 @@ if($_SESSION["rol"] == "cliente"){
     					<h3>Editar Cliente</h3>
     				</div>
     				<div class="card-body">
-    					<?php if ($editado) { ?>						
-    						<div class="alert alert-success alert-dismissible fade show"
-    							role="alert">
-    							<?php 
-        							 echo "Datos editados";
-            				         session_destroy();
-            					     echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";
-        						?>
-    						</div>
-    					<?php } ?>
+    					<?php if ($editado && $salir==1) { ?>    											
+                				<div class="alert alert-success alert-dismissible fade show"
+                					role="alert">
+                					<?php 
+                    					echo "Datos editados";
+                						session_destroy();
+                				        echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>";                						
+                				    ?>
+            					</div>
+    					<?php }elseif($editado && $salir==0){ ?>
+    							<div class="alert alert-success alert-dismissible fade show"
+                					role="alert">
+                					<?php 
+                    					echo "Datos editados";
+                				        echo "<script>setTimeout(\"location.href = 'index.php?pid=" . base64_encode("presentacion/sesionCliente.php") . "';\",1500);</script>";                						
+                				    ?>
+            					</div>
+    					<?php }?>
     					<form
     						action="<?php echo "index.php?pid=" . base64_encode("presentacion/cliente/editarCliente.php") . "&idCliente=" . $_GET["idCliente"] ?>"
     						method="post">

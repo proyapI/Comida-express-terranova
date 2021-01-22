@@ -41,7 +41,7 @@ if($_SESSION["rol"] == "cliente"){
        echo "<script>alert('Compra finalizada');window.location = 'index.php?pid=".base64_encode("presentacion/pedido/consultarPedido.php") ."';</script>";               
    }
    else{
-       echo "<script>alert('No hay un domiciliario disponible en su ciudad');window.location = 'index.php?pid=".base64_encode("presentacion/pedido/consultarPedido.php") ."';</script>";
+       echo "<script>alert('No hay un domiciliario disponible en su ciudad o en su localidad');window.location = 'index.php?pid=".base64_encode("presentacion/pedido/consultarPedido.php") ."';</script>";
    }
 }else{
     echo "Lo siento. Usted no tiene permisos";

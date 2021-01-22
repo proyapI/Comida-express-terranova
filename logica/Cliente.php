@@ -98,6 +98,14 @@ class Cliente{
         }
     }
     
+    function consultar_existe($id){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultar_existe($id));
+        $this -> conexion -> cerrar();
+        $resultado = $this -> conexion -> extraer();
+        return $resultado[0];
+    }
+    
     function consultar(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> clienteDAO -> consultar());
